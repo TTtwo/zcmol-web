@@ -1,17 +1,14 @@
 from flask_script import Manager, Server
-# from zcmol.models import create_all
-from zcmol.kernel.core import app
+from kernel.core import app
+from models import create_all
+
 
 manager = Manager(app)
-manager.add_command("server", Server())
+manager.add_command("server", Server)
 
 @manager.command
-def hello():
-    print('how are you')
+def create():
+   create_all()
 
-# @manager.command
-# def create():
-#    create_all()
-#
 if __name__ == '__main__':
     manager.run()

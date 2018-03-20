@@ -1,5 +1,5 @@
 import datetime
-from zcmol.kernel.database import DB
+from kernel.database import DB
 
 class User(DB.Model):
 

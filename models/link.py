@@ -1,4 +1,4 @@
-from zcmol.kernel.database import DB
+from kernel.database import DB
 import datetime
 
 class Link(DB.Model):

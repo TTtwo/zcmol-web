@@ -1,6 +1,6 @@
 import datetime
 from sqlalchemy.dialects.mysql import BIGINT
-from zcmol.kernel.database import DB
+from kernel import DB
 
 class ModelMinix:
     id = DB.Column(BIGINT(unsigned=True), nullable=False, unique=True,
