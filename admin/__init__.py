@@ -10,4 +10,7 @@ def create_core(env: str) -> Core:
 
     core = Core(import_name=__name__, configs=configs[env].to_dict())
 
+    for c in controllers:
+        c.bind(core)
+
     return core

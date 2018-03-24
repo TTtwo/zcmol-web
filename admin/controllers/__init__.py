@@ -1,2 +1,6 @@
+from .auth import auth_controller
 
-controllers = {}
+controllers = [
+    auth_controller
+]
+

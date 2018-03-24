@@ -6,7 +6,16 @@ monkey.patch_all()
 
 core = create_core('default')
 app = core.app
-manager = Manager("server", Server)
+manager = Manager(app)
 
-wsgi.WSGIServer(('0.0.0.0', 5000), app).serve_forever()
+@manager.command
+def runserver():
+    wsgi.WSGIServer(('0.0.0.0', 5000), app).serve_forever()
+
+
+if __name__ == '__main__':
+    manager.run(default_command='runserver')
+
+
+
 
