@@ -1,27 +1,23 @@
 from flask import Blueprint
+from functools import wraps
 
 
-
-class BaseController():
-
+class BaseController:
     REQUIRED_ENV = None
 
     def __init__(self, import_name, name, prefix, template_folder=None):
 
-        self.bluprint = Blueprint(name, import_name, )
-
+        self.bluprint = Blueprint(name=name, import_name=import_name, url_prefix=prefix,
+                                  template_folder=template_folder)
         self.import_name = import_name
         self.name = name
         self.prefix = prefix
-
-        def _handle_err(err):
-            return err
 
     def bind(self, core):
         """　bind controller to app,　and register relevant event"""
         app = core.app
         if self.REQUIRED_ENV:
-            env = app.config["ENVIROMENT"]
+            env = app.config["ENVIRONMENT"]
             if env != self.REQUIRED_ENV:
                 return False
         app.register_blueprint(self.bluprint)
@@ -29,13 +25,15 @@ class BaseController():
 
     def _router(self, route, method, **options):
         """ bind view func to blueprint"""
-        def decorater(fn):
+
+        def decorator(fn):
             options['methods'] = [method]
             return self.bluprint.route(route, **options)(fn)
 
-        return decorater
+        return decorator
 
     def get(self, route, **options):
+        print(route)
         return self._router(route, 'GET', **options)
 
     def post(self, route, **options):
@@ -48,34 +46,3 @@ class BaseController():
     def visit_limit(self, seconds):
         # TODO
         pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

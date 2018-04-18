@@ -1,5 +1,5 @@
 from kernel.controllers import BaseController
 
 
-class AdminController(BaseController):
+class CustomController(BaseController):
     pass

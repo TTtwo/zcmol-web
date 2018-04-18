@@ -1,8 +1,9 @@
-from ..controller import AdminController
+from admin.controllers.controller import AdminController
 from flask import jsonify
 
-auth_controller = AdminController(__name__, 'demo', '/auth')
+auth_controller = AdminController(import_name=__name__, name='auth', prefix='/auth')
 _a = auth_controller
+
 
 @_a.get('/index')
 def index():

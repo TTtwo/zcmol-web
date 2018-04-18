@@ -2,7 +2,6 @@ import datetime
 from kernel.database import DB
 
 class User(DB.Model):
-
     __tablename__ = 'zc_user'
     user_id = DB.Column(DB.Integer, primary_key=True, autoincrement=True)
     user_name = DB.Column(DB.String(20), nullable=False, unique=True)

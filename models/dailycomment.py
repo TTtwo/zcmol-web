@@ -1,10 +1,9 @@
 from kernel.database import DB
 import datetime
 
+
 class DailyComment(DB.Model):
-
     __tablename__ = 'zc_daily_comment'
-
     daco_id = DB.Column(DB.Integer, primary_key=True, autoincrement=True)
     daco_user = DB.Column(DB.Integer, nullable=False)
     daco_time = DB.Column(DB.DateTime, default=datetime.datetime.now)

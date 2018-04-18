@@ -1,19 +1,19 @@
-
 def __fileter_attribute__(attr: str):
     return not attr.startswith('_') and attr != 'to_dict'
+
 
 class SysConfig:
 
     # system
     DEBUG = False
     TESTING = False
-    ENVIROMENT = 'default'
+    ENVIRONMENT = 'default'
     APP_NAME = ''
     SECRET_KEY = ''
     JWT_SECRET = ''
 
     # database
-    SQLALCHEMY_URI = None
+    SQLALCHEMY_DATABASE_URI = None
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = True
 
