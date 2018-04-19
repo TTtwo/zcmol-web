@@ -33,7 +33,6 @@ class BaseController:
         return decorator
 
     def get(self, route, **options):
-        print(route)
         return self._router(route, 'GET', **options)
 
     def post(self, route, **options):

@@ -2,8 +2,10 @@ from flask_script import Manager, Server
 from app import create_core
 from models import create_all
 
+
 core = create_core('default')
-manager = Manager(core.app)
+app = core.app
+manager = Manager(app)
 manager.add_command("server", Server)
 
 
@@ -13,4 +15,4 @@ def create():
 
 
 if __name__ == '__main__':
-    manager.run()
+    manager.run(default_command="server")
