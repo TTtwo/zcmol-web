@@ -60,10 +60,12 @@
     height: calc(100% - 80px);
     width: 100%;
     transition: margin-left .5s ease-in-out;
+    /*transition: width .5s ease-in-out;*/
   }
 
   .containerAnim {
     margin-left: 300px;
+    /*width: calc(100% - 300px);*/
   }
 
   .menu-parent {
@@ -140,7 +142,7 @@
       <div class="font30 menu-btn-div flex-mid" @click="show_menu = !show_menu">=</div>
       <div class="font30 title"><span>{{ app_name }}</span></div>
     </div>
-    <div class="menu flex-mid top" :class="{ menuAnim: show_menu}">
+    <div class="menu flex-mid top" :class="{ menuAnim: show_menu}" @click="guestbook">
       <div class="menu-div">
         <div class="menu-parent" v-for="m,index in menus">
           <div class="menu-parent-title flex-mid left" :class="{menuOpen: select_id === m.id}" @click="menusOpen(m)">
@@ -155,7 +157,9 @@
         </div>
       </div>
     </div>
-    <div class="container" :class="{ containerAnim: show_menu}"></div>
+    <div class="container" :class="{ containerAnim: show_menu}">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -207,8 +211,8 @@
           this.select_id = m.id
         }
       },
-      menuSubOpen () {
-
+      guestbook () {
+        this.$router.push('/guestbook')
       }
     }
   }

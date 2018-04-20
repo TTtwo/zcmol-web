@@ -103,6 +103,13 @@
       opacity: .9;
     }
   }
+  .foot {
+    position: relative;
+    margin-top: 40px;
+    font-family: zcmol;
+    font-size: 24px;
+    color: @bg-color;
+  }
 </style>
 
 <template>
@@ -121,6 +128,9 @@
         <div class="input-div flex-mid"><input v-model="password" type="password" class="input" placeholder="please enter password"></div>
         <div class="input-div flex-mid"><input type="button" class="button font30" value="Login" @click="login" /></div>
         <p class="font24">不知道密码的你，请离开吧~~</p>
+      </div>
+      <div class="foot">
+        <p>@2016-2018 早茶月光, 无聊之人无聊之作</p>
       </div>
     </div>
   </div>
