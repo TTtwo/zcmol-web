@@ -9,7 +9,7 @@
   .header {
     width: 100%;
     height: 80px;
-    background-color: @white;
+    background-color: @green-white;
   }
 
   .title {
@@ -183,6 +183,11 @@
                 id: 101,
                 is_selected: false,
                 text: '留言'
+              },
+              {
+                id: 102,
+                is_selected: false,
+                text: '日志评论'
               }
             ]
           },
@@ -192,13 +197,39 @@
             is_selected: false,
             sub_menus: [
               {
-                id: 102,
+                id: 201,
                 is_selected: false,
                 text: '写日志'
+              },
+              {
+                id: 202,
+                is_selected: false,
+                text: '写说说'
+              },
+              {
+                id: 203,
+                is_selected: false,
+                text: '写鸡汤'
+              },
+              {
+                id: 204,
+                is_selected: false,
+                text: '写文章'
+              }
+            ]
+          },
+          {
+            id: 3,
+            text: '配    置',
+            is_selected: false,
+            sub_menus: [
+              {
+                id: 301,
+                is_selected: false,
+                text: '修改配置',
               }
             ]
           }
-
         ]
       }
     },

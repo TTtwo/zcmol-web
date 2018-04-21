@@ -1,10 +1,11 @@
 @green: #1db099;
+@green-white: #CCE8CF;
 @white-gray: #e6e7ee;
 @white: white;
 @black-blue: #1e2938;
 @red-org: #d8554f;
 @black: #1c2a3a;
-
+@out-color: #86cbdb;
 * {
   margin: 0;
   padding: 0;
@@ -73,6 +74,14 @@ input, Button, select, textarea {
 }
 
 // input
+.input1 {
+  border-radius: 5px;
+  border: 1px solid @black;
+  text-align: center;
+  &:focus {
+    box-shadow: 0 0 5px 1px @out-color;
+  }
+}
 .input-sm {
   width: 160px;
   height: 60px;
@@ -86,4 +95,22 @@ input, Button, select, textarea {
 .input-bg {
   width: 280px;
   height: 60px;
+}
+
+// btn
+.btn1{
+  width: 100px;
+  height: 60px;
+  position: relative;
+  margin-right: 30px;
+  background-color: @black;
+  border-radius: 10px;
+  font-size: 24px;
+  color: @white;
+  &:hover {
+    cursor: pointer;
+    color:  @black;
+    background-color: @white;
+    border: 1px solid @black;
+  }
 }
