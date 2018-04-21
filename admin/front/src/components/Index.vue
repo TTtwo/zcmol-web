@@ -56,6 +56,7 @@
   }
 
   .container {
+
     position: relative;
     height: calc(100% - 80px);
     width: 100%;
@@ -142,7 +143,7 @@
       <div class="font30 menu-btn-div flex-mid" @click="show_menu = !show_menu">=</div>
       <div class="font30 title"><span>{{ app_name }}</span></div>
     </div>
-    <div class="menu flex-mid top" :class="{ menuAnim: show_menu}" @click="guestbook">
+    <div class="menu flex-mid top" :class="{ menuAnim: show_menu}">
       <div class="menu-div">
         <div class="menu-parent" v-for="m,index in menus">
           <div class="menu-parent-title flex-mid left" :class="{menuOpen: select_id === m.id}" @click="menusOpen(m)">
@@ -188,43 +189,45 @@
                 id: 102,
                 is_selected: false,
                 text: '日志评论'
+              },
+              {
+                id: 103,
+                is_selected: false,
+                text: '文章评论'
               }
             ]
           },
           {
             id: 2,
-            text: '内容管理',
+            text: '编辑内容',
             is_selected: false,
             sub_menus: [
               {
                 id: 201,
                 is_selected: false,
-                text: '写日志'
-              },
-              {
-                id: 202,
-                is_selected: false,
-                text: '写说说'
-              },
-              {
-                id: 203,
-                is_selected: false,
-                text: '写鸡汤'
-              },
-              {
-                id: 204,
-                is_selected: false,
-                text: '写文章'
+                text: '编写发布'
               }
             ]
           },
           {
             id: 3,
-            text: '配    置',
+            text: '内容管理',
             is_selected: false,
             sub_menus: [
               {
                 id: 301,
+                is_selected: false,
+                text: '查看/修改'
+              }
+            ]
+          },
+          {
+            id: 4,
+            text: '配    置',
+            is_selected: false,
+            sub_menus: [
+              {
+                id: 401,
                 is_selected: false,
                 text: '修改配置',
               }
@@ -242,9 +245,6 @@
           this.select_id = m.id
         }
       },
-      guestbook () {
-        this.$router.push('/guestbook')
-      }
     }
   }
 </script>

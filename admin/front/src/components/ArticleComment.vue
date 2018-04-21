@@ -11,13 +11,11 @@
       overflow: scroll;
     }
   }
-
   .table {
     width: 1370px;
     margin: auto;
     margin-top: 40px;
   }
-
   .table-header {
     width: 100%;
     height: 60px;
@@ -96,11 +94,11 @@
       white-space: nowrap;
       margin-left: 20px;
     }
-    .id {
-      width: 30px;
+    .article {
+      width: 180px;
     }
     .name {
-      width: 160px;
+      width: 180px;
     }
     .content {
       width: 300px;
@@ -125,7 +123,6 @@
       background-color: @white;
     }
   }
-
   .model-content-title {
     width: 100%;
     height: 60px;
@@ -170,8 +167,23 @@
       font-size: 32px;
     }
   }
-
-
+  .model-reply-div {
+    width: 100%;
+    height: 160px;
+    position: relative;
+    border: 1px solid @black-blue;
+    border-radius: 5px;
+    >  textarea {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border-radius: 5px;
+      font-size: 24px;
+      resize: none;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
 </style>
 
 <template>
@@ -184,20 +196,18 @@
       </div>
       <ul class="ul">
         <li>
-          <div class="c-id flex-mid left">id</div>
+          <div class="article flex-mid left">日  志</div>
           <div class="name flex-mid left">昵 称</div>
           <div class="time flex-mid left">时 间</div>
           <div class="content flex-mid left">内 容</div>
           <div class="email flex-mid left">邮 箱</div>
-          <div class="my-reply flex-mid left">我的回复</div>
         </li>
         <li @click="change">
-          <div class="c-id flex-mid left"><span class="span left">1</span></div>
+          <div class="article flex-mid left"><span class="span-mid left">结束不过开始</span></div>
           <div class="name flex-mid left"><span class="span left">我是小老拉时代峻峰拉水电费</span></div>
           <div class="time flex-mid left"><span class="span left">2018-06-03 12:55:12</span></div>
           <div class="content flex-mid left"><span class="span left">阿大山里的开发撒的浪费捡垃圾水电费炼金啊说的福利看手机对</span></div>
           <div class="email flex-mid left"><span class="span left">1297075993@qq.com</span></div>
-          <div class="my-reply flex-mid left"><span class="span left">啊手动阀撒旦发爱上对方律师的阿斯顿立法局士大夫</span></div>
         </li>
       </ul>
       <Modal v-model="modal_show">
@@ -205,17 +215,15 @@
         <div class="model-content"><span>1</span></div>
         <div class="model-content-title flex-mid left"><span class="flex-mid left">昵  称</span></div>
         <div class="model-content"><span>我是谁</span></div>
-        <div class="model-content-title flex-mid left"><span class="flex-mid left">时  间</span></div>
-        <div class="model-content"><span>2018-06-07 12:36:55</span></div>
-        <div class="model-content-title flex-mid left"><span class="flex-mid left">内  容</span></div>
+        <div class="model-content-title flex-mid left">回复的人</div>
+        <div class="model-content flex-mid left">傻傻不快乐</div>
+        <div class="model-content-title flex-mid left">回复的人的评论</div>
+        <div class="model-content flex-mid left">id:1     你就是个傻逼</div>
+        <div class="model-content-title flex-mid left"><span class="flex-mid left">回复内容</span></div>
         <div class="model-content"><span>萨拉丁附件阿斯顿立法局阿斯蒂芬</span></div>
-        <div class="model-content-title flex-mid left"><span class="flex-mid left">邮  箱</span></div>
-        <div class="model-content"><span>1297075993@qq.com</span></div>
-        <div class="model-content-title flex-mid left"><span class="flex-mid left">我的回复</span></div>
-        <div class="model-content"><span>按时发送拉大锯拉萨的积分拉萨的空间</span></div>
         <div class="model-btn-div flex-mid right">
           <div class="model-del-div flex-mid">
-            <input type="text" class="input1" placeholder="删除/修改"/>
+            <input type="text" class="input1" placeholder="删除/修改/回复"/>
           </div>
           <div class="btn1 flex-mid">
             删除
@@ -223,6 +231,12 @@
           <div class="btn1 flex-mid">
             修改
           </div>
+          <div class="btn1 flex-mid">回复</div>
+        </div>
+        <div class="model-reply-div">
+          <textarea name="myreply" id="mrp" cols="30" rows="10">
+
+          </textarea>
         </div>
       </Modal>
     </div>
@@ -231,7 +245,7 @@
 
 <script>
   export default {
-    name: 'guestbook',
+    name: 'articleComment',
     data() {
       return {
         modal_show: false
@@ -244,7 +258,6 @@
     }
   }
 </script>
-
 
 
 
