@@ -112,6 +112,12 @@
       background-color: @white;
     }
   }
+  .editor-style {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+  }
 </style>
 
 <template>
@@ -208,15 +214,19 @@
         </li>
       </ul>
     </div>
+    <editor v-show="editor_show" class="editor-style"></editor>
   </div>
 </template>
 
 <script>
+  import Editor from './Write'
   export default {
     name: 'contentManager',
+    components: {Editor},
     data() {
       return {
-        modal_show: false
+        modal_show: false,
+        editor_show: true
       }
     },
     methods: {

@@ -28,7 +28,6 @@
     border-radius: 80px;
     background-color: @bg-color;
     position: relative;
-    top: -80px;
     @img-wh: 145px;
     img {
       height: @img-wh;
@@ -40,6 +39,7 @@
   .login-wrap {
     width: 100%;
     height: 440px;
+    margin-top: 80px;
     border: 1px solid @bo-color;
     background-color: @bg-color;
     border-radius: 10px;
@@ -105,10 +105,8 @@
   }
   .foot {
     position: relative;
-    margin-top: 40px;
     font-family: zcmol;
     font-size: 24px;
-    color: @bg-color;
   }
 </style>
 
