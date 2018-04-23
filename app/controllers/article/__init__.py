@@ -12,5 +12,3 @@ def index():
     print(ary[0].da_id)
     r = str(ary[0])
     return r
-
-

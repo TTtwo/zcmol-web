@@ -4,7 +4,6 @@
   .wrap {
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
   }
 
   @media (max-width: 1024px) {
@@ -12,15 +11,18 @@
       overflow: scroll;
     }
   }
+
   .table {
     width: 1370px;
     position: relative;
     margin: auto;
     margin-top: 40px;
   }
+
   .table-top {
     margin-top: 150px;
   }
+
   .table-header {
     width: 100%;
     height: 60px;
@@ -33,12 +35,14 @@
       margin: 0 15px;
     }
   }
+
   .table-header-text {
     height: 100%;
     position: relative;
     background-color: @white;
     float: left;
   }
+
   .table-header-input {
     position: relative;
     float: left;
@@ -62,6 +66,7 @@
       }
     }
   }
+
   .table-header-btn {
     height: 100%;
     position: relative;
@@ -72,6 +77,7 @@
       cursor: pointer;
     }
   }
+
   .ul {
     width: 100%;
     > li {
@@ -112,126 +118,141 @@
       background-color: @white;
     }
   }
+
   .editor-style {
     position: relative;
     width: 100%;
     height: 100%;
-    top: -100%;
+  }
+  .table-wrap {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
   }
 </style>
 
 <template>
   <div class="wrap">
-    <div class="table">
-      <div class="table-header flex-mid left">
-        <div class="table-header-text flex-mid"><span class="flex-mid">共3页 跳到</span></div>
-        <div class="table-header-input"><input placeholder-style="color:white" type="text" class="input1" placeholder="输入页数"></div>
-        <div class="table-header-btn"><span class="flex-mid">确定跳转</span></div>
+    <div class="table-wrap" v-show="!editor_show">
+      <div class="table">
+        <div class="table-header flex-mid left">
+          <div class="table-header-text flex-mid"><span class="flex-mid">共3页 跳到</span></div>
+          <div class="table-header-input"><input placeholder-style="color:white" type="text" class="input1"
+                                                 placeholder="输入页数"></div>
+          <div class="table-header-btn"><span class="flex-mid">确定跳转</span></div>
+        </div>
+        <ul class="ul">
+          <li>
+            <div class="flex-mid left">日 志</div>
+            <div class="flex-mid left">标 题</div>
+            <div class="flex-mid left">发布时间</div>
+            <div class="flex-mid left">是否可见</div>
+            <div class="flex-mid left">浏览数</div>
+          </li>
+          <li @click="editor(editor_type.log)">
+            <div class="flex-mid left"><span class="span"></span></div>
+            <div class="flex-mid left"><span class="span">结束不过开始</span></div>
+            <div class="flex-mid left"><span class="span">2018-06-03 12:55:12</span></div>
+            <div class="flex-mid left"><span class="span">是</span></div>
+            <div class="flex-mid left"><span class="span">123</span></div>
+          </li>
+        </ul>
       </div>
-      <ul class="ul">
-        <li>
-          <div class="flex-mid left">日 志</div>
-          <div class="flex-mid left">标 题</div>
-          <div class="flex-mid left">发布时间</div>
-          <div class="flex-mid left">是否可见</div>
-          <div class="flex-mid left">浏览数</div>
-        </li>
-        <li @click="change">
-          <div class="flex-mid left"><span class="span"></span></div>
-          <div class="flex-mid left"><span class="span">结束不过开始</span></div>
-          <div class="flex-mid left"><span class="span">2018-06-03 12:55:12</span></div>
-          <div class="flex-mid left"><span class="span">是</span></div>
-          <div class="flex-mid left"><span class="span">123</span></div>
-        </li>
-      </ul>
-    </div>
-    <div class="table table-top">
-      <div class="table-header flex-mid left">
-        <div class="table-header-text flex-mid"><span class="flex-mid">共3页 跳到</span></div>
-        <div class="table-header-input"><input placeholder-style="color:white" type="text" class="input1" placeholder="输入页数"></div>
-        <div class="table-header-btn"><span class="flex-mid">确定跳转</span></div>
+      <div class="table table-top">
+        <div class="table-header flex-mid left">
+          <div class="table-header-text flex-mid"><span class="flex-mid">共3页 跳到</span></div>
+          <div class="table-header-input"><input placeholder-style="color:white" type="text" class="input1"
+                                                 placeholder="输入页数"></div>
+          <div class="table-header-btn"><span class="flex-mid">确定跳转</span></div>
+        </div>
+        <ul class="ul">
+          <li>
+            <div class="flex-mid left">博 文</div>
+            <div class="flex-mid left">标 题</div>
+            <div class="flex-mid left">发布时间</div>
+            <div class="flex-mid left">是否可见</div>
+            <div class="flex-mid left">浏览数</div>
+          </li>
+          <li @click="editor(editor_type.blog)">
+            <div class="flex-mid left"><span class="span"></span></div>
+            <div class="flex-mid left"><span class="span">结束不过开始</span></div>
+            <div class="flex-mid left"><span class="span">2018-06-03 12:55:12</span></div>
+            <div class="flex-mid left"><span class="span">是</span></div>
+            <div class="flex-mid left"><span class="span">123</span></div>
+          </li>
+        </ul>
       </div>
-      <ul class="ul">
-        <li>
-          <div class="flex-mid left">博 文</div>
-          <div class="flex-mid left">标 题</div>
-          <div class="flex-mid left">发布时间</div>
-          <div class="flex-mid left">是否可见</div>
-          <div class="flex-mid left">浏览数</div>
-        </li>
-        <li @click="change">
-          <div class="flex-mid left"><span class="span"></span></div>
-          <div class="flex-mid left"><span class="span">结束不过开始</span></div>
-          <div class="flex-mid left"><span class="span">2018-06-03 12:55:12</span></div>
-          <div class="flex-mid left"><span class="span">是</span></div>
-          <div class="flex-mid left"><span class="span">123</span></div>
-        </li>
-      </ul>
-    </div>
-    <div class="table table-top">
-      <div class="table-header flex-mid left">
-        <div class="table-header-text flex-mid"><span class="flex-mid">共3页 跳到</span></div>
-        <div class="table-header-input"><input placeholder-style="color:white" type="text" class="input1" placeholder="输入页数"></div>
-        <div class="table-header-btn"><span class="flex-mid">确定跳转</span></div>
+      <div class="table table-top">
+        <div class="table-header flex-mid left">
+          <div class="table-header-text flex-mid"><span class="flex-mid">共3页 跳到</span></div>
+          <div class="table-header-input"><input placeholder-style="color:white" type="text" class="input1"
+                                                 placeholder="输入页数"></div>
+          <div class="table-header-btn"><span class="flex-mid">确定跳转</span></div>
+        </div>
+        <ul class="ul">
+          <li>
+            <div class="flex-mid left">说 说</div>
+            <div class="flex-mid left">标 题</div>
+            <div class="flex-mid left">发布时间</div>
+            <div class="flex-mid left">是否可见</div>
+            <div class="flex-mid left">点赞数</div>
+          </li>
+          <li @click="editor(editor_type.saySomething)">
+            <div class="flex-mid left"><span class="span"></span></div>
+            <div class="flex-mid left"><span class="span">结束不过开始</span></div>
+            <div class="flex-mid left"><span class="span">2018-06-03 12:55:12</span></div>
+            <div class="flex-mid left"><span class="span">是</span></div>
+            <div class="flex-mid left"><span class="span">123</span></div>
+          </li>
+        </ul>
       </div>
-      <ul class="ul">
-        <li>
-          <div class="flex-mid left">说 说</div>
-          <div class="flex-mid left">标 题</div>
-          <div class="flex-mid left">发布时间</div>
-          <div class="flex-mid left">是否可见</div>
-          <div class="flex-mid left">点赞数</div>
-        </li>
-        <li @click="change">
-          <div class="flex-mid left"><span class="span"></span></div>
-          <div class="flex-mid left"><span class="span">结束不过开始</span></div>
-          <div class="flex-mid left"><span class="span">2018-06-03 12:55:12</span></div>
-          <div class="flex-mid left"><span class="span">是</span></div>
-          <div class="flex-mid left"><span class="span">123</span></div>
-        </li>
-      </ul>
-    </div>
-    <div class="table table-top">
-      <div class="table-header flex-mid left">
-        <div class="table-header-text flex-mid"><span class="flex-mid">共3页 跳到</span></div>
-        <div class="table-header-input"><input placeholder-style="color:white" type="text" class="input1" placeholder="输入页数"></div>
-        <div class="table-header-btn"><span class="flex-mid">确定跳转</span></div>
+      <div class="table table-top">
+        <div class="table-header flex-mid left">
+          <div class="table-header-text flex-mid"><span class="flex-mid">共3页 跳到</span></div>
+          <div class="table-header-input"><input placeholder-style="color:white" type="text" class="input1"
+                                                 placeholder="输入页数"></div>
+          <div class="table-header-btn"><span class="flex-mid">确定跳转</span></div>
+        </div>
+        <ul class="ul">
+          <li>
+            <div class="flex-mid left">鸡 汤</div>
+            <div class="flex-mid left">标 题</div>
+            <div class="flex-mid left">发布时间</div>
+            <div class="flex-mid left">是否可见</div>
+            <div class="flex-mid left">浏览数</div>
+          </li>
+          <li @click="editor(editor_type.motto)">
+            <div class="flex-mid left"><span class="span"></span></div>
+            <div class="flex-mid left"><span class="span">结束不过开始</span></div>
+            <div class="flex-mid left"><span class="span">2018-06-03 12:55:12</span></div>
+            <div class="flex-mid left"><span class="span">是</span></div>
+            <div class="flex-mid left"><span class="span">123</span></div>
+          </li>
+        </ul>
       </div>
-      <ul class="ul">
-        <li>
-          <div class="flex-mid left">鸡 汤</div>
-          <div class="flex-mid left">标 题</div>
-          <div class="flex-mid left">发布时间</div>
-          <div class="flex-mid left">是否可见</div>
-          <div class="flex-mid left">浏览数</div>
-        </li>
-        <li @click="change">
-          <div class="flex-mid left"><span class="span"></span></div>
-          <div class="flex-mid left"><span class="span">结束不过开始</span></div>
-          <div class="flex-mid left"><span class="span">2018-06-03 12:55:12</span></div>
-          <div class="flex-mid left"><span class="span">是</span></div>
-          <div class="flex-mid left"><span class="span">123</span></div>
-        </li>
-      </ul>
     </div>
-    <editor v-show="editor_show" class="editor-style"></editor>
+    <editor-component v-show="editor_show" ref="edco" @close="editor_show = false" class="editor-style"></editor-component>
   </div>
 </template>
 
 <script>
-  import Editor from './Write'
+  import EditorComponent from './EditorComponent'
+  import { editor_type, editor_status } from "../constant";
+
   export default {
     name: 'contentManager',
-    components: {Editor},
+    components: {EditorComponent},
     data() {
       return {
-        modal_show: false,
-        editor_show: true
+        editor_type: editor_type,
+        editor_show: false
       }
     },
     methods: {
-      change() {
-        this.modal_show = true
+      editor(type) {
+        const editor = this.$refs["edco"]
+        editor.setData(editor_status.update)
+        this.editor_show = true
       }
     }
   }

@@ -99,7 +99,7 @@
     }
   }
 
-  .menuOpen {
+  .menusOpen {
     &::before {
       top: 26px;
       transform: rotate(45deg);
@@ -135,6 +135,10 @@
     max-height: 300px;
   }
 
+  .selected {
+    color: @green;
+  }
+
 </style>
 
 <template>
@@ -146,12 +150,13 @@
     <div class="menu flex-mid top" :class="{ menuAnim: show_menu}">
       <div class="menu-div">
         <div class="menu-parent" v-for="m,index in menus">
-          <div class="menu-parent-title flex-mid left" :class="{menuOpen: select_id === m.id}" @click="menusOpen(m)">
+          <div class="menu-parent-title flex-mid left" :class="{menusOpen: render_select_id === m.id}" @click="menusOpen(m)">
             <span class="span">{{ m.text}}</span>
           </div>
-          <div class="menu-sub-div" :class="{menuSubOpen: select_id === m.id}"
+          <div class="menu-sub-div" :class="{menuSubOpen: render_select_id === m.id}"
                v-for="submenu in m.sub_menus">
-            <div class="menu-sub flex-mid">
+            <div class="menu-sub flex-mid" :class="{selected: submenu.id === $route.name}"
+                 @click="transformMenu(submenu.url)">
               {{submenu.text}} ·
             </div>
           </div>
@@ -181,19 +186,22 @@
             is_selected: false,
             sub_menus: [
               {
-                id: 101,
+                id: 'guestbook',
                 is_selected: false,
-                text: '留言'
+                text: '留言',
+                url: '/guestbook'
               },
               {
-                id: 102,
+                id: 'articleComment',
                 is_selected: false,
-                text: '日志评论'
+                text: '日志评论',
+                url: '/articleComment'
               },
               {
-                id: 103,
+                id: 'blogComment',
                 is_selected: false,
-                text: '文章评论'
+                text: '文章评论',
+                url: '/blogComment'
               }
             ]
           },
@@ -203,9 +211,10 @@
             is_selected: false,
             sub_menus: [
               {
-                id: 201,
+                id: 'write',
                 is_selected: false,
-                text: '编写发布'
+                text: '编写发布',
+                url: '/write'
               }
             ]
           },
@@ -215,9 +224,10 @@
             is_selected: false,
             sub_menus: [
               {
-                id: 301,
+                id: 'contentManager',
                 is_selected: false,
-                text: '查看/修改'
+                text: '查看/修改',
+                url: '/contentManager'
               }
             ]
           },
@@ -227,24 +237,35 @@
             is_selected: false,
             sub_menus: [
               {
-                id: 401,
+                id: 'setting',
                 is_selected: false,
                 text: '修改配置',
+                url: '/setting'
               }
             ]
           }
         ]
       }
     },
+    computed: {
+      render_select_id() {
+        if (this.select_id !== -1)
+          return this.select_id
+
+        const current = this.menus.filter(menu => menu.sub_menus.filter(sub => sub.id === this.$route.name).length)
+        if (current.length)
+          return current[0].id
+        else
+          return -1
+      }
+    },
     methods: {
-      menusOpen(m) {
-        m.is_selected = !m.is_selected
-        if (this.select_id === m.id) {
-          this.select_id = -1
-        } else {
-          this.select_id = m.id
-        }
+      transformMenu(url) {
+        this.$router.push(url)
       },
+      menusOpen(m) {
+        this.select_id = m.id
+      }
     }
   }
 </script>
