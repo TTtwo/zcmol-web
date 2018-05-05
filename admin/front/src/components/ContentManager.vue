@@ -1,10 +1,6 @@
 <style scoped lang="less">
   @import "../assets/my-style";
 
-  .wrap {
-    width: 100%;
-    height: 100%;
-  }
 
   @media (max-width: 1024px) {
     .wrap {
@@ -124,6 +120,7 @@
     width: 100%;
     height: 100%;
   }
+
   .table-wrap {
     width: 100%;
     height: 100%;
@@ -231,13 +228,14 @@
         </ul>
       </div>
     </div>
-    <editor-component v-show="editor_show" ref="edco" @close="editor_show = false" class="editor-style"></editor-component>
+    <editor-component v-show="editor_show" ref="edco" @close="editor_show = false"
+                      class="editor-style"></editor-component>
   </div>
 </template>
 
 <script>
   import EditorComponent from './EditorComponent'
-  import { editor_type, editor_status } from "../constant";
+  import {editor_type, editor_status} from "../constant";
 
   export default {
     name: 'contentManager',

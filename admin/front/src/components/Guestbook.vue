@@ -1,11 +1,6 @@
 <style scoped lang="less">
   @import "../assets/my-style";
 
-  .wrap {
-    width: 100%;
-    height: 100%;
-  }
-
   @media (max-width: 1024px) {
     .wrap {
       overflow: scroll;

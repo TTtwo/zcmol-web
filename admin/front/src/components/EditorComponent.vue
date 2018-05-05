@@ -1,11 +1,9 @@
 <style scoped lang="less">
   @import '../assets/my-style';
-  .wrap {
-    height: 100%;
-    width: 100%;
-    position: relative;
-  }
 
+  .wrap {
+    overflow: hidden;
+  }
   .wrap-div {
     width: 90%;
     position: relative;

@@ -41,8 +41,8 @@
     transition: margin-left .5s ease-in-out;
     height: calc(100% - 80px);
     background-color: @black-blue;
-    position: relative;
-    float: left;
+    position: absolute;
+    top: 80px;
   }
 
   .menuAnim {
@@ -147,10 +147,14 @@
       <div class="font30 menu-btn-div flex-mid" @click="show_menu = !show_menu">=</div>
       <div class="font30 title"><span>{{ app_name }}</span></div>
     </div>
+    <div class="container" :class="{ containerAnim: show_menu}">
+      <router-view></router-view>
+    </div>
     <div class="menu flex-mid top" :class="{ menuAnim: show_menu}">
       <div class="menu-div">
         <div class="menu-parent" v-for="m,index in menus">
-          <div class="menu-parent-title flex-mid left" :class="{menusOpen: render_select_id === m.id}" @click="menusOpen(m)">
+          <div class="menu-parent-title flex-mid left" :class="{menusOpen: render_select_id === m.id}"
+               @click="menusOpen(m)">
             <span class="span">{{ m.text}}</span>
           </div>
           <div class="menu-sub-div" :class="{menuSubOpen: render_select_id === m.id}"
@@ -162,9 +166,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="container" :class="{ containerAnim: show_menu}">
-      <router-view></router-view>
     </div>
   </div>
 </template>
