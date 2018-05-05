@@ -6,57 +6,7 @@
     margin: auto;
     margin-top: 40px;
   }
-  .table-header {
-    width: 100%;
-    height: 60px;
-    position: relative;
-    margin: 20px 0;
-    span {
-      height: 100%;
-      position: relative;
-      font-size: 22px;
-      margin: 0 15px;
-    }
-  }
-  .table-header-text {
-    height: 100%;
-    position: relative;
-    background-color: @white;
-    float: left;
-  }
-  .table-header-input {
-    position: relative;
-    float: left;
-    width: 120px;
-    height: 100%;
-    > input {
-      border: none;
-      font-size: 24px;
-      text-align: center;
-      height: 100%;
-      width: 100%;
-      background-color: #c8c8c8;
-      color: white;
-      &::-webkit-input-placeholder {
-        color: white;
-        text-align: center;
-      }
-      &::-moz-placeholder {
-        color: white;
-        text-align: center;
-      }
-    }
-  }
-  .table-header-btn {
-    height: 100%;
-    position: relative;
-    float: left;
-    background-color: @white;
-    &:hover {
-      border: 1px solid @green-white;
-      cursor: pointer;
-    }
-  }
+
   .ul {
     width: 100%;
     > li {
@@ -113,6 +63,7 @@
       background-color: @white;
     }
   }
+
   .model-content-title {
     width: 100%;
     height: 60px;
@@ -127,6 +78,7 @@
       margin-left: 10px;
     }
   }
+
   .model-content {
     width: 100%;
     position: relative;
@@ -140,12 +92,14 @@
       margin-left: 10px;
     }
   }
+
   .model-btn-div {
     width: 100%;
     height: 80px;
     position: relative;
     margin-top: 30px;
   }
+
   .model-del-div {
     width: 220px;
     height: 60px;
@@ -157,13 +111,14 @@
       font-size: 32px;
     }
   }
+
   .model-reply-div {
     width: 100%;
     height: 160px;
     position: relative;
     border: 1px solid @black-blue;
     border-radius: 5px;
-    >  textarea {
+    > textarea {
       width: 100%;
       height: 100%;
       position: relative;
@@ -179,14 +134,9 @@
 <template>
   <div class="wrap">
     <div class="table">
-      <div class="table-header flex-mid left">
-        <div class="table-header-text flex-mid"><span class="flex-mid">共3页 跳到</span></div>
-        <div class="table-header-input"><input placeholder-style="color:white" type="text" class="input1" placeholder="输入页数"></div>
-        <div class="table-header-btn"><span class="flex-mid">确定跳转</span></div>
-      </div>
       <ul class="ul">
         <li>
-          <div class="article flex-mid left">日  志</div>
+          <div class="article flex-mid left">日 志</div>
           <div class="name flex-mid left">昵 称</div>
           <div class="time flex-mid left">时 间</div>
           <div class="content flex-mid left">内 容</div>
@@ -200,6 +150,7 @@
           <div class="email flex-mid left"><span class="span left">1297075993@qq.com</span></div>
         </li>
       </ul>
+      <page-comp></page-comp>
       <Modal v-model="modal_show">
         <div class="model-content-title flex-mid left"><span class="flex-mid left">id</span></div>
         <div class="model-content"><span>1</span></div>
@@ -208,7 +159,7 @@
         <div class="model-content-title flex-mid left">回复的人</div>
         <div class="model-content flex-mid left">傻傻不快乐</div>
         <div class="model-content-title flex-mid left">回复的人的评论</div>
-        <div class="model-content flex-mid left">id:1     你就是个傻逼</div>
+        <div class="model-content flex-mid left">id:1 你就是个傻逼</div>
         <div class="model-content-title flex-mid left"><span class="flex-mid left">回复内容</span></div>
         <div class="model-content"><span>萨拉丁附件阿斯顿立法局阿斯蒂芬</span></div>
         <div class="model-btn-div flex-mid right">
@@ -234,8 +185,10 @@
 </template>
 
 <script>
+  import PageComp from './PagingComponent'
   export default {
     name: 'articleComment',
+    components: { PageComp },
     data() {
       return {
         modal_show: false

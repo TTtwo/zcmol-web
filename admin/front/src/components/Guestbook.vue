@@ -13,57 +13,6 @@
     margin-top: 40px;
   }
 
-  .table-header {
-    width: 100%;
-    height: 60px;
-    position: relative;
-    margin: 20px 0;
-    span {
-      height: 100%;
-      position: relative;
-      font-size: 22px;
-      margin: 0 15px;
-    }
-  }
-  .table-header-text {
-    height: 100%;
-    position: relative;
-    background-color: @white;
-    float: left;
-  }
-  .table-header-input {
-    position: relative;
-    float: left;
-    width: 120px;
-    height: 100%;
-    > input {
-      border: none;
-      font-size: 24px;
-      text-align: center;
-      height: 100%;
-      width: 100%;
-      background-color: #c8c8c8;
-      color: white;
-      &::-webkit-input-placeholder {
-        color: white;
-        text-align: center;
-      }
-      &::-moz-placeholder {
-        color: white;
-        text-align: center;
-      }
-    }
-  }
-  .table-header-btn {
-    height: 100%;
-    position: relative;
-    float: left;
-    background-color: @white;
-    &:hover {
-      border: 1px solid @green-white;
-      cursor: pointer;
-    }
-  }
   .ul {
     width: 100%;
     > li {
@@ -135,6 +84,7 @@
       margin-left: 10px;
     }
   }
+
   .model-content {
     width: 100%;
     position: relative;
@@ -148,12 +98,14 @@
       margin-left: 10px;
     }
   }
+
   .model-btn-div {
     width: 100%;
     height: 80px;
     position: relative;
     margin-top: 30px;
   }
+
   .model-del-div {
     width: 220px;
     height: 60px;
@@ -172,11 +124,6 @@
 <template>
   <div class="wrap">
     <div class="table">
-      <div class="table-header flex-mid left">
-        <div class="table-header-text flex-mid"><span class="flex-mid">共3页 跳到</span></div>
-        <div class="table-header-input"><input placeholder-style="color:white" type="text" class="input1" placeholder="输入页数"></div>
-        <div class="table-header-btn"><span class="flex-mid">确定跳转</span></div>
-      </div>
       <ul class="ul">
         <li>
           <div class="c-id flex-mid left">id</div>
@@ -195,6 +142,7 @@
           <div class="my-reply flex-mid left"><span class="span left">啊手动阀撒旦发爱上对方律师的阿斯顿立法局士大夫</span></div>
         </li>
       </ul>
+      <page-comp></page-comp>
       <Modal v-model="modal_show">
         <div class="model-content-title flex-mid left"><span class="flex-mid left">id</span></div>
         <div class="model-content"><span>1</span></div>
@@ -225,8 +173,11 @@
 </template>
 
 <script>
+  import PageComp from './PagingComponent'
+
   export default {
     name: 'guestbook',
+    components: {PageComp},
     data() {
       return {
         modal_show: false

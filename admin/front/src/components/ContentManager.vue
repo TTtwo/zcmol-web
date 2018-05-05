@@ -1,13 +1,6 @@
 <style scoped lang="less">
   @import "../assets/my-style";
 
-
-  @media (max-width: 1024px) {
-    .wrap {
-      overflow: scroll;
-    }
-  }
-
   .table {
     width: 1370px;
     position: relative;
@@ -124,7 +117,6 @@
   .table-wrap {
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
   }
 </style>
 

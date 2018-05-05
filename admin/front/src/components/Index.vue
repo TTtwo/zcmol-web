@@ -171,7 +171,7 @@
 </template>
 
 <script>
-  import {app_name} from "../constant";
+  import {app_name, menus} from "../constant";
 
   export default {
     name: "index",
@@ -180,72 +180,7 @@
         app_name: app_name,
         show_menu: false,
         select_id: -1,
-        menus: [
-          {
-            id: 1,
-            text: '评论管理',
-            is_selected: false,
-            sub_menus: [
-              {
-                id: 'guestbook',
-                is_selected: false,
-                text: '留言',
-                url: '/guestbook'
-              },
-              {
-                id: 'articleComment',
-                is_selected: false,
-                text: '日志评论',
-                url: '/articleComment'
-              },
-              {
-                id: 'blogComment',
-                is_selected: false,
-                text: '文章评论',
-                url: '/blogComment'
-              }
-            ]
-          },
-          {
-            id: 2,
-            text: '编辑内容',
-            is_selected: false,
-            sub_menus: [
-              {
-                id: 'write',
-                is_selected: false,
-                text: '编写发布',
-                url: '/write'
-              }
-            ]
-          },
-          {
-            id: 3,
-            text: '内容管理',
-            is_selected: false,
-            sub_menus: [
-              {
-                id: 'contentManager',
-                is_selected: false,
-                text: '查看/修改',
-                url: '/contentManager'
-              }
-            ]
-          },
-          {
-            id: 4,
-            text: '配    置',
-            is_selected: false,
-            sub_menus: [
-              {
-                id: 'setting',
-                is_selected: false,
-                text: '修改配置',
-                url: '/setting'
-              }
-            ]
-          }
-        ]
+        menus: menus
       }
     },
     computed: {

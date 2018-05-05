@@ -112,7 +112,7 @@
 
 <script>
   import E from 'wangeditor'
-  import { editor_status, editor_type } from "../constant";
+  import { editor_status, editor_type, editor_text } from "../constant";
   export default {
     name: 'write',
     data() {
@@ -120,12 +120,7 @@
         editor_status: editor_status,
         editor_type: editor_type,
         component_status: editor_status.update,
-        content_type: [
-          {type: editor_type.log, text: '日志'},
-          {type: editor_type.blog, text: '博文'},
-          {type: editor_type.saySomething, text: '说说'},
-          {type: editor_type.motto, text: '鸡汤'}
-        ],
+        content_type: editor_text,
         selected_type: {type: editor_type.log, text: '日志'},
         editor_content: '',
         data: null
@@ -142,7 +137,7 @@
         this.$emit('close')
       },
       tranType() {
-        this.selectedType = this.contentType[(this.selectedType.type) % 4]
+        this.selected_type = this.content_type[(this.selected_type.type + 1) % 4]
       }
     },
     mounted() {
