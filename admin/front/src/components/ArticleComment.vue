@@ -151,17 +151,13 @@
         </li>
       </ul>
       <page-comp></page-comp>
-      <Modal v-model="modal_show">
-        <div class="model-content-title flex-mid left"><span class="flex-mid left">id</span></div>
-        <div class="model-content"><span>1</span></div>
-        <div class="model-content-title flex-mid left"><span class="flex-mid left">昵  称</span></div>
-        <div class="model-content"><span>我是谁</span></div>
-        <div class="model-content-title flex-mid left">回复的人</div>
-        <div class="model-content flex-mid left">傻傻不快乐</div>
-        <div class="model-content-title flex-mid left">回复的人的评论</div>
-        <div class="model-content flex-mid left">id:1 你就是个傻逼</div>
-        <div class="model-content-title flex-mid left"><span class="flex-mid left">回复内容</span></div>
-        <div class="model-content"><span>萨拉丁附件阿斯顿立法局阿斯蒂芬</span></div>
+      <Modal v-model="modal_show" class="modal">
+        <div class="modal-wrap" v-for="(item, key) in modal_data" :key="key">
+          <div class="model-content-title flex-mid left"><span class="flex-mid left"> {{ modalKeyText[key] }}</span>
+          </div>
+          <div class="model-content"><span>{{ item }}</span></div>
+        </div>
+
         <div class="model-btn-div flex-mid right">
           <div class="model-del-div flex-mid">
             <input type="text" class="input1" placeholder="删除/修改/回复"/>
@@ -186,12 +182,22 @@
 
 <script>
   import PageComp from './PagingComponent'
+  import {MODALKEYTEXT} from "../constant";
+
   export default {
     name: 'articleComment',
-    components: { PageComp },
+    components: {PageComp},
     data() {
       return {
-        modal_show: false
+        modalKeyText: MODALKEYTEXT,
+        modal_show: false,
+        modal_data: {
+          id: '1',
+          nickName: 'safas',
+          target_nickName: '回复的人名',
+          target_content: '回复的人的内容',
+          reply_content: '回复内容'
+        }
       }
     },
     methods: {

@@ -7,11 +7,13 @@ import router from './router'
 import 'lib-flexible/flexible'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
+import MyRequest from './common/request_api'
 
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
 Vue.use(iView)
+Vue.use(MyRequest)
 
 /* eslint-disable no-new */
 new Vue({

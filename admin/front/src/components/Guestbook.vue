@@ -11,35 +11,6 @@
     width: 1370px;
     margin: auto;
     margin-top: 40px;
-  }
-
-  .ul {
-    width: 100%;
-    > li {
-      width: 100%;
-      height: 70px;
-      position: relative;
-      font-size: 22px;
-      &:hover {
-        cursor: pointer;
-        background-color: @green-white;
-      }
-    }
-    > li:first-child {
-      background-color: @green;
-      color: @white;
-      &:hover {
-        cursor: none;
-      }
-    }
-    > li > div {
-      position: relative;
-      float: left;
-      height: 70px;
-      line-height: 70px;
-      white-space: nowrap;
-      margin-left: 20px;
-    }
     .id {
       width: 30px;
     }
@@ -57,45 +28,6 @@
     }
     .my-reply {
       width: 300px;
-    }
-    .span {
-      text-overflow: ellipsis;
-      overflow: hidden;
-      word-break: keep-all;
-      height: 100%;
-      width: 100%;
-    }
-    .li-white {
-      background-color: @white;
-    }
-  }
-
-  .model-content-title {
-    width: 100%;
-    height: 60px;
-    font-size: 24px;
-    font-weight: bold;
-    position: relative;
-    background-color: @green-white;
-    border-radius: 5px;
-    > span {
-      height: 100%;
-      position: relative;
-      margin-left: 10px;
-    }
-  }
-
-  .model-content {
-    width: 100%;
-    position: relative;
-    font-size: 24px;
-    background-color: @white-gray;
-    margin-bottom: 15px;
-    line-height: 44px;
-    > span {
-      width: 100%;
-      position: relative;
-      margin-left: 10px;
     }
   }
 
@@ -124,38 +56,30 @@
 <template>
   <div class="wrap">
     <div class="table">
-      <ul class="ul">
-        <li>
-          <div class="c-id flex-mid left">id</div>
-          <div class="name flex-mid left">昵 称</div>
-          <div class="time flex-mid left">时 间</div>
-          <div class="content flex-mid left">内 容</div>
-          <div class="email flex-mid left">邮 箱</div>
-          <div class="my-reply flex-mid left">我的回复</div>
-        </li>
+      <div class="content-ul-title">
+        <div class="c-id">id</div>
+        <div class="name">昵 称</div>
+        <div class="time">时 间</div>
+        <div class="content">内 容</div>
+        <div class="email">邮 箱</div>
+        <div class="my-reply">我的回复</div>
+      </div>
+      <ul class="content-ul">
         <li @click="change">
-          <div class="c-id flex-mid left"><span class="span left">1</span></div>
-          <div class="name flex-mid left"><span class="span left">我是小老拉时代峻峰拉水电费</span></div>
-          <div class="time flex-mid left"><span class="span left">2018-06-03 12:55:12</span></div>
-          <div class="content flex-mid left"><span class="span left">阿大山里的开发撒的浪费捡垃圾水电费炼金啊说的福利看手机对</span></div>
-          <div class="email flex-mid left"><span class="span left">1297075993@qq.com</span></div>
-          <div class="my-reply flex-mid left"><span class="span left">啊手动阀撒旦发爱上对方律师的阿斯顿立法局士大夫</span></div>
+          <div class="c-id"><span>1</span></div>
+          <div class="name"><span>我是小老拉时代峻峰拉水电费</span></div>
+          <div class="time"><span>2018-06-03 12:55:12</span></div>
+          <div class="content"><span>阿大山里的开发撒的浪费捡垃圾水电费炼金啊说的福利看手机对</span></div>
+          <div class="email"><span>1297075993@qq.com</span></div>
+          <div class="my-reply"><span>啊手动阀撒旦发爱上对方律师的阿斯顿立法局士大夫</span></div>
         </li>
       </ul>
       <page-comp></page-comp>
-      <Modal v-model="modal_show">
-        <div class="model-content-title flex-mid left"><span class="flex-mid left">id</span></div>
-        <div class="model-content"><span>1</span></div>
-        <div class="model-content-title flex-mid left"><span class="flex-mid left">昵  称</span></div>
-        <div class="model-content"><span>我是谁</span></div>
-        <div class="model-content-title flex-mid left"><span class="flex-mid left">时  间</span></div>
-        <div class="model-content"><span>2018-06-07 12:36:55</span></div>
-        <div class="model-content-title flex-mid left"><span class="flex-mid left">内  容</span></div>
-        <div class="model-content"><span>萨拉丁附件阿斯顿立法局阿斯蒂芬</span></div>
-        <div class="model-content-title flex-mid left"><span class="flex-mid left">邮  箱</span></div>
-        <div class="model-content"><span>1297075993@qq.com</span></div>
-        <div class="model-content-title flex-mid left"><span class="flex-mid left">我的回复</span></div>
-        <div class="model-content"><span>按时发送拉大锯拉萨的积分拉萨的空间</span></div>
+      <Modal v-model="modal_show" class="modal">
+        <div class="modal-wrap" v-for="(item, key) in modal_data" :key="key">
+          <div class="modal-title"><span class="flex-mid left">{{ modalKeyText[key] }}</span></div>
+          <div class="model-content"><span> {{ item }}</span></div>
+        </div>
         <div class="model-btn-div flex-mid right">
           <div class="model-del-div flex-mid">
             <input type="text" class="input1" placeholder="删除/修改"/>
@@ -174,13 +98,23 @@
 
 <script>
   import PageComp from './PagingComponent'
+  import {MODALKEYTEXT} from '../constant'
 
   export default {
     name: 'guestbook',
     components: {PageComp},
     data() {
       return {
-        modal_show: false
+        modalKeyText: MODALKEYTEXT,
+        modal_show: false,
+        modal_data: {
+          id: 1,
+          nickName: 'TTtwo',
+          time: '2016 11 11',
+          content: '巴拉巴拉',
+          email: '12465464@qq.com',
+          my_reply: '无回复'
+        },
       }
     },
     methods: {

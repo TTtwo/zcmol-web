@@ -71,3 +71,16 @@ export const menus = [
     ]
   }
 ]
+export const MODALKEYTEXT = {
+  id: 'id',
+  nickName: '昵称',
+  time: '时间',
+  content: '内容',
+  email: '邮箱',
+
+  target_nickName: '回复对象',
+  target_content: '回复对象的内容',
+
+  reply_content: '回复内容',
+  my_reply: '我的回复',
+}
