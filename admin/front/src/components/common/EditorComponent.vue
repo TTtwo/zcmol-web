@@ -1,5 +1,5 @@
 <style scoped lang="less">
-  @import '../assets/my-style';
+  @import '../../assets/my-style';
 
   .wrap {
     overflow: hidden;
@@ -112,7 +112,7 @@
 
 <script>
   import E from 'wangeditor'
-  import { editor_status, editor_type, editor_text } from "../constant";
+  import { editor_status, editor_type, editor_text } from "../../constant";
   export default {
     name: 'write',
     data() {

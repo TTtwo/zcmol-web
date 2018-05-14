@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import EditorComponent from './EditorComponent'
+  import EditorComponent from './common/EditorComponent'
   import { editor_status } from "../constant";
 
   export default {

@@ -181,7 +181,7 @@
 </template>
 
 <script>
-  import PageComp from './PagingComponent'
+  import PageComp from './common/PagingComponent'
   import {MODALKEYTEXT} from "../constant";
 
   export default {

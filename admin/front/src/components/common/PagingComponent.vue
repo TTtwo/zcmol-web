@@ -1,5 +1,5 @@
 <style scoped lang="less">
-  @import "../assets/my-style";
+  @import "../../assets/my-style";
   #pag {
     height: 80px;
     position: relative;
