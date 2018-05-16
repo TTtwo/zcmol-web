@@ -77,10 +77,12 @@ export const MODALKEYTEXT = {
   time: '时间',
   content: '内容',
   email: '邮箱',
+  website: '网址',
 
   target_nickName: '回复对象',
   target_content: '回复对象的内容',
 
   reply_content: '回复内容',
   my_reply: '我的回复',
+
 }

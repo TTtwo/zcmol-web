@@ -10,18 +10,22 @@
   margin: 0;
   padding: 0;
 }
+
 html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
+
 @font-face {
   font-family: zcmol;
   src: url("./zcmol.ttf");
 }
+
 ul {
   list-style: none;
 }
+
 input, Button, select, textarea {
   outline: none;
   -webkit-appearance: none;
@@ -31,108 +35,76 @@ input, Button, select, textarea {
 }
 
 //font
-.font18 {
-  font-size: 18px;
+.font-style(@size; @color: #fff) {
+  color: @color;
+  font-size: @size;
 }
-.font24 {
-  font-size: 24px;
-}
-.font30 {
-  font-size: 30px;
-}
-.font-bg {
-  font-size: 40px;
-}
-// flex
+
 .flex-mid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-.left {
-  justify-content: flex-start;
-}
-.right {
-  justify-content: flex-end;
-}
+
+.left,
+.right,
+.bottom,
 .top {
-  align-items: flex-start;
+
 }
-.bottom {
-  align-items: flex-end;
+
+.font30,
+.font20 {
+
 }
+
+// flex
+.flex(@horizontal: center; @vertical: center) {
+  display: flex;
+  align-items: @vertical;
+  justify-content: @horizontal;
+}
+
 // input
-.input1 {
-  border-radius: 5px;
-  border: 1px solid @black;
+.base-input(@w: 100%; @h: 100%;
+            @bsc: #dfc111; @fbsc: @out-color
+  ) {
+  width: @w;
+  height: @h;
   text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 0 3px @bsc;
+
   &:focus {
-    box-shadow: 0 0 5px 1px @out-color;
+    box-shadow: 0 0 5px 1px @fbsc;
   }
 }
-.input-sm {
-  width: 160px;
-  height: 60px;
-}
 
-.input-md {
-  width: 220px;
-  height: 60px;
-}
+// textare
+.base-textarea(@w: 100%; @h: 100%;
+               @bgc: @white; @bsc: @white;
+               @fbsc: @out-color
+  ) {
+  width: @w;
+  height: @h;
+  background-color: @bgc;
+  box-shadow: 0 0 3px @bsc;
 
-.input-bg {
-  width: 280px;
-  height: 60px;
+  &:focus {
+    box-shadow: 0 0 5px 1px @fbsc;
+  }
 }
 
 // btn
-.btn1{
-  width: 100px;
-  height: 60px;
+.base-btn(@h: 60px; @bgc: @white; @habgc: @black-blue) {
+  height: @h;
+  padding: 10px;
   position: relative;
-  margin-right: 30px;
-  background-color: @black;
-  border-radius: 10px;
-  font-size: 24px;
-  color: @white;
+  background-color: @bgc;
+
   &:hover {
     cursor: pointer;
-    color:  @black;
-    background-color: @white;
-    border: 1px solid @black;
+    background-color: lighten(@habgc, 10);
   }
-  &:active {
-    background-color: @green-white;
-  }
-}
-.btn2{
-  width: 100px;
-  height: 60px;
-  position: relative;
-  margin-right: 30px;
-  background-color: @green-white;
-  border-radius: 10px;
-  font-size: 24px;
-  color: @green;
-  &:hover {
-    cursor: pointer;
-    color:  @black;
-    background-color: @green-white;
-    border: 1px solid @black;
-  }
-  &:active {
-    background-color: @white;
-  }
-}
 
-// margin distance
-.marLef10 {
-  margin-left: 10px;
-}
-.marRih10 {
-  margin-right: 10px;
-}
-
-.marginLeft(@dis) {
-  margin-left: @dis;
+  &:active {
+    background-color: darken(@habgc, 15);
+  }
 }

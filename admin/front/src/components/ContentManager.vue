@@ -240,11 +240,4 @@
     },
     methods: {
       editor(type) {
-        const editor = this.$refs["edco"]
-        editor.setData(editor_status.update)
-        this.editor_show = true
-      }
-    }
-  }
-</script>
-
+        const editor = this.$r

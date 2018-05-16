@@ -2,32 +2,10 @@
   @import "../assets/my-style";
 
   .mod {
-    .table {
+    .table,
+    .page-component {
       width: 1370px;
-      margin: auto;
-      margin-top: 40px;
-    }
-    .modal {
-      .modal-btn-wrapper {
-        width: 100%;
-        height: 80px;
-        position: relative;
-        margin-top: 30px;
-        .flex-mid;
-        .right;
-        .modal-input-wrapper {
-          width: 220px;
-          height: 60px;
-          position: relative;
-          margin-right: 20px;
-          .flex-mid;
-          input {
-            width: 100%;
-            height: 100%;
-            font-size: 32px;
-          }
-        }
-      }
+      margin: 40px auto auto auto;
     }
 
     .id {
@@ -50,7 +28,41 @@
     }
   }
 
+  .modal {
 
+    .modal-btn-wrapper {
+      width: 100%;
+      height: 80px;
+      margin-top: 30px;
+      position: relative;
+      .flex(@horizontal: flex-end);
+
+      .modal-input-item {
+        width: 220px;
+        height: 60px;
+        position: relative;
+        margin-right: 20px;
+        .flex();
+
+        input {
+          .font-style(28px; @black);
+          .base-input(@bsc: @green);
+        }
+      }
+
+      .btn {
+        margin-left: 5px;
+        border-radius: 5px;
+        .base-btn(@bgc: @green-white);
+        .font-style(24px; @black);
+        .flex();
+
+        &:hover {
+          color: @white;
+        }
+      }
+    }
+  }
 </style>
 
 <template>
@@ -75,20 +87,23 @@
         </li>
       </ul>
     </div>
-    <page-comp></page-comp>
+    <page-comp class="page-component"></page-comp>
     <Modal v-model="modal_show" class="modal">
-      <div class="modal-wrapper" v-for="(item, key) in modal_data" :key="key">
-        <div class="modal-title"><span class="flex-mid left">{{ modalKeyText[key] }}</span></div>
+      <div class="modal-item" v-for="(item, key) in modal_data" :key="key">
+        <div class="modal-title"><span>{{ modalKeyText[key] }}</span></div>
         <div class="modal-content"><span> {{ item }}</span></div>
       </div>
+      <div class="modal-item">
+        <textarea class="modal-textarea" placeholder="输入/修改 我的回复..."></textarea>
+      </div>
       <div class="modal-btn-wrapper">
-        <div class="modal-input-wrapper">
-          <input type="text" class="input1" placeholder="删除/修改"/>
+        <div class="modal-input-item">
+          <input type="text" placeholder="删除/修改"/>
         </div>
-        <div class="btn1 flex-mid">
+        <div class="btn">
           删除
         </div>
-        <div class="btn1 flex-mid">
+        <div class="btn">
           修改
         </div>
       </div>
@@ -109,9 +124,10 @@
         modal_show: false,
         modal_data: {
           id: 1,
+          website: '无',
           nickName: 'TTtwo',
           time: '2016 11 11',
-          content: '巴拉巴拉',
+          content: 'asdfasd',
           email: '12465464@qq.com',
           my_reply: '无回复'
         },
