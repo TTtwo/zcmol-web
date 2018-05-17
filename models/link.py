@@ -1,14 +1,13 @@
 from kernel.database import DB
-import datetime
+from ..models.utils.mixin import ModelMixin
+from ..models.utils.mixin import HiddenMixin
 
 
-class Link(DB.Model):
-    __tablename__ = 'zc_links'
-    link_id = DB.Column(DB.Integer, primary_key=True, autoincrement=True)
-    link_name = DB.Column(DB.String(30), nullable=False)
-    link_url = DB.Column(DB.String(150), nullable=False)
-    link_bg_img = DB.Column(DB.String(150), default="")
-    link_desc = DB.Column(DB.String(150), default="")
-    create_at = DB.Column(DB.DateTime, nullable=False, default=datetime.datetime.now)
+class Link(DB.Model, ModelMixin, HiddenMixin):
+    __tablename__ = 'links'
 
-
+    id = DB.Column(DB.Integer, primary_key=True, autoincrement=True)
+    name = DB.Column(DB.String(30), nullable=False)
+    url = DB.Column(DB.String(150), nullable=False)
+    img = DB.Column(DB.String(150), default="")
+    desc = DB.Column(DB.String(150), default="")

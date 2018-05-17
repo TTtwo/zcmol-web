@@ -1,19 +1,24 @@
-from models.user import User
-from models.dailyarticle import DailyArticle
-from models.guestbook import GuestBook
-from models.link import Link
-from models.dailycomment import DailyComment
 from kernel.database import DB
+from ..models.article.article import Article
+from ..models.article.blog_content import BlogContent
+from ..models.article.blog_content import BlogTag
+from ..models.article.blog_content import BlogContentCategory
+from ..models.article.daily_content import DailyContent
+from ..models.article.article_comment import ArticleComment
+from ..models.guestbook import GuestBook
+from ..models.link import Link
 
 MODELS = {
-    "User": User,
-    "DailyArticle": DailyArticle,
+    "Article": Article,
+    "ArticleComment": ArticleComment,
+    "BlogContentCategory": BlogContentCategory,
+    "BlogTag": BlogTag,
+    "BlogContent": BlogContent,
+    "DailyContent": DailyContent,
     "GuestBook": GuestBook,
     "Link": Link,
-    "DailyComment": DailyComment,
 }
+
 
 def create_all():
     DB.create_all()
-
-

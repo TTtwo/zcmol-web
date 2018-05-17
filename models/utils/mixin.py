@@ -1,14 +1,34 @@
 import datetime
-from sqlalchemy.dialects.mysql import BIGINT
-from kernel import DB
+from kernel.database import DB
 
-class ModelMinix:
-    id = DB.Column(BIGINT(unsigned=True), nullable=False, unique=True,
-                   primary_key=True, autoincrement=True)
-    create_at = DB.Column(DB.DateTime(), nullable=False,
+
+class HiddenMixin:
+    _hidden = DB.Column(DB.Boolean, nullable=False,
+                        default=False)
+
+    @property
+    def hidden(self):
+        return self._hidden
+
+    @hidden.setter
+    def hidden(self, val: bool):
+        self._hidden = val
+
+
+class ModelMixin:
+    create_at = DB.Column(DB.Datetime, nullable=False,
                           default=datetime.datetime.now)
+    change_at = DB.Column(DB.Datetime, defualt=datetime.datetime.now)
 
-class HelperMinix:
 
-    id = None
-    create_at = None
+class ArticleMixin:
+    id = DB.Column(DB.Integer, primaryKey=True, autoincrement=True)
+    title = DB.Column(DB.String(50), nullable=False)
+    content = DB.Column(DB.Text, nullable=False)
+
+
+class CommentMixin:
+    email = DB.Column(DB.String(50))
+    website = DB.Column(DB.String(120))
+    content = DB.Column(DB.Text, nullable=False)
+    nickname = DB.Column(DB.String(50), nullable=False)
