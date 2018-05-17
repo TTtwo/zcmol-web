@@ -1,6 +1,6 @@
 from kernel.database import DB
-from ...models.article.article import Article
-from ...models.utils.mixin import ArticleMixin
+from ..article.article import Article
+from ..utils.mixin import ArticleMixin
 
 
 class DailyContent(DB.Model, ArticleMixin):

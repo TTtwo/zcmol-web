@@ -1,21 +1,21 @@
 from kernel.database import DB
-from ...models.article.article import Article
-from ...models.utils.mixin import ModelMixin
-from ...models.utils.mixin import HiddenMixin
-from ...models.utils.mixin import ArticleMixin
+from ..article.article import Article
+from ..utils.mixin import ModelMixin
+from ..utils.mixin import HiddenMixin
+from ..utils.mixin import ArticleMixin
 
 
 class BlogContentCategory(DB.Model, ModelMixin, HiddenMixin):
     __tablename__ = 'blog_content_category'
 
-    id = DB.Column(DB.Integer, primaryKey=True, autoincrement=True)
+    id = DB.Column(DB.Integer, primary_key=True, autoincrement=True)
     category_name = DB.Column(DB.String(50), nullable=False, unique=True)
 
 
 class BlogTag(DB.Model, ModelMixin, HiddenMixin):
     __tablename__ = 'blog_tag'
 
-    id = DB.Column(DB.Integer, primaryKey=True, autoincrement=True)
+    id = DB.Column(DB.Integer, primary_key=True, autoincrement=True)
     tag_name = DB.Column(DB.String(20), nullable=False, unique=True)
 
 

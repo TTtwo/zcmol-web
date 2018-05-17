@@ -1,7 +1,7 @@
 from enum import Enum
 from kernel.database import DB
-from ...models.utils.mixin import HiddenMixin
-from ...models.utils.mixin import ModelMixin
+from ..utils.mixin import HiddenMixin
+from ..utils.mixin import ModelMixin
 
 
 class ArticleStateEnum(Enum):
@@ -17,6 +17,6 @@ class ArticleContentTypeEnum(Enum):
 class Article(DB.Model, ModelMixin, HiddenMixin):
     __tablename__ = 'article'
 
-    id = DB.Column(DB.Integer, primaryKey=True, autoincrement=True)
+    id = DB.Column(DB.Integer, primary_key=True, autoincrement=True)
     state = DB.Column(DB.Integer, nullable=False, default=ArticleStateEnum.PUBLIC.value)
-    content_type = DB.Column(DB.Integer, null=False, default=ArticleContentTypeEnum.DAILY.value)
+    content_type = DB.Column(DB.Integer, nullable=False, default=ArticleContentTypeEnum.DAILY.value)

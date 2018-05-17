@@ -4,7 +4,7 @@ from kernel.database import DB
 
 class HiddenMixin:
     _hidden = DB.Column(DB.Boolean, nullable=False,
-                        default=False)
+                        default='False')
 
     @property
     def hidden(self):
@@ -16,13 +16,13 @@ class HiddenMixin:
 
 
 class ModelMixin:
-    create_at = DB.Column(DB.Datetime, nullable=False,
+    create_at = DB.Column(DB.DateTime, nullable=False,
                           default=datetime.datetime.now)
-    change_at = DB.Column(DB.Datetime, defualt=datetime.datetime.now)
+    change_at = DB.Column(DB.DateTime, default=datetime.datetime.now)
 
 
 class ArticleMixin:
-    id = DB.Column(DB.Integer, primaryKey=True, autoincrement=True)
+    id = DB.Column(DB.Integer, primary_key=True, autoincrement=True)
     title = DB.Column(DB.String(50), nullable=False)
     content = DB.Column(DB.Text, nullable=False)
 

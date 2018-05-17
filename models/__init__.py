@@ -1,12 +1,12 @@
 from kernel.database import DB
-from ..models.article.article import Article
-from ..models.article.blog_content import BlogContent
-from ..models.article.blog_content import BlogTag
-from ..models.article.blog_content import BlogContentCategory
-from ..models.article.daily_content import DailyContent
-from ..models.article.article_comment import ArticleComment
-from ..models.guestbook import GuestBook
-from ..models.link import Link
+from .article.article import Article
+from .article.blog_content import BlogContent
+from .article.blog_content import BlogTag
+from .article.blog_content import BlogContentCategory
+from .article.daily_content import DailyContent
+from .article.article_comment import ArticleComment
+from .guestbook import GuestBook
+from .link import Link
 
 MODELS = {
     "Article": Article,

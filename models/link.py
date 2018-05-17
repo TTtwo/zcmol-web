@@ -1,6 +1,6 @@
 from kernel.database import DB
-from ..models.utils.mixin import ModelMixin
-from ..models.utils.mixin import HiddenMixin
+from .utils.mixin import ModelMixin
+from .utils.mixin import HiddenMixin
 
 
 class Link(DB.Model, ModelMixin, HiddenMixin):
