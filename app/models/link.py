@@ -1,0 +1,13 @@
+from app.kernel.database import DB
+from .utils.mixin import ModelMixin
+from .utils.mixin import HiddenMixin
+
+
+class Link(DB.Model, ModelMixin, HiddenMixin):
+    __tablename__ = 'links'
+
+    id = DB.Column(DB.Integer, primary_key=True, autoincrement=True)
+    name = DB.Column(DB.String(30), nullable=False)
+    url = DB.Column(DB.String(150), nullable=False)
+    img = DB.Column(DB.String(150), default="")
+    desc = DB.Column(DB.String(150), default="")

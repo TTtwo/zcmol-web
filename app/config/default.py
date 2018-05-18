@@ -1,4 +1,4 @@
-from kernel.core.sysconfig import SysConfig
+from app.kernel.core.sysconfig import SysConfig
 
 
 class DefaultConfig(SysConfig):
