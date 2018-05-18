@@ -1,5 +1,4 @@
 from flask import Blueprint
-from functools import wraps
 
 
 class BaseController:
@@ -7,8 +6,8 @@ class BaseController:
 
     def __init__(self, import_name, name, prefix, template_folder=None):
 
-        self.bluprint = Blueprint(name=name, import_name=import_name, url_prefix=prefix,
-                                  template_folder=template_folder)
+        self.blueprint = Blueprint(name=name, import_name=import_name, url_prefix=prefix,
+                                   template_folder=template_folder)
         self.import_name = import_name
         self.name = name
         self.prefix = prefix
@@ -20,7 +19,7 @@ class BaseController:
             env = app.config["ENVIRONMENT"]
             if env != self.REQUIRED_ENV:
                 return False
-        app.register_blueprint(self.bluprint)
+        app.register_blueprint(self.blueprint)
         return True
 
     def _router(self, route, method, **options):
@@ -28,7 +27,7 @@ class BaseController:
 
         def decorator(fn):
             options['methods'] = [method]
-            return self.bluprint.route(route, **options)(fn)
+            return self.blueprint.route(route, **options)(fn)
 
         return decorator
 

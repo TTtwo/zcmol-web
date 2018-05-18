@@ -2,9 +2,6 @@ from flask import jsonify
 
 
 class Response:
-    @classmethod
-    def _jsonify(cls, **kwargs):
+    @staticmethod
+    def to_json(**kwargs):
         return jsonify(**kwargs)
-
-
-

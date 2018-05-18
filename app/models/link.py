@@ -1,4 +1,4 @@
-from app.kernel.database import DB
+from ..kernel.database import DB
 from .utils.mixin import ModelMixin
 from .utils.mixin import HiddenMixin
 

@@ -1,6 +1,7 @@
-from .auth import auth_controller
+from .article import article_controller
+from .link import link_controller
 
 controllers = [
-    auth_controller
+    article_controller,
+    link_controller
 ]
-

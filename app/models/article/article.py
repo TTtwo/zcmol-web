@@ -1,5 +1,5 @@
 from enum import Enum
-from app.kernel.database import DB
+from ...kernel.database import DB
 from ..utils.mixin import HiddenMixin
 from ..utils.mixin import ModelMixin
 

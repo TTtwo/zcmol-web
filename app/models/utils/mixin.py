@@ -1,10 +1,10 @@
-from datetime import datetime
-from app.kernel.database import DB
+from _datetime import datetime
+from ...kernel.database import DB
 
 
 class HiddenMixin:
     _hidden = DB.Column(DB.Boolean, nullable=False,
-                        default='False')
+                        default=False)
 
     @property
     def hidden(self):
@@ -17,8 +17,8 @@ class HiddenMixin:
 
 class ModelMixin:
     create_at = DB.Column(DB.DateTime, nullable=False,
-                          default=datetime.timestamp)
-    change_at = DB.Column(DB.DateTime, default=datetime.timestamp)
+                          default=datetime.now())
+    change_at = DB.Column(DB.DateTime, default=datetime.now())
 
 
 class ArticleMixin:
