@@ -15,8 +15,7 @@ link_controller = AdminController(import_name=__name__, name='admin-link',
 api = Api(link_controller.blueprint)
 
 
-@api.resource('/link')
-class Link(Resource):
+class Links(Resource):
 
     @use_kwargs({
         'hidden': fields.Bool(missing=None)
@@ -24,11 +23,44 @@ class Link(Resource):
     def get(self, hidden: bool):
         filter_arg = {}
         if hidden is not None:
-            filter_arg["hidden"] = hidden
-
-
+            filter_arg["_hidden"] = hidden
+        links_res = Model.Link.query.filter_by(**filter_arg).all()
         links = [
             ModelHelper.serialize(link)
             for link in links_res
         ]
         return Response.to_json(links=links)
+
+    @use_kwargs({
+        'name': fields.Str(required=True, max=32),
+        'url': fields.Str(required=True, max=256),
+        'img': fields.Str(max=256),
+        'desc': fields.Str()
+    })
+    def post(self, name: str, url: str, img: str, desc: str):
+        params = {
+            'name': name,
+            'url': url
+        }
+        if img:
+            params['img'] = img
+        if desc:
+            params['desc'] = desc
+        link = Model.Link(**params)
+        DB.session.add(link)
+        DB.session.commit()
+        return 201
+
+
+class LinksDetail(Resource):
+
+    @use_kwargs({
+        'name': fields.Str(max=32),
+        'url': fields.Str(max=256),
+        'img': fields.Str(max=256),
+        'desc': fields.Str(),
+        'hidden': fields.Bool()
+    })
+    def patch(self, name: str, url: str, img: str, desc: str, hidden: bool):
+        # TODO
+        pass
