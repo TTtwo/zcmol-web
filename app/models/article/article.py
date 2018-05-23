@@ -10,7 +10,7 @@ class ArticleStateEnum(Enum):
 
 
 class ArticleContentTypeEnum(Enum):
-    DAILY = 1,
+    DAILY = 1
     BLOG = 2
 
 

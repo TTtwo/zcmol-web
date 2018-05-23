@@ -6,4 +6,4 @@ from ..utils.mixin import ArticleMixin
 class DailyContent(DB.Model, ArticleMixin):
     __tablename__ = 'daily_content'
 
-    article_id = DB.Column(DB.Integer, DB.ForeignKey(Article.id))
+    article_id = DB.Column(DB.Integer, DB.ForeignKey(Article.id), nullable=False)
