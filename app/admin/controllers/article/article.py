@@ -24,10 +24,15 @@ class Article(Resource):
     })
     def get(self, content_type: int):
         filter_arg = {"_hidden": False, 'content_type': content_type}
-        articles: Model.Article = Model.Article \
-            .query \
-            .filter_by(**filter_arg) \
-            .all()
+        # articles: Model.Article = Model.Article \
+        #     .query \
+        #     .filter_by(**filter_arg) \
+        #     .all()
+        # items = [
+        #     ModelHelper.serialize(article)
+        #     for article in articles
+        # ]
+        articles = DB.session.query(Model.Article, Model.DailyContent).all()
         items = [
             ModelHelper.serialize(article)
             for article in articles
