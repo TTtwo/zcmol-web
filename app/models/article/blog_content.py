@@ -3,7 +3,7 @@ from ..article.article import Article
 from ..utils.mixin import ModelMixin
 from ..utils.mixin import HiddenMixin
 from ..utils.mixin import ArticleMixin
-
+from sqlalchemy.orm import relationship
 
 class BlogContentCategory(DB.Model, ModelMixin, HiddenMixin):
     __tablename__ = 'blog_content_category'
@@ -27,3 +27,4 @@ class BlogContent(DB.Model, ArticleMixin):
                                     nullable=False)
     tag_id = DB.Column(DB.Integer, DB.ForeignKey(BlogTag.id), nullable=False)
     article_id = DB.Column(DB.Integer, DB.ForeignKey(Article.id), nullable=False)
+    article = relationship('article', backref=DB.backref('blogContent'))

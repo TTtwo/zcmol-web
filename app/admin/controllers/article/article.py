@@ -10,6 +10,7 @@ from marshmallow import validate
 from webargs.flaskparser import use_kwargs
 
 from flask_restful import Resource
+from flask_sqlalchemy import BaseQuery
 
 CONTENT_TYPES = [v.value for v in ArticleContentTypeEnum.__members__.values()]
 
@@ -24,12 +25,7 @@ class Article(Resource):
     })
     def get(self, content_type: int):
         filter_arg = {"_hidden": False, 'content_type': content_type}
-        articles: Model.Article = Model.Article \
-            .query \
-            .filter_by(**filter_arg) \
-            .all()
-        items = [
-            ModelHelper.serialize(article)
-            for article in articles
-        ]
-        return resp_to_json(items=items)
+        query: BaseQuery = Model.Article.query.filter_by(**filter_arg).all()
+        # query: BaseQuery = query.daily_content
+        print([ModelHelper.serialize(a) for a in query])
+        return resp_to_json(items=[ModelHelper.serialize(a) for a in query])
