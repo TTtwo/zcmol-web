@@ -10,6 +10,8 @@ class ModelHelper:
     @staticmethod
     def serialize(model: Model, **kwargs):
         if model:
+            if isinstance(model, dict) or isinstance(model, list):
+                return model
             model_data = {
                 c.name: getattr(model, c.name)
                 for c in model.__table__.columns

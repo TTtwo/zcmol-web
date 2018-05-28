@@ -5,7 +5,7 @@ from ..utils.mixin import ModelMixin
 
 
 class ArticleStateEnum(Enum):
-    PUBLIC = 1,
+    PUBLIC = 1
     PRIVATE = 2
 
 
