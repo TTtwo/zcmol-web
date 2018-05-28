@@ -25,7 +25,12 @@ class Article(Resource):
     })
     def get(self, content_type: int):
         filter_arg = {"_hidden": False, 'content_type': content_type}
-        query: BaseQuery = Model.Article.query.filter_by(**filter_arg).all()
-        # query: BaseQuery = query.daily_content
-        print([ModelHelper.serialize(a) for a in query])
-        return resp_to_json(items=[ModelHelper.serialize(a) for a in query])
+        # query: BaseQuery = Model.Article.query.filter_by(**filter_arg).first()
+        query: BaseQuery = DB.session \
+            .query(Model.Article) \
+            .join(Model.Article.daily_content) \
+            .all()
+        return resp_to_json(items=[
+            ModelHelper.serialize(item, dailyContent=item.daily_content.title)
+            for item in query
+        ])

@@ -27,4 +27,4 @@ class BlogContent(DB.Model, ArticleMixin):
                                     nullable=False)
     tag_id = DB.Column(DB.Integer, DB.ForeignKey(BlogTag.id), nullable=False)
     article_id = DB.Column(DB.Integer, DB.ForeignKey(Article.id), nullable=False)
-    article = relationship('article', backref=DB.backref('blogContent'))
+    article = relationship('Article', backref=DB.backref('blog_content'))
