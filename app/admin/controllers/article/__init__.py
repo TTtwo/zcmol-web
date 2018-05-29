@@ -7,3 +7,4 @@ article_controller = AdminController(import_name=__name__, name="admin-article",
 api = Api(article_controller.blueprint)
 
 api.add_resource(DailyArticle, '/daily_article')
+api.add_resource(DailyArticleDetail, '/<int:article_id>/daily_article')

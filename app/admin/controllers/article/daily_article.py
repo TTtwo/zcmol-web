@@ -6,6 +6,8 @@ from app.models.article.daily_content import DailyContentType
 from app.models import Model
 from app.kernel.utils.response import resp_to_json
 
+from datetime import datetime
+
 from webargs import fields
 from marshmallow import validate
 from webargs.flaskparser import use_kwargs
@@ -63,13 +65,32 @@ class DailyArticle(Resource):
                                 _hidden=hidden,
                                 content_type=ArticleContentTypeEnum.DAILY.value)
         article.daily_content = Model.DailyContent(title=title,
-                                                   content=content, daily_type=daily_type)
+                                                   content=content,
+                                                   daily_type=daily_type)
         DB.session.add(article)
         DB.session.commit()
         return 201
 
-    @use_kwargs({
 
+class DailyArticleDetail(Resource):
+    @use_kwargs({
+        'title': fields.Str(max=20),
+        'content': fields.Str(),
+        'hidden': fields.Bool(),
+        'daily_type': fields.Str(validate=validate.OneOf(DAILY_CONTENT_TYPES))
     })
-    def patch(self):
-        pass
+    def patch(self, article_id, title, content, hidden, daily_type):
+        article = Model.Article.query.get(article_id)
+        if article is None:
+            return 'article_id {} is not exists'.format(article_id)
+        if hidden:
+            article._hidden = hidden
+        if title:
+            article.daily_content.title = title
+        if content:
+            article.daily_content.content = content
+        if daily_type:
+            article.daily_content.daily_content = daily_type
+        article.change_at = datetime.now()
+        DB.session.commit()
+        return 201

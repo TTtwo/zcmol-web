@@ -5,6 +5,7 @@ from ..utils.mixin import HiddenMixin
 from ..utils.mixin import ArticleMixin
 from sqlalchemy.orm import relationship
 
+
 class BlogContentCategory(DB.Model, ModelMixin, HiddenMixin):
     __tablename__ = 'blog_content_category'
 
@@ -28,3 +29,5 @@ class BlogContent(DB.Model, ArticleMixin):
     tag_id = DB.Column(DB.Integer, DB.ForeignKey(BlogTag.id), nullable=False)
     article_id = DB.Column(DB.Integer, DB.ForeignKey(Article.id), nullable=False)
     article = relationship('Article', backref=DB.backref('blog_content'))
+    tags = relationship('BlogTag', backref=DB.backref('blog', useList=True))
+    category = relationship('BlogContentCategory', backref=DB.backref('blog', useList=True))
