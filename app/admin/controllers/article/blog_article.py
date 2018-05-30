@@ -34,10 +34,11 @@ class BlogArticle(Resource):
             .all()
         items = [
             ModelHelper.serialize(item, contents={
-                'title': item.blog_content.title,
+                'title': item.blog_content.title
             })
             for item in query
         ]
+        print(items)
         return resp_to_json(items=items)
 
     @use_kwargs({
