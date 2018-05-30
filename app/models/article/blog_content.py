@@ -18,7 +18,7 @@ class BlogTag(DB.Model, ModelMixin, HiddenMixin):
 
     id = DB.Column(DB.Integer, primary_key=True, autoincrement=True)
     tag_name = DB.Column(DB.String(20), nullable=False, unique=True)
-    blog_content_tag = relationship('BlogContent', secondary='blog_tag_middle_table')
+    blogs = relationship('BlogContent', secondary='blog_tag_middle_table')
 
 
 class BlogContent(DB.Model, ArticleMixin):
@@ -28,7 +28,7 @@ class BlogContent(DB.Model, ArticleMixin):
                                     DB.ForeignKey(BlogContentCategory.id),
                                     nullable=False)
     article_id = DB.Column(DB.Integer, DB.ForeignKey(Article.id), nullable=False)
-    article = relationship('Article', backref=DB.backref('blog_content', uselist=True))
+    article = relationship('Article', backref=DB.backref('blog_content', uselist=False))
     tags = relationship('BlogTag', secondary='blog_tag_middle_table')
     category = relationship('BlogContentCategory', backref=DB.backref('blog', uselist=True))
 

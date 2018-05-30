@@ -33,20 +33,44 @@ class BlogArticle(Resource):
             .join(Model.Article.blog_content) \
             .all()
         items = [
-            ModelHelper.serialize(item, contents={
-                'title': item.blog_content.title
-            })
+            ModelHelper.serialize(item,
+                                  contents=item.blog_content,
+                                  tags=item.blog_content.tags)
             for item in query
         ]
-        print(items)
         return resp_to_json(items=items)
 
+    @use_kwargs({
+        'title': fields.Str(max=20, required=True),
+        'content': fields.Str(required=True),
+        'hidden': fields.Bool(missing=False),
+        'tag_ids': fields.List(fields.Int(), reuqired=True),
+        'category': fields.Int(required=True),
+        'state': fields.Int(validate=validate.OneOf(STATE), missint=STATE[0])
+    })
+    def post(self, title, content, tag_ids, category, state, hidden):
+        article = Model.Article(state=state, _hidden=hidden)
+        article.blog_content = Model.BlogContent(title=title, content=content)
+        article.blog_content.category = Model.BlogContentCategory \
+            .query \
+            .get(category)
+        article.blog_content.tags = Model.BlogTag \
+            .query \
+            .filter(Model.BlogTag.id.in_(tag_ids)) \
+            .all()
+        DB.session.add(article)
+        DB.session.commit()
+        return 201
+
+
+class BlogArticleDetail(Resource):
     @use_kwargs({
         'title': fields.Str(max=20),
         'content': fields.Str(),
         'hidden': fields.Bool(),
-        'tag_ids': fields.List(fields.Int(), required=True),
-        'category': fields.Int(required=True)
+        'state': fields.Int(validate=validate.OneOf(STATE)),
+        'category': fields.Int(),
+        'tag_ids': fields.List(fields.Int())
     })
-    def post(self, title, content, tag_ids, category, state, hidden):
+    def path(self):
         pass
