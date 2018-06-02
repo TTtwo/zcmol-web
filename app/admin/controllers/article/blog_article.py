@@ -73,7 +73,7 @@ class BlogArticleDetail(Resource):
         'tag_ids': fields.List(fields.Int())
     })
     def patch(self, article_id, title, content,
-             hidden, state, category, tag_ids):
+              hidden, state, category, tag_ids):
         article: Model.Article = Model.Article.query.get(article_id)
         if article is None:
             return 'blog_article_id {} is not exits'.format(article_id)
@@ -88,12 +88,21 @@ class BlogArticleDetail(Resource):
         if category:
             article.blog_content.category = category
         if tag_ids:
-            blog_tag_query: list[Model.BlogTag] = Model.BlogTag\
-                .query\
-                .filter(Model.BlogTag.id.in_(tag_ids))\
+            blog_tag_query: list[Model.BlogTag] = Model.BlogTag \
+                .query \
+                .filter(Model.BlogTag.id.in_(tag_ids)) \
                 .all()
             article.blog_content.tags = blog_tag_query
         article.change_at = datetime.now()
         DB.session.commit()
         return 201
 
+
+class BlogTag(Resource):
+    def get(self):
+        query: list[Model.BlogTag] = Model.BlogTag.query.all()
+        items = [
+            ModelHelper.serialize(item)
+            for item in query
+        ]
+        return resp_to_json(items=items)
