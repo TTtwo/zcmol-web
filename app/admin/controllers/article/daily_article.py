@@ -80,7 +80,7 @@ class DailyArticleDetail(Resource):
         'daily_type': fields.Str(validate=validate.OneOf(DAILY_CONTENT_TYPES))
     })
     def patch(self, article_id, title, content, hidden, daily_type):
-        article = Model.Article.query.get(article_id)
+        article: Model.Article = Model.Article.query.get(article_id)
         if article is None:
             return 'article_id {} is not exists'.format(article_id)
         if hidden:

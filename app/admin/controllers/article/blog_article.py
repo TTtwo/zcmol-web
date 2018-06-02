@@ -72,5 +72,28 @@ class BlogArticleDetail(Resource):
         'category': fields.Int(),
         'tag_ids': fields.List(fields.Int())
     })
-    def path(self):
-        pass
+    def patch(self, article_id, title, content,
+             hidden, state, category, tag_ids):
+        article: Model.Article = Model.Article.query.get(article_id)
+        if article is None:
+            return 'blog_article_id {} is not exits'.format(article_id)
+        if hidden:
+            article._hidden = hidden
+        if state:
+            article.state = state
+        if title:
+            article.blog_content.title = title
+        if content:
+            article.blog_content.content = content
+        if category:
+            article.blog_content.category = category
+        if tag_ids:
+            blog_tag_query: list[Model.BlogTag] = Model.BlogTag\
+                .query\
+                .filter(Model.BlogTag.id.in_(tag_ids))\
+                .all()
+            article.blog_content.tags = blog_tag_query
+        article.change_at = datetime.now()
+        DB.session.commit()
+        return 201
+
