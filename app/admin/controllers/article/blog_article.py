@@ -8,6 +8,7 @@ from app.kernel.utils.response import resp_to_json
 from datetime import datetime
 
 from webargs import fields
+from webargs import ValidationError
 from marshmallow import validate
 from webargs.flaskparser import use_kwargs
 
@@ -67,7 +68,7 @@ class BlogArticleDetail(Resource):
     @use_kwargs({
         'title': fields.Str(max=20),
         'content': fields.Str(),
-        'hidden': fields.Bool(),
+        'hidden': fields.Bool(missing=False),
         'state': fields.Int(validate=validate.OneOf(STATE)),
         'category': fields.Int(),
         'tag_ids': fields.List(fields.Int())
@@ -75,10 +76,9 @@ class BlogArticleDetail(Resource):
     def patch(self, article_id, title, content,
               hidden, state, category, tag_ids):
         article: Model.Article = Model.Article.query.get(article_id)
+        article._hidden = hidden
         if article is None:
             return 'blog_article_id {} is not exits'.format(article_id)
-        if hidden:
-            article._hidden = hidden
         if state:
             article.state = state
         if title:
@@ -96,13 +96,3 @@ class BlogArticleDetail(Resource):
         article.change_at = datetime.now()
         DB.session.commit()
         return 201
-
-
-class BlogTag(Resource):
-    def get(self):
-        query: list[Model.BlogTag] = Model.BlogTag.query.all()
-        items = [
-            ModelHelper.serialize(item)
-            for item in query
-        ]
-        return resp_to_json(items=items)

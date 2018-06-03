@@ -76,15 +76,14 @@ class DailyArticleDetail(Resource):
     @use_kwargs({
         'title': fields.Str(max=20),
         'content': fields.Str(),
-        'hidden': fields.Bool(),
+        'hidden': fields.Bool(missing=False),
         'daily_type': fields.Str(validate=validate.OneOf(DAILY_CONTENT_TYPES))
     })
     def patch(self, article_id, title, content, hidden, daily_type):
         article: Model.Article = Model.Article.query.get(article_id)
+        article._hidden = hidden
         if article is None:
             return 'article_id {} is not exists'.format(article_id)
-        if hidden:
-            article._hidden = hidden
         if title:
             article.daily_content.title = title
         if content:

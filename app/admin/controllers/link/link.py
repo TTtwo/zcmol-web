@@ -42,6 +42,7 @@ class Links(Resource):
             params['img'] = img
         if desc:
             params['desc'] = desc
+        params['change_at'] = datetime.now()
         link = Model.Link(**params)
         DB.session.add(link)
         DB.session.commit()
