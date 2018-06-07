@@ -5,29 +5,33 @@
     width: 100%;
     height: 100%;
     background: url("../assets/bg.gif") repeat;
-  }
 
-  .header {
-    height: 25%;
-    position: relative;
+    .header {
+      height: 25%;
+      position: relative;
 
-    .logo-wrapper {
-      width: 30%;
-      height: 100%;
-      .flex(@h: flex-start);
+      .logo-wrapper {
+        width: 30%;
+        height: 100%;
+        .flex(@h: flex-start);
 
-      img {
-        margin-left: 20px;
-        height: 150px;
+        .logo {
+          width: 100%;
+          height: 100%;
+          max-height: 196px;
+          max-width: 256px;
+          background: url("../assets/logo.png") no-repeat center;
+          background-size: contain;
+        }
       }
     }
-  }
 
-  .container {
-    position: relative;
-    width: 100%;
-    height: 75%;
-    background-color: black;
+    .container {
+      position: relative;
+      width: 100%;
+      height: 75%;
+      background-color: black;
+    }
   }
 </style>
 
@@ -35,7 +39,7 @@
   <div id="index">
     <div class="header">
       <div class="logo-wrapper">
-        <img src="../assets/logo.png" alt="早茶月光">
+        <div class="logo"></div>
       </div>
     </div>
     <div class="container">

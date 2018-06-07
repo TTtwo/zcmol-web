@@ -1,5 +1,41 @@
+@barColor: #333;
+@green: #7de87d;
+@font-face {
+  font-family: zcmol;
+  src: url('./font/zcmol.ttf');
+}
+
+@font-face {
+  font-family: beleren;
+  src: url("./font/Beleren-Bold.ttf");
+}
+
 .flex(@h: center, @v: center) {
   display: flex;
   align-items: @v;
   justify-content: @h;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 0;
+}
+
+::-webkit-scrollbar-button {
+  width: 8px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border: 0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #444;
+  border: 0;
+  box-shadow: 0 0 3px #444 inset;
+  border-radius: 10px;
+}
+
