@@ -14,27 +14,56 @@
       background: url("../assets/bg.gif");
       overflow-y: scroll;
 
+      .comment-wrapper {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: -100%;
+        background-color: @comment_bg;
+        -webkit-transition: top 1.2s;
+        -moz-transition: top 1.2s;
+        -ms-transition: top 1.2s;
+        -o-transition: top 1.2s;
+        transition: top 1.2s;
+        transition-timing-function: cubic-bezier(.66, 0, .46, 1.53);
+
+        .comment-wrapper-wrap {
+          position: relative;
+          margin: 20px 60px;
+          text-align: left;
+        }
+      }
+      .comment-wrapper-animation {
+        top: 0;
+      }
       .content-wrapper {
         position: relative;
         margin: 40px;
       }
-
-      .comment-btn {
-        @c-size: 70px;
-        width: @c-size;
-        height: @c-size;
-        position: absolute;
-        font-size: @c-size - 10px;
-        color: @barColor;
-        font-family: beleren;
-        -webkit-border-radius: @c-size;
-        -moz-border-radius: @c-size;
-        border-radius: @c-size;
-        background-color: @green;
-        .flex;
-      }
     }
 
+    .comment-btn {
+      @c-size: 70px;
+      width: @c-size;
+      height: @c-size;
+      position: absolute;
+      font-size: @c-size - 10px;
+      color: @barColor;
+      font-family: beleren;
+      -webkit-border-radius: @c-size;
+      -moz-border-radius: @c-size;
+      border-radius: @c-size;
+      background-color: @green;
+      top: 120px;
+      right: 20px;
+      z-index: 2;
+      .flex;
+      &:hover {
+        cursor: pointer;
+        background-color: @barColor;
+        color: @green;
+      }
+    }
     .header, .footer {
       z-index: 2;
       width: 100%;
@@ -94,10 +123,15 @@
       <div class="logo"></div>
     </div>
     <div class="daily-container">
+      <div class="comment-wrapper" :class="{'comment-wrapper-animation': is_show_comment}">
+        <div class="comment-wrapper-wrap">
+          <comment-component></comment-component>
+        </div>
+      </div>
       <div class="content-wrapper">
       </div>
-      <div class="comment-btn">C</div>
     </div>
+    <div class="comment-btn" @click="is_show_comment = !is_show_comment">C</div>
     <div class="footer">
       <div class="btn">Prev</div>
       <div class="btn">Next</div>
@@ -106,7 +140,16 @@
 </template>
 
 <script>
+  import CommentComponent from './common/CommentComponent';
+
   export default {
-    name: 'daily_article'
+    name: 'daily_article',
+    components: {CommentComponent},
+    data() {
+      return {
+        is_show_comment: false,
+      }
+    },
+    methods: {}
   }
 </script>
