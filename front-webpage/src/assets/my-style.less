@@ -1,6 +1,9 @@
 @barColor: #333;
 @green: #7de87d;
 @comment_bg: #b0b0b0;
+
+@circle-btn-size: 70px;
+
 @font-face {
   font-family: zcmol;
   src: url('./font/zcmol.ttf');
@@ -15,6 +18,25 @@
   display: flex;
   align-items: @v;
   justify-content: @h;
+}
+
+// btn - style
+.circle-btn {
+  width: @circle-btn-size;
+  height: @circle-btn-size;
+  font-size: @circle-btn-size - 10px;
+  color: @barColor;
+  font-family: beleren;
+  -webkit-border-radius: @circle-btn-size;
+  -moz-border-radius: @circle-btn-size;
+  border-radius: @circle-btn-size;
+  background-color: @green;
+  .flex;
+  &:hover {
+    cursor: pointer;
+    background-color: @barColor;
+    color: @green;
+  }
 }
 
 ::-webkit-scrollbar {

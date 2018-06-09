@@ -19,50 +19,29 @@
         height: 100%;
         position: absolute;
         top: -100%;
-        background-color: @comment_bg;
-        -webkit-transition: top 1.2s;
-        -moz-transition: top 1.2s;
-        -ms-transition: top 1.2s;
-        -o-transition: top 1.2s;
-        transition: top 1.2s;
-        transition-timing-function: cubic-bezier(.66, 0, .46, 1.53);
-
-        .comment-wrapper-wrap {
-          position: relative;
-          margin: 20px 60px;
-          text-align: left;
-        }
+        /*background: url("../assets/bg.gif") repeat;*/
+        background-color: #414141;
+        -webkit-transition: top .7s;
+        -moz-transition: top .7s;
+        -ms-transition: top .7s;
+        -o-transition: top .7s;
+        transition: top .7s;
+        transition-timing-function: ease-in-out;
       }
       .comment-wrapper-animation {
         top: 0;
       }
       .content-wrapper {
         position: relative;
-        margin: 40px;
       }
     }
 
     .comment-btn {
-      @c-size: 70px;
-      width: @c-size;
-      height: @c-size;
+      .circle-btn;
       position: absolute;
-      font-size: @c-size - 10px;
-      color: @barColor;
-      font-family: beleren;
-      -webkit-border-radius: @c-size;
-      -moz-border-radius: @c-size;
-      border-radius: @c-size;
-      background-color: @green;
       top: 120px;
       right: 20px;
       z-index: 2;
-      .flex;
-      &:hover {
-        cursor: pointer;
-        background-color: @barColor;
-        color: @green;
-      }
     }
     .header, .footer {
       z-index: 2;
@@ -81,7 +60,7 @@
         height: 95px;
         width: 95px;
         background: url("../assets/logo.png") no-repeat center;
-        background-size: cover;
+        background-size: contain;
         &:hover {
           cursor: pointer;
         }
@@ -108,10 +87,10 @@
         }
       }
       .btn:first-child {
-        border-right: 1px solid #868686;
+        border-right: 1px solid #222;
       }
       .btn:nth-child(2) {
-        border-left: 1px solid #868686;
+        border-left: 1px solid #222;
       }
     }
   }
@@ -124,9 +103,7 @@
     </div>
     <div class="daily-container">
       <div class="comment-wrapper" :class="{'comment-wrapper-animation': is_show_comment}">
-        <div class="comment-wrapper-wrap">
-          <comment-component></comment-component>
-        </div>
+        <comment-component></comment-component>
       </div>
       <div class="content-wrapper">
       </div>

@@ -15,7 +15,10 @@
     padding: 0;
     margin: 0;
   }
-
+  a {
+    text-decoration: none;
+    color: unset;
+  }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
