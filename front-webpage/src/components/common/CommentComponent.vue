@@ -3,20 +3,29 @@
 
   #comment-component {
     width: 100%;
-    height: 100px;
-    overflow: hidden;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 
     .content-wrapper {
       margin: 20px 60px;
 
       .ul-lv1 {
         list-style: none;
-        width: 100%;
-        overflow: auto;
+        overflow-x: scroll;
         .ul-lv1-li {
           width: 100%;
           text-align: left;
           position: relative;
+          padding: 1px;
+          margin-top: 2px;
+          &::after {
+            content: '';
+            display: block;
+            visibility: hidden;
+            height: 0;
+            clear: both;
+          }
           .avatar {
             width: 80px;
             height: 80px;
@@ -24,9 +33,6 @@
             border: 1px solid @comment_bg;
             overflow: hidden;
             box-shadow: 0 0 5px @comment_bg;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
             transition: border-radius .5s ease-in-out;
             float: left;
             img {
@@ -95,9 +101,17 @@
           }
           .content {
             position: relative;
-            top: 80px;
+            margin: 100px 0 40px 0;
+            text-indent: 2em;
+            padding-left: 80px;
+            font-size: 24px;
+            line-height: 36px;
+            color: @comment_bg;
           }
         }
+      }
+      .ul-lv2 {
+        padding-left: 80px;
       }
     }
     .write-wrapper {
@@ -196,7 +210,226 @@
             </aside>
           </div>
           <div class="content">
-            <p>asdfasdf asdfasdf hsadfh lkasdjflk asdfj </p>
+            <p>北极星的眼泪
+            </p>
+          </div>
+          <ul class="ul-lv1 ul-lv2">
+            <li class="ul-lv1-li">
+              <div class="avatar">
+                <img src="../../assets/logo.png">
+              </div>
+              <div class="info-wrapper">
+                <div class="info">
+                  <a href="http://zcmol.cn" target="_blank">早茶月光</a>
+                  <span>Time: 2016:03:06 23:54:46</span>
+                </div>
+                <aside class="aside">
+                  <div class="comment">
+                    <img src="../../assets/comment.png">
+                  </div>
+                </aside>
+              </div>
+              <div class="content">
+                <p>北极星的眼泪
+                </p>
+              </div>
+              <ul class="ul-lv1 ul-lv2">
+                <li class="ul-lv1-li">
+                  <div class="avatar">
+                    <img src="../../assets/logo.png">
+                  </div>
+                  <div class="info-wrapper">
+                    <div class="info">
+                      <a href="http://zcmol.cn" target="_blank">早茶月光</a>
+                      <span>Time: 2016:03:06 23:54:46</span>
+                    </div>
+                    <aside class="aside">
+                      <div class="comment">
+                        <img src="../../assets/comment.png">
+                      </div>
+                    </aside>
+                  </div>
+                  <div class="content">
+                    <p>北极星的眼泪
+                    </p>
+                  </div>
+                  <ul class="ul-lv1 ul-lv2">
+                    <li class="ul-lv1-li">
+                      <div class="avatar">
+                        <img src="../../assets/logo.png">
+                      </div>
+                      <div class="info-wrapper">
+                        <div class="info">
+                          <a href="http://zcmol.cn" target="_blank">早茶月光</a>
+                          <span>Time: 2016:03:06 23:54:46</span>
+                        </div>
+                        <aside class="aside">
+                          <div class="comment">
+                            <img src="../../assets/comment.png">
+                          </div>
+                        </aside>
+                      </div>
+                      <div class="content">
+                        <p>北极星的眼泪
+                        </p>
+                      </div>
+                      <ul class="ul-lv1 ul-lv2">
+                        <li class="ul-lv1-li">
+                          <div class="avatar">
+                            <img src="../../assets/logo.png">
+                          </div>
+                          <div class="info-wrapper">
+                            <div class="info">
+                              <a href="http://zcmol.cn" target="_blank">早茶月光</a>
+                              <span>Time: 2016:03:06 23:54:46</span>
+                            </div>
+                            <aside class="aside">
+                              <div class="comment">
+                                <img src="../../assets/comment.png">
+                              </div>
+                            </aside>
+                          </div>
+                          <div class="content">
+                            <p>北极星的眼泪
+                            </p>
+                          </div>
+                          <ul class="ul-lv1 ul-lv2">
+                            <li class="ul-lv1-li">
+                              <div class="avatar">
+                                <img src="../../assets/logo.png">
+                              </div>
+                              <div class="info-wrapper">
+                                <div class="info">
+                                  <a href="http://zcmol.cn" target="_blank">早茶月光</a>
+                                  <span>Time: 2016:03:06 23:54:46</span>
+                                </div>
+                                <aside class="aside">
+                                  <div class="comment">
+                                    <img src="../../assets/comment.png">
+                                  </div>
+                                </aside>
+                              </div>
+                              <div class="content">
+                                <p>北极星的眼泪
+                                </p>
+                              </div>
+                              <ul class="ul-lv1 ul-lv2">
+                                <li class="ul-lv1-li">
+                                  <div class="avatar">
+                                    <img src="../../assets/logo.png">
+                                  </div>
+                                  <div class="info-wrapper">
+                                    <div class="info">
+                                      <a href="http://zcmol.cn" target="_blank">早茶月光</a>
+                                      <span>Time: 2016:03:06 23:54:46</span>
+                                    </div>
+                                    <aside class="aside">
+                                      <div class="comment">
+                                        <img src="../../assets/comment.png">
+                                      </div>
+                                    </aside>
+                                  </div>
+                                  <div class="content">
+                                    <p>北极星的眼泪
+                                    </p>
+                                  </div>
+                                  <ul class="ul-lv1 ul-lv2">
+                                    <li class="ul-lv1-li">
+                                      <div class="avatar">
+                                        <img src="../../assets/logo.png">
+                                      </div>
+                                      <div class="info-wrapper">
+                                        <div class="info">
+                                          <a href="http://zcmol.cn" target="_blank">早茶月光</a>
+                                          <span>Time: 2016:03:06 23:54:46</span>
+                                        </div>
+                                        <aside class="aside">
+                                          <div class="comment">
+                                            <img src="../../assets/comment.png">
+                                          </div>
+                                        </aside>
+                                      </div>
+                                      <div class="content">
+                                        <p>北极星的眼泪
+                                        </p>
+                                      </div>
+                                      <ul class="ul-lv1 ul-lv2">
+                                        <li class="ul-lv1-li">
+                                          <div class="avatar">
+                                            <img src="../../assets/logo.png">
+                                          </div>
+                                          <div class="info-wrapper">
+                                            <div class="info">
+                                              <a href="http://zcmol.cn" target="_blank">早茶月光</a>
+                                              <span>Time: 2016:03:06 23:54:46</span>
+                                            </div>
+                                            <aside class="aside">
+                                              <div class="comment">
+                                                <img src="../../assets/comment.png">
+                                              </div>
+                                            </aside>
+                                          </div>
+                                          <div class="content">
+                                            <p>北极星的眼泪
+                                            </p>
+                                          </div>
+                                          <ul class="ul-lv1 ul-lv2">
+                                            <li class="ul-lv1-li">
+                                              <div class="avatar">
+                                                <img src="../../assets/logo.png">
+                                              </div>
+                                              <div class="info-wrapper">
+                                                <div class="info">
+                                                  <a href="http://zcmol.cn" target="_blank">早茶月光</a>
+                                                  <span>Time: 2016:03:06 23:54:46</span>
+                                                </div>
+                                                <aside class="aside">
+                                                  <div class="comment">
+                                                    <img src="../../assets/comment.png">
+                                                  </div>
+                                                </aside>
+                                              </div>
+                                              <div class="content">
+                                                <p>北极星的眼泪
+                                                </p>
+                                              </div>
+                                            </li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="ul-lv1-li">
+          <div class="avatar">
+            <img src="../../assets/logo.png">
+          </div>
+          <div class="info-wrapper">
+            <div class="info">
+              <a href="http://zcmol.cn" target="_blank">早茶月光</a>
+              <span>Time: 2016:03:06 23:54:46</span>
+            </div>
+            <aside class="aside">
+              <div class="comment">
+                <img src="../../assets/comment.png">
+              </div>
+            </aside>
+          </div>
+          <div class="content">
+            <p>asdfasdf asdfasdf hsadfh lkasdjflk asdfj
+            </p>
           </div>
         </li>
       </ul>
