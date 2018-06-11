@@ -12,13 +12,14 @@
       bottom: 80px;
       width: 100%;
       background: url("../assets/bg.gif");
-      overflow-y: scroll;
+      overflow: hidden;
 
       .comment-wrapper {
         z-index: 5;
         width: 100%;
         height: 100%;
         position: absolute;
+        overflow-y: scroll;
         top: -100%;
         /*background: url("../assets/bg.gif") repeat;*/
         background-color: #414141;
@@ -35,26 +36,31 @@
       .content-wrapper {
         z-index: 4;
         position: relative;
-        .title {
-          padding: 40px 0 10px 0;
-          font-size: 40px;
-          color: @comment_bg;
-          font-family: beleren;
-        }
-        .info {
-          font-size: 24px;
-          color: #777;
-          font-family: beleren;
-          span {
-            display: block;
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+        .content-wrap {
+          .title {
+            padding: 40px 0 10px 0;
+            font-size: 40px;
+            color: @comment_bg;
+            font-family: beleren;
           }
-        }
-        .content {
-          padding-top: 15px;
-          padding-bottom: 40px;
-          color: @comment_bg;
-          font-size: 24px;
-          line-height: 48px;
+          .info {
+            font-size: 24px;
+            color: #777;
+            font-family: beleren;
+            span {
+              display: block;
+            }
+          }
+          .content {
+            padding-top: 15px;
+            padding-bottom: 40px;
+            color: @comment_bg;
+            font-size: 24px;
+            line-height: 48px;
+          }
         }
       }
     }
@@ -93,13 +99,16 @@
       bottom: 0;
       height: 80px;
       box-shadow: 2px 2px 16px #222;
+      .btn:first-child {
+        background-color: #404040;
+      }
       .btn {
         width: 50%;
         height: 100%;
         float: left;
         font-family: beleren;
         font-size: 45px;
-        color: @green;
+        color: @comment_bg;
         box-sizing: border-box;
         .flex;
 
@@ -109,12 +118,7 @@
           cursor: pointer;
         }
       }
-      .btn:first-child {
-        border-right: 1px solid #222;
-      }
-      .btn:nth-child(2) {
-        border-left: 1px solid #222;
-      }
+
     }
   }
 </style>
@@ -122,34 +126,38 @@
 <template>
   <div id="daily_article">
     <div class="header">
-      <div class="logo"></div>
+      <a href="http://zcmol.cn">
+        <div class="logo"></div>
+      </a>
     </div>
     <div class="daily-container">
       <div class="comment-wrapper" :class="{'comment-wrapper-animation': is_show_comment}">
         <comment-component></comment-component>
       </div>
       <div class="content-wrapper">
-        <div class="title"><span>你好</span></div>
-        <div class="info">
-          <span>Tag: log++</span>
-          <span>Time: 2016.10.21 10:50:25</span>
-        </div>
-        <div class="content">
-          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86
-                  src="//music.163.com/outchain/player?type=2&id=361493&auto=0&height=66"></iframe>
-          <br>
-          我一直认为，你就是我的唯一<br>
-          我一直认为，你就是我的唯一<br>
-          我一直认为，你就是我的唯一<br>
-          我一直认为，你就是我的唯一<br>
-          我一直认为，你就是我的唯一<br>
-          我一直认为，你就是我的唯一<br>
-          我一直认为，你就是我的唯一<br>
-          我一直认为，你就是我的唯一<br>
-          我一直认为，你就是我的唯一<br>
-          我一直认为，你就是我的唯一<br>
-          我一直认为，你就是我的唯一<br>
-          我一直认为，你就是我的唯一<br>
+        <div class="content-wrap">
+          <div class="title"><span>你好</span></div>
+          <div class="info">
+            <span>Tag: log++</span>
+            <span>Time: 2016.10.21 10:50:25</span>
+          </div>
+          <div class="content">
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86
+                    src="//music.163.com/outchain/player?type=2&id=361493&auto=0&height=66"></iframe>
+            <br>
+            我一直认为，你就是我的唯一<br>
+            我一直认为，你就是我的唯一<br>
+            我一直认为，你就是我的唯一<br>
+            我一直认为，你就是我的唯一<br>
+            我一直认为，你就是我的唯一<br>
+            我一直认为，你就是我的唯一<br>
+            我一直认为，你就是我的唯一<br>
+            我一直认为，你就是我的唯一<br>
+            我一直认为，你就是我的唯一<br>
+            我一直认为，你就是我的唯一<br>
+            我一直认为，你就是我的唯一<br>
+            我一直认为，你就是我的唯一<br>
+          </div>
         </div>
       </div>
     </div>
