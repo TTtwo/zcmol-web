@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '../components/Index'
 import DailyArticle from '../components/DailyArticle'
+import Motto from '../components/Motto'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/daily_article',
       name: 'daily_article',
       component: DailyArticle
+    },
+    {
+      path: '/motto',
+      name: '/motto',
+      component: Motto
     }
   ]
 })
