@@ -5,11 +5,9 @@
     width: 100%;
     height: 100%;
     background: url("../assets/bg.gif") repeat;
-
     .header {
       height: 25%;
       position: relative;
-
       .logo-wrapper {
         width: 30%;
         height: 100%;
@@ -25,12 +23,28 @@
         }
       }
     }
-
     .container {
       position: relative;
       width: 100%;
       height: 75%;
-      background-color: black;
+      overflow: hidden;
+      .content-wrapper {
+        width: 100%;
+        height: 500%;
+        .content-page {
+          height: 20%;
+          width: 100%;
+        }
+      }
+    }
+    @media (max-width: 1024px) {
+      .header {
+        height: 20%;
+      }
+
+      .container {
+        height: 80%;
+      }
     }
   }
 </style>
@@ -43,13 +57,18 @@
       </div>
     </div>
     <div class="container">
-
+      <div class="content-wrapper">
+        <daily-comp class="content-page"></daily-comp>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import DailyComp from './common/DailyComponent'
+
   export default {
-    name: 'index'
+    name: 'index',
+    components: {DailyComp}
   }
 </script>
