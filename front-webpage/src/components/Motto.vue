@@ -12,13 +12,13 @@
       position: relative;
       text-align: center;
       overflow: hidden;
+      transition: top .6s ease-in-out;
       .bg {
         width: 100%;
         height: 100%;
         background: url("../assets/motto-bg.jpg") center no-repeat;
         background-size: cover;
-        filter: grayscale(100%);
-        opacity: .9;
+        filter: grayscale(50%);
       }
       .lo-wrapper {
         height: 100%;
@@ -67,7 +67,8 @@
               .flex;
               &:hover {
                 cursor: pointer;
-                border: 1px solid @green;
+                color: @comment_bg;
+                border: 1px solid @comment_bg;
                 background-color: initial;
                 -webkit-box-sizing: border-box;
                 -moz-box-sizing: border-box;
@@ -78,16 +79,21 @@
         }
       }
     }
+    .bg-wrapper-anim {
+      top: -200%;
+    }
     .content-wrapper {
       width: 100%;
       height: 100%;
       position: relative;
       background-color: @comment_bg;
       .content-header {
+        top: -145px;
         height: 145px;
         width: 100%;
         position: fixed;
         .flex;
+        transition: top .6s ease-in-out .6s;
         span {
           font-size: 100px;
           font-family: motto;
@@ -95,19 +101,25 @@
         }
 
       }
+      .content-header-anim {
+        top: 0;
+      }
       .content {
         position: absolute;
-        top: 145px;
+        top: 600px;
         bottom: 0;
         right: 0;
         left: 0;
         overflow-y: scroll;
+        transition: top 1.2s ease-in-out;
         .motto {
           width: 600px;
           padding: 20px;
           margin: 0 auto;
           text-align: center;
           color: #222;
+          font-family: "WenQuanYi Micro Hei,
+                        sans-serif";
           span {
             display: block;
             padding: 10px 20px;
@@ -130,6 +142,9 @@
             line-height: 40px;
           }
         }
+      }
+      .content-anim {
+        top: 145px;
       }
     }
     .logo-wrapper {
@@ -157,10 +172,10 @@
 <template>
   <div id="motto">
     <div class="content-wrapper">
-      <div class="content-header">
+      <div class="content-header" :class="{'content-header-anim': !show}">
         <span>心灵鸡汤</span>
       </div>
-      <div class="content">
+      <div class="content" :class="{'content-anim': !show}">
         <div class="motto">
           <span>2016.12.06</span>
           <span class="words">没有了过去，就连未来也看不清打法是否阿斯顿发挥卡迪夫
@@ -172,7 +187,7 @@
         </div>
       </div>
     </div>
-    <div v-show="false" class="bg-wrapper">
+    <div class="bg-wrapper" :class="{'bg-wrapper-anim': !show}">
       <div class="bg"></div>
       <div class="lo-wrapper">
         <div class="lo">
@@ -184,7 +199,7 @@
             听听歌，看看电影，打打球。我养了植物，时不时的会出去走走，太阳跟雨都喜欢
           </span>
           </div>
-          <div class="read"><span>读</span></div>
+          <div class="read" @click="show = false"><span>读</span></div>
         </div>
       </div>
     </div>
@@ -200,7 +215,9 @@
   export default {
     name: 'motto',
     data() {
-      return {}
+      return {
+        show: true
+      }
     }
   }
 </script>
