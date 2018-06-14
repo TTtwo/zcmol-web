@@ -27,20 +27,15 @@
             clear: both;
           }
           .avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 10px;
-            border: 1px solid @comment_bg;
+            width: 70px;
+            height: 70px;
             overflow: hidden;
             box-shadow: 0 0 5px @comment_bg;
             transition: border-radius .5s ease-in-out;
             float: left;
             img {
-              width: 80px;
-              height: 80px;
-            }
-            &:hover {
-              border-radius: 80px;
+              width: 70px;
+              height: 70px;
             }
           }
           .info-wrapper {
@@ -56,6 +51,7 @@
               float: left;
               span {
                 display: block;
+                color: #999;
                 height: 50%;
                 .flex(@h: flex-start);
               }
@@ -101,7 +97,7 @@
           }
           .content {
             position: relative;
-            margin: 100px 0 40px 0;
+            margin: 80px 0 20px 0;
             text-indent: 2em;
             padding-left: 80px;
             font-size: 24px;
@@ -122,8 +118,20 @@
       .write-container {
         height: 80px;
         width: 100%;
-        background-color: @barColor;
-
+        .send-btn {
+          float: right;
+          width: 180px;
+          height: 80px;
+          background-color: @green;
+          color: #222;
+          font-size: 50px;
+          font-family: 'impact', arial;
+          .flex;
+          &:hover {
+            opacity: .8;
+            cursor: pointer;
+          }
+        }
         .write {
           height: 80px;
           width: 50%;
@@ -168,6 +176,15 @@
         transition: margin-left .6s;
         transition-timing-function: ease-in-out;
       }
+      .btn-anim {
+        margin-left: -100%;
+        -webkit-transition: margin-left 1s;
+        -moz-transition: margin-left 1s;
+        -ms-transition: margin-left 1s;
+        -o-transition: margin-left 1s;
+        transition: margin-left 1s;
+        transition-timing-function: cubic-bezier(.98, .45, .66, .16);
+      }
       .left-animation-start {
         margin-left: -100%;
         .w-anim;
@@ -210,13 +227,38 @@
             </aside>
           </div>
           <div class="content">
-            <p>北极星的眼泪
+            <p>-- 北极星的眼泪
             </p>
           </div>
+          <ul class="ul-lv1 ul-lv2">
+            <li class="ul-lv1-li">
+              <div class="avatar">
+                <img src="https://avatars1.githubusercontent.com/u/24515205?s=460&v=4">
+              </div>
+              <div class="info-wrapper">
+                <div class="info">
+                  <a href="http://zcmol.cn" target="_blank">早茶月光</a>
+                  <span>Time: 2016:03:06 23:54:46</span>
+                </div>
+                <aside class="aside">
+                  <div class="comment">
+                    <img src="../../assets/comment.png">
+                  </div>
+                </aside>
+              </div>
+              <div class="content">
+                <p>@早茶月光-- 北极星的眼泪
+                </p>
+              </div>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
     <div class="write-wrapper">
+      <div class="write-container btn-anim" :class="{'left-animation-end': is_write}">
+        <div class="send-btn">SEND</div>
+      </div>
       <div class="write-container left-animation-start" :class="{'left-animation-end': is_write}">
         <div class="write">
           <div class="icon"><img src="../../assets/me1.png"></div>

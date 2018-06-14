@@ -11,7 +11,7 @@
       top: 100px;
       bottom: 80px;
       width: 100%;
-      background: url("../assets/bg.gif");
+      background-color: #323232;
       overflow: hidden;
 
       .comment-wrapper {
@@ -81,7 +81,7 @@
     .header {
       top: 0;
       height: 100px;
-      box-shadow: 2px -2px 16px #222;
+      box-shadow: 2px -2px 16px 4px #222;
       border-bottom: 5px solid #3a3a3a;
       .flex;
 
@@ -98,7 +98,7 @@
     .footer {
       bottom: 0;
       height: 80px;
-      box-shadow: 2px 2px 16px #222;
+      box-shadow: 2px 2px 16px 8px #222;
       .btn:first-child {
         background-color: #404040;
       }
