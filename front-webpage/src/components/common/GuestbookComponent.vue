@@ -116,10 +116,145 @@
         text-align: center;
         .v-ul {
           width: 1200px;
-          height: 400px;
           list-style: none;
-          background-color: red;
           margin: 0 auto;
+          padding-bottom: 88px;
+          .li-tip {
+            padding: 10px 0;
+            height: 80px;
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            .flex;
+            .tip {
+              width: 50%;
+              max-width: 400px;
+              height: 100%;
+              border-radius: 90px;
+              background-color: #3a3a3a;
+              .tip-avatar {
+                height: 60px;
+                width: 60px;
+                border-radius: 60px;
+                position: absolute;
+                background: url("../../assets/Icon1.png") no-repeat center;
+                background-size: cover;
+              }
+              p {
+                height: 100%;
+                .flex;
+                font-size: 24px;
+                color: @green;
+              }
+            }
+          }
+          .li-item {
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 10px 20px;
+            position: relative;
+            .li-time {
+              padding: 10px;
+              .flex;
+              span {
+                width: 160px;
+                border-radius: 20px;
+                background-color: @green;
+                color: #222;
+                font-size: 18px;
+                padding: 4px 0;
+                .flex;
+              }
+            }
+            .other {
+              .ot-avatar {
+                width: 60px;
+                position: relative;
+                float: left;
+                img {
+                  width: 60px;
+                  height: 60px;
+                  border-radius: 60px;
+                  box-shadow: 0 0 10px @green;
+                }
+                &:hover {
+                  cursor: pointer;
+                }
+              }
+              .ot-context {
+                position: relative;
+                float: left;
+                background-color: @green;
+                p {
+                  padding: 0 20px;
+                  text-align: left;
+                  font-size: 24px;
+                  color: #222;
+                }
+                .ot-nickname {
+                  padding-top: 10px;
+                  font-weight: bolder;
+                }
+                .ot-content {
+                  padding-top: 5px;
+                  padding-bottom: 10px;
+                }
+              }
+            }
+            .my-reply {
+              padding-top: 10px;
+              .my-avatar {
+                position: relative;
+                float: right;
+                img {
+                  width: 60px;
+                  height: 60px;
+                  border-radius: 60px;
+                  box-shadow: 0 0 10px @comment_bg;
+                }
+              }
+              .my-context {
+                position: relative;
+                float: right;
+                background-color: #3a3a3a;
+                p {
+                  padding: 0 20px;
+                  font-size: 24px;
+                  color: #999;
+                  text-align: left;
+                }
+                .my-nickname {
+                  padding-top: 10px;
+                  font-weight: bolder;
+                }
+                .my-content {
+                  padding-top: 5px;
+                  padding-bottom: 10px;
+                }
+              }
+            }
+            .my-reply, .other {
+              .ot-context, .my-context {
+                margin-left: 85px;
+                margin-right: 85px;
+                margin-top: -60px;
+                border-radius: 10px;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+              }
+              &::after {
+                content: '';
+                visibility: hidden;
+                height: 0;
+                display: block;
+                clear: both;
+              }
+            }
+          }
         }
         @media (max-width: 960px) {
           .v-ul {
@@ -523,7 +658,36 @@
         </li>
       </ul>
       <div v-else class="vertical">
-        <ul class="v-ul"></ul>
+        <ul class="v-ul">
+          <li class="li-tip">
+            <div class="tip">
+              <div class="tip-avatar"></div>
+              <p>回复之前都是[...]</p>
+            </div>
+          </li>
+          <li class="li-item">
+            <div class="li-time"><span>1分钟前</span></div>
+            <div class="other">
+              <div class="ot-avatar">
+                <a href="http://zcmol.cn" target="_blank"><img
+                  src="http://storeweb.cn/upload/site/image/2018-04/193-4-XEOXQC.jpg"></a>
+              </div>
+              <div class="ot-context">
+                <p class="ot-nickname">@我是你好</p>
+                <p class="ot-content">楼上的房间氨基酸老地方阿斯兰的积分阿斯兰的风景阿斯兰的咖啡机阿斯兰地方加收代理费加点水j</p>
+              </div>
+            </div>
+            <div class="my-reply">
+              <div class="my-avatar">
+                <img src="../../assets/Icon.png" alt="">
+              </div>
+              <div class="my-context">
+                <p class="my-nickname">Reply:</p>
+                <p class="my-content">打发斯楼上的房间氨基酸老地方阿斯兰的积分阿斯兰的风景阿斯兰的咖啡机阿斯兰地方加收代理费加点水j蒂芬</p>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
       <div class="send-wrapper">
         <div class="enter-name">
