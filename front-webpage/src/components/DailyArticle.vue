@@ -39,26 +39,25 @@
         width: 100%;
         height: 100%;
         overflow-y: scroll;
+        font-family: 'microsoft yahei', arial;
         .content-wrap {
           .title {
-            padding: 40px 0 10px 0;
+            padding: 60px 0 10px 0;
             font-size: 40px;
-            color: @comment_bg;
-            font-family: beleren;
+            color: #eee;
           }
           .info {
-            font-size: 24px;
-            color: #777;
-            font-family: beleren;
-            span {
-              display: block;
+            font-size: 18px;
+            color: #999;
+            span:nth-child(2){
+              padding: 8px;
             }
           }
           .content {
             padding-top: 15px;
             padding-bottom: 40px;
-            color: @comment_bg;
-            font-size: 24px;
+            color: #bbb;
+            font-size: 20px;
             line-height: 48px;
           }
         }
@@ -138,8 +137,9 @@
         <div class="content-wrap">
           <div class="title"><span>你好</span></div>
           <div class="info">
-            <span>Tag: log++</span>
             <span>Time: 2016.10.21 10:50:25</span>
+            <span>丨</span>
+            <span>Hits: 110</span>
           </div>
           <div class="content">
             <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86

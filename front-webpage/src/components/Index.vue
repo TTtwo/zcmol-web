@@ -59,7 +59,8 @@
     <div class="container">
       <div class="content-wrapper">
         <!--<daily-comp class="content-page"></daily-comp>-->
-        <guestbook-comp class="content-page"></guestbook-comp>
+        <!--<guestbook-comp class="content-page"></guestbook-comp>-->
+        <link-comp class="content-page"></link-comp>
       </div>
     </div>
   </div>
@@ -68,9 +69,10 @@
 <script>
   import DailyComp from './common/DailyComponent'
   import GuestbookComp from './common/GuestbookComponent'
+  import LinkComp from './common/LinkComponent'
 
   export default {
     name: 'index',
-    components: {DailyComp, GuestbookComp}
+    components: {DailyComp, GuestbookComp, LinkComp}
   }
 </script>
