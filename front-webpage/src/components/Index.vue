@@ -60,7 +60,8 @@
       <div class="content-wrapper">
         <!--<daily-comp class="content-page"></daily-comp>-->
         <!--<guestbook-comp class="content-page"></guestbook-comp>-->
-        <link-comp class="content-page"></link-comp>
+        <!--<link-comp class="content-page"></link-comp>-->
+        <about-me-comp class="content-page"></about-me-comp>
       </div>
     </div>
   </div>
@@ -70,9 +71,10 @@
   import DailyComp from './common/DailyComponent'
   import GuestbookComp from './common/GuestbookComponent'
   import LinkComp from './common/LinkComponent'
+  import AboutMeComp from './common/AboutMeComponent'
 
   export default {
     name: 'index',
-    components: {DailyComp, GuestbookComp, LinkComp}
+    components: {DailyComp, GuestbookComp, LinkComp, AboutMeComp}
   }
 </script>
