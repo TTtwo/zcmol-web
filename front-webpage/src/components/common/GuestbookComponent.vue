@@ -72,6 +72,9 @@
           .li-d1:hover {
             height: 70%;
           }
+          &:hover {
+            cursor: default;
+          }
         }
         .msg-item:first-child {
           width: 40%;
@@ -708,7 +711,7 @@
     name: 'guestbook',
     data() {
       return {
-        is_paved: false
+        is_paved: true
       }
     }
   }

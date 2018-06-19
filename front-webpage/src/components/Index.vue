@@ -59,9 +59,9 @@
     <div class="container">
       <div class="content-wrapper">
         <!--<daily-comp class="content-page"></daily-comp>-->
-        <!--<guestbook-comp class="content-page"></guestbook-comp>-->
+        <guestbook-comp class="content-page"></guestbook-comp>
         <!--<link-comp class="content-page"></link-comp>-->
-        <about-me-comp class="content-page"></about-me-comp>
+        <!--<about-me-comp class="content-page"></about-me-comp>-->
       </div>
     </div>
   </div>
