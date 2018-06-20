@@ -711,7 +711,13 @@
     name: 'guestbook',
     data() {
       return {
-        is_paved: true
+        is_paved: true,
+        screen_width: window.innerWidth
+      }
+    },
+    computed: {
+      setIsPaved() {
+        this.screen_width < 1024 ? this.is_paved = false : this.is_paved = true
       }
     }
   }

@@ -15,10 +15,15 @@
     padding: 0;
     margin: 0;
   }
+
+  body {
+    overflow: hidden;
+  }
   a {
     text-decoration: none;
     color: unset;
   }
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -26,5 +31,6 @@
     text-align: center;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
   }
 </style>
