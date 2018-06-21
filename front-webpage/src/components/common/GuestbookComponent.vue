@@ -715,9 +715,21 @@
         screen_width: window.innerWidth
       }
     },
-    computed: {
-      setIsPaved() {
-        this.screen_width < 1024 ? this.is_paved = false : this.is_paved = true
+    mounted() {
+      window.innerWidth < 1024
+        ? this.is_paved = false
+        : this.is_paved = true
+
+      let func
+      const self = this
+      window.onresize = function () {
+        if (func)
+          clearTimeout(func)
+        func = setTimeout(() => {
+          window.innerWidth < 1024
+            ? self.is_paved = false
+            : self.is_paved = true
+        }, 200)
       }
     }
   }

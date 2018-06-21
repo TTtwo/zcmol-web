@@ -34,6 +34,9 @@
         left: 0;
         transition: left .3s ease-in-out;
       }
+      .open-menu-anim {
+        left: -108px;
+      }
     }
     .container {
       position: relative;
@@ -54,6 +57,9 @@
           position: relative;
         }
       }
+    }
+    .container-anim {
+      left: -108px;
     }
     .menu {
       height: 100%;
@@ -87,6 +93,10 @@
         }
       }
     }
+    .menu-anim {
+      transition: right .3s ease-in-out .1s;
+      right: 0px;
+    }
     @media (max-width: 1024px) {
       .header {
         height: 20%;
@@ -105,9 +115,9 @@
       <div class="logo-wrapper">
         <div class="logo"></div>
       </div>
-      <div class="open-menu" @click="show_menu = !show_menu" :style="{left: mvContainerPos}">点开</div>
+      <div class="open-menu" @click="show_menu = !show_menu" :class="{'open-menu-anim': show_menu}">点开</div>
     </div>
-    <div class="container" :style="{left: mvContainerPos}">
+    <div class="container" :class="{'container-anim': show_menu}">
       <div class="content-wrapper" :style="{top: mvMenuPos}">
         <daily-comp class="content-page"></daily-comp>
         <about-me-comp class="content-page"></about-me-comp>
@@ -115,7 +125,7 @@
         <guestbook-comp class="content-page"></guestbook-comp>
       </div>
     </div>
-    <div class="menu" :style="{right: mvMenuShow}" v-on:mouseleave="show_menu = false">
+    <div class="menu" :class="{'menu-anim': show_menu}" v-on:mouseleave="show_menu = false">
       <div class="menu-content">
         <div class="menu-btn" v-for="mu, index in menu" :title="mu.name" @click="mvMenuPosFunc(index)">{{ mu.name }}
         </div>
@@ -156,18 +166,11 @@
           window.open(window.location.origin + item.link)
         }
       },
-    }
-    ,
+    },
     computed: {
       mvMenuPos() {
         return this.menu_pos
-      },
-      mvMenuShow() {
-        return this.show_menu ? '0px' : '-108px'
-      },
-      mvContainerPos() {
-        return this.show_menu ? '-78px' : '0'
-      },
+      }
     }
   }
 </script>

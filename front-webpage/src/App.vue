@@ -16,9 +16,12 @@
     margin: 0;
   }
 
-  body {
+  html, body {
+    height: 100%;
+    width: 100%;
     overflow: hidden;
   }
+
   a {
     text-decoration: none;
     color: unset;
@@ -29,8 +32,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
   }
 </style>
