@@ -8,6 +8,10 @@
       background-color: @green;
       overflow-y: scroll;
       position: relative;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      border-bottom: 1px solid #3a3a3a;
       .title {
         padding-top: 20px;
         p {
@@ -127,6 +131,26 @@
           }
         }
       }
+    }
+    @media (max-width: 720px) {
+      .info-wrapper {
+        width: 100%;
+      }
+
+      .contact-wrapper {
+        position: relative;
+        width: 100%;
+        left: 0;
+        > div {
+          height: 160px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 720px) {
+    #about-me {
+      overflow-y: scroll;
     }
   }
 </style>

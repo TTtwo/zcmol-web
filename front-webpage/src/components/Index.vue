@@ -29,9 +29,10 @@
         width: 120px;
         height: 100%;
         position: relative;
-        background-color: red;
+        background: url("../assets/btn.png") no-repeat center;
         float: right;
         left: 0;
+        margin-right: 80px;
         transition: left .3s ease-in-out;
       }
       .open-menu-anim {
