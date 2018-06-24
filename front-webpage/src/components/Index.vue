@@ -34,6 +34,9 @@
         left: 0;
         margin-right: 80px;
         transition: left .3s ease-in-out;
+        &:hover {
+          cursor: pointer;
+        }
       }
       .open-menu-anim {
         left: -108px;
@@ -116,7 +119,7 @@
       <div class="logo-wrapper">
         <div class="logo"></div>
       </div>
-      <div class="open-menu" @click="show_menu = !show_menu" :class="{'open-menu-anim': show_menu}">点开</div>
+      <div class="open-menu" @click="show_menu = !show_menu" :class="{'open-menu-anim': show_menu}"></div>
     </div>
     <div class="container" :class="{'container-anim': show_menu}">
       <div class="content-wrapper" :style="{top: mvMenuPos}">
