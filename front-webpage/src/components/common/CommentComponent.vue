@@ -6,7 +6,6 @@
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
-
     .content-wrapper {
       margin: 20px 60px;
 
@@ -110,101 +109,117 @@
         padding-left: 80px;
       }
     }
-    .write-wrapper {
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-
-      .write-container {
-        height: 80px;
-        width: 100%;
-        .send-btn {
-          float: right;
-          width: 180px;
-          height: 80px;
-          background-color: @green;
-          color: #222;
-          font-size: 50px;
-          font-family: 'impact', arial;
-          .flex;
-          &:hover {
-            opacity: .8;
-            cursor: pointer;
-          }
-        }
-        .write {
-          height: 80px;
-          width: 50%;
-          position: relative;
-          float: left;
-
-          .icon {
-            width: 80px;
-            height: 80px;
-            background-color: #373737;
-            .flex;
-            img {
-              width: 60px;
-              height: 60px;
-            }
-          }
-          input {
-            display: block;
-            position: absolute;
-            left: 80px;
-            top: 0;
-            height: 80px;
-            width: calc(100% - 80px);
-            outline: none;
-            background-color: @barColor;
-            color: @comment_bg;
-            border: none;
-            font-size: 24px;
-            font-family: zcmol;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-            padding: 0 20px;
-          }
-        }
-      }
-      .w-anim {
-        -webkit-transition: margin-left .6s;
-        -moz-transition: margin-left .6s;
-        -ms-transition: margin-left .6s;
-        -o-transition: margin-left .6s;
-        transition: margin-left .6s;
-        transition-timing-function: ease-in-out;
-      }
-      .btn-anim {
-        margin-left: -100%;
-        -webkit-transition: margin-left 1s;
-        -moz-transition: margin-left 1s;
-        -ms-transition: margin-left 1s;
-        -o-transition: margin-left 1s;
-        transition: margin-left 1s;
-        transition-timing-function: cubic-bezier(.98, .45, .66, .16);
-      }
-      .left-animation-start {
-        margin-left: -100%;
-        .w-anim;
-      }
-      .right-animation-start {
-        margin-left: 100%;
-        .w-anim;
-      }
-      .left-animation-end {
-        margin-left: 0;
-      }
-    }
-
     .write-btn {
       .circle-btn;
       position: absolute;
       right: 12px;
       top: 90px;
     }
+
+    .modal {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .2s ease-in-out, visibility .2s ease-in-out;
+      .flex;
+      .modal-mask {
+        width: 100%;
+        height: 100%;
+        background-color: #333333;
+        opacity: .5;
+      }
+      .modal-wrapper {
+        width: 680px;
+        min-height: 200px;
+        background-color: white;
+        position: absolute;
+        top: 40px;
+        border-radius: 10px;
+        -webkit-box-shadow: 0 0 5px #222;
+        -moz-box-shadow: 0 0 5px #222;
+        box-shadow: 0 0 5px #222;
+        .modal-header {
+          height: 40px;
+          width: 100%;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+          border-bottom: 1px solid #777;
+          color: black;
+          font-weight: bolder;
+          font-size: 18px;
+          .flex;
+        }
+        .modal-content {
+          padding: 5px 10px;
+          .modal-item {
+            position: relative;
+            margin-bottom: 10px;
+            .modal-title {
+              height: 44px;
+              font-size: 24px;
+              font-weight: bolder;
+              color: #222;
+              background-color: #cce8cf;
+              .flex(@h: flex-start);
+              -webkit-box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              box-sizing: border-box;
+              padding-left: 10px;
+              border-radius: 5px;
+            }
+            .modal-input, .modal-textarea {
+              width: 100%;
+              border: none;
+              outline: none;
+              -webkit-box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              box-sizing: border-box;
+              padding-left: 10px;
+              font-size: 24px;
+              background-color: #e6e7ee;
+            }
+            .modal-input {
+              height: 60px;
+            }
+            .modal-textarea {
+              height: 80px;
+              resize: vertical;
+              line-height: 36px;
+              padding: 10px;
+            }
+            .modal-send-btn {
+              width: 100%;
+              .flex(@h: flex-end);
+              span {
+                width: 100px;
+                height: 50px;
+                border-radius: 5px;
+                color: #d2d2d2;
+                background-color: #1c2a3a;
+                font-family: beleren;
+                font-size: 24px;
+                .flex;
+                &:hover {
+                  color: #1c2a3a;
+                  background-color: #d2d2d2;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .modal-anim {
+      visibility: unset;
+      opacity: 1;
+    }
   }
+
 </style>
 
 <template>
@@ -255,28 +270,32 @@
         </li>
       </ul>
     </div>
-    <div class="write-wrapper">
-      <div class="write-container btn-anim" :class="{'left-animation-end': is_write}">
-        <div class="send-btn">SEND</div>
-      </div>
-      <div class="write-container left-animation-start" :class="{'left-animation-end': is_write}">
-        <div class="write">
-          <div class="icon"><img src="../../assets/me1.png"></div>
-          <input type="text" placeholder="Email">
-        </div>
-        <div class="write">
-          <div class="icon"><img src="../../assets/messagebook1.png"></div>
-          <input type="text" placeholder="Web site">
-        </div>
-      </div>
-      <div class="write-container right-animation-start" :class="{'left-animation-end': is_write}">
-        <div class="write">
-          <div class="icon"><img src="../../assets/me1.png"></div>
-          <input type="text" placeholder="Nick name">
-        </div>
-        <div class="write">
-          <div class="icon"><img src="../../assets/messagebook1.png"></div>
-          <input type="text" placeholder="content">
+    <div class="modal" :class="{'modal-anim': is_write}">
+      <div class="modal-mask" @click="is_write = false"></div>
+      <div class="modal-wrapper">
+        <div class="modal-header">嘿, 写点什么吧</div>
+        <div class="modal-content">
+          <div class="modal-item">
+            <div class="modal-title">昵称</div>
+            <input type="text" class="modal-input" placeholder="...">
+          </div>
+          <div class="modal-item">
+            <div class="modal-title">邮箱</div>
+            <input type="text" class="modal-input" placeholder="...">
+          </div>
+          <div class="modal-item">
+            <div class="modal-title">网址</div>
+            <input type="text" class="modal-input" placeholder="...">
+          </div>
+          <div class="modal-item">
+            <div class="modal-title">内容</div>
+            <textarea class="modal-textarea" placeholder="..."></textarea>
+          </div>
+          <div class="modal-item">
+            <div class="modal-send-btn">
+              <span>SEND</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

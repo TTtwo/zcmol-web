@@ -4,7 +4,7 @@
   #about-me {
     .info-wrapper {
       width: 40%;
-      height: 100%;
+      /*height: 100%;*/
       background-color: @green;
       overflow-y: scroll;
       position: relative;
@@ -192,11 +192,13 @@
       <div class="girl-bg"></div>
       <div class="contact"></div>
       <div class="contact"></div>
-      <div class="contact">
-        <p>
-          code<br>
-          source
-        </p>
+      <div class="contact source-code">
+        <a href="https://github.com/TTtwo/zcmol-web" target="_blank">
+          <p>
+            code<br>
+            source
+          </p>
+        </a>
       </div>
     </div>
   </div>

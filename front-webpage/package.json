@@ -12,6 +12,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "iview": "^2.14.3",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "lib-flexible": "^0.3.2",
