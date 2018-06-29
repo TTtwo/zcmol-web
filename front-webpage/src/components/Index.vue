@@ -126,6 +126,7 @@
         <daily-comp class="content-page"></daily-comp>
         <about-me-comp class="content-page"></about-me-comp>
         <link-comp class="content-page"></link-comp>
+        <say-comp class="content-page"></say-comp>
         <guestbook-comp class="content-page"></guestbook-comp>
       </div>
     </div>
@@ -143,19 +144,21 @@
   import GuestbookComp from './common/GuestbookComponent'
   import LinkComp from './common/LinkComponent'
   import AboutMeComp from './common/AboutMeComponent'
+  import SayComp from './common/SayComponent'
 
   export default {
     name: 'index',
-    components: {DailyComp, GuestbookComp, LinkComp, AboutMeComp},
+    components: {DailyComp, GuestbookComp, LinkComp, AboutMeComp, SayComp},
     data() {
       return {
         menu: [
           {name: 'H ome', dis: "0%"},
           {name: 'A bout me', dis: "-100%"},
           {name: 'L inks', dis: "-200%"},
+          {name: 'S ay', dis: "-300%"},
+          {name: 'G uestbook', dis: "-400%"},
           {name: 'B log', dis: null, link: '#/blog'},
           {name: 'M otto', dis: null, link: '#/motto'},
-          {name: 'G uestbook', dis: "-300%"},
         ],
         menu_pos: 0,
         show_menu: false,
