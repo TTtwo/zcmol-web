@@ -5,7 +5,7 @@
     .info-wrapper {
       width: 40%;
       /*height: 100%;*/
-      background-color: @green;
+      background-color: #cce8cf;
       overflow-y: scroll;
       position: relative;
       -webkit-box-sizing: border-box;
