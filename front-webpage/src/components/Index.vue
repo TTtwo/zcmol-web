@@ -132,7 +132,7 @@
     </div>
     <div class="menu" :class="{'menu-anim': show_menu}" v-on:mouseleave="show_menu = false">
       <div class="menu-content">
-        <div class="menu-btn" v-for="mu, index in menu" :title="mu.name" @click="mvMenuPosFunc(index)">{{ mu.name }}
+        <div class="menu-btn" v-for="mu, index in menu" :title="mu.des" @click="mvMenuPosFunc(index)">{{ mu.name }}
         </div>
       </div>
     </div>
@@ -152,13 +152,13 @@
     data() {
       return {
         menu: [
-          {name: 'H ome', dis: "0%"},
-          {name: 'A bout me', dis: "-100%"},
-          {name: 'L inks', dis: "-200%"},
-          {name: 'S ay', dis: "-300%"},
-          {name: 'G uestbook', dis: "-400%"},
-          {name: 'B log', dis: null, link: '#/blog'},
-          {name: 'M otto', dis: null, link: '#/motto'},
+          {name: 'H', dis: "0%", des: '主界面'},
+          {name: 'A', dis: "-100%", des: '关于我'},
+          {name: 'L', dis: "-200%", des: '友链'},
+          {name: 'S', dis: "-300%", des: '说说'},
+          {name: 'G', dis: "-400%", des: '留言'},
+          {name: 'B', dis: null, link: '', des: '博客文章, building...'},
+          {name: 'M', dis: null, link: '#/motto', des: '心灵鸡汤'},
         ],
         menu_pos: 0,
         show_menu: false,

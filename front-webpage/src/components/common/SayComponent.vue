@@ -1,22 +1,34 @@
 <style lang="less" scoped>
   #say {
-    display: flex;
-    flex-direction: row;
     overflow-y: scroll;
-    div {
-      width: 300px;
-      height: auto;
-      background-color: red;
-      overflow-y: hidden;
-      margin: 10px 10px;
+    .say-wrapper {
+      -webkit-column-width: 400px;
+      -moz-column-width: 400px;
+      column-width: 400px;
+      -webkit-column-gap: 5px;
+      -moz-column-gap: 5px;
+      column-gap: 5px;
+      .say-item {
+        padding: 20px;
+        float: left;
+        height: 100px;
+        .say-content {
+          height: 100px;
+          background-color: red;
+        }
+      }
     }
   }
 </style>
 <template>
   <div id="say">
-    <div>adfasdfadfasdf</div>
-    <div>aadfasdfadfasdfadfasdfadfasdfadfasdfadfasdfdfasdfadfasdf</div>
-    <div>adfasdfadfasdf</div>
+    <div class="say-wrapper">
+      <div class="say-item">
+        <div class="say-content">asdflasldfsadfs</div>
+      </div>
+      <div class="say-item">asldfjasldfjaskldfjVy</div>
+      <div class="say-item">asldfjasldfjaskldfjVy</div>
+    </div>
   </div>
 </template>
 <script>

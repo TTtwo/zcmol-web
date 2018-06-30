@@ -274,7 +274,10 @@
         -webkit-box-shadow: 0 0 20px 4px #222;
         -moz-box-shadow: 0 0 20px 4px #222;
         box-shadow: 0 0 20px 4px #222;
-        .enter-name, .enter-content, .enter-email, .enter-website {
+        .enter-name,
+        .enter-content,
+        .enter-email,
+        .enter-website {
           position: relative;
           float: left;
           height: 100%;
@@ -303,6 +306,7 @@
             color: #888;
           }
         }
+
         .enter-name {
           width: 25%;
           background-color: #3a3a3a;
@@ -316,6 +320,33 @@
             background: url("../../assets/messagebook1.png") no-repeat center;
           }
         }
+
+        .enter-email {
+          width: 25%;
+          top: -200%;
+          left: -100%;
+          background-color: #333;
+          transition: left .6s ease-in-out;
+          box-shadow: 0 -2px 5px #333;
+          .icon {
+            background: url("../../assets/me1.png") no-repeat center;
+          }
+        }
+        .enter-website {
+          width: 55%;
+          top: -200%;
+          left: 200%;
+          background-color: #3a3a3a;
+          box-shadow: 0 -2px 5px #3a3a3a;
+          transition: left .6s ease-in-out;
+          .icon {
+            background: url("../../assets/messagebook1.png") no-repeat center;
+          }
+        }
+        .enter-anim {
+          left: 0;
+        }
+
         .send-btn {
           position: relative;
           float: left;
@@ -334,10 +365,10 @@
       }
       @media (max-width: 960px) {
         .send-wrapper {
-          .enter-name {
+          .enter-name, .enter-email {
             width: 30%;
           }
-          .enter-content {
+          .enter-content, .enter-website {
             width: 60%;
           }
           .send-btn {
@@ -695,13 +726,29 @@
       <div class="send-wrapper">
         <div class="enter-name">
           <div class="icon"></div>
-          <input type="text" placeholder="输入昵称">
+          <input type="text" placeholder="输入昵称"
+                 @focus="onFocus"
+                 @blur="onBlur">
         </div>
         <div class="enter-content">
           <div class="icon"></div>
-          <input type="text" placeholder="请输入内容  在回复之前都是[...]">
+          <input type="text" placeholder="请输入内容  在回复之前都是[...]"
+                 @focus="onFocus"
+                 @blur="onBlur">
         </div>
         <div class="send-btn">SEND</div>
+        <div class="enter-email" :class="{'enter-anim': show_other_input}">
+          <div class="icon"></div>
+          <input type="text" placeholder="输入邮箱"
+                 @focus="onFocus"
+                 @blur="onBlur">
+        </div>
+        <div class="enter-website" :class="{'enter-anim': show_other_input}">
+          <div class="icon"></div>
+          <input type="text" placeholder="输入网址"
+                 @focus="onFocus"
+                 @blur="onBlur">
+        </div>
       </div>
     </div>
   </div>
@@ -712,7 +759,16 @@
     data() {
       return {
         is_paved: true,
+        show_other_input: false,
         screen_width: window.innerWidth
+      }
+    },
+    methods: {
+      onFocus() {
+        this.show_other_input = true
+      },
+      onBlur() {
+        this.show_other_input = false
       }
     },
     mounted() {
