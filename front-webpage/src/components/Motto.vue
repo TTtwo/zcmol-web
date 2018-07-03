@@ -176,13 +176,11 @@
         <span>心灵鸡汤</span>
       </div>
       <div class="content" :class="{'content-anim': !show}">
-        <div class="motto">
-          <span>2016.12.06</span>
-          <span class="words">没有了过去，就连未来也看不清打法是否阿斯顿发挥卡迪夫
-          阿斯顿发生卡萨丁方括号阿斯蒂芬狂欢节
-          阿斯顿发瘦客户机</span>
+        <div v-for="item, index in motto" :key="index" class="motto">
+          <span>{{transformTime(item.create_at)}}</span>
+          <span class="words">{{item.content}}</span>
           <span class="hx"><div></div></span>
-          <span>冯业佳  《天下》</span>
+          <span>{{item.author}}</span>
           <span class="esll">●●●</span>
         </div>
       </div>
@@ -212,12 +210,33 @@
 </template>
 
 <script>
+  import api from '../api/api'
+
   export default {
     name: 'motto',
     data() {
       return {
-        show: true
+        show: true,
+        motto: []
       }
+    },
+    methods: {
+      async getInitData() {
+        this.$Spin.show()
+        const result = await this.$$api(api.motto, {})
+        this.$Spin.hide()
+        if (result.status !== 200) {
+          this.$Message.error('访问失败~')
+          return
+        }
+        this.motto = result.body.data.motto
+      },
+      transformTime(time) {
+        return new Date(time).toLocaleDateString().replace(new RegExp('/', 'g'), '.')
+      }
+    },
+    mounted() {
+      this.getInitData()
     }
   }
 </script>

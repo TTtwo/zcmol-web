@@ -5,10 +5,13 @@ import DailyArticle from '../components/DailyArticle'
 import Motto from '../components/Motto'
 import Http from 'vue-resource'
 import request_api from '../api/requet_api'
+import 'iview/dist/styles/iview.css'
+import iView from 'iview'
 
 Vue.use(Router)
 Vue.use(request_api)
 Vue.use(Http)
+Vue.use(iView)
 
 export default new Router({
   routes: [

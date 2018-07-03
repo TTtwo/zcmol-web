@@ -12,6 +12,10 @@ export default {
   index: {
     url: '/index',
     method: GET
+  },
+  motto: {
+    url: '/motto',
+    method: GET
   }
 
 }

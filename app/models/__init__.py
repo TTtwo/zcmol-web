@@ -1,6 +1,7 @@
 from .link import Link
 from ..kernel.database import DB
 from .guestbook import GuestBook
+from .motto import Motto
 from .article.article import Article
 from .article.blog_content import BlogTag
 from .article.blog_content import BlogContent
@@ -17,6 +18,7 @@ class Model:
     BlogContentCategory = BlogContentCategory
     DailyContent = DailyContent
     GuestBook = GuestBook
+    Motto = Motto
     Link = Link
 
     def create_all(self):
