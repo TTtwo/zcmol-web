@@ -1,5 +1,5 @@
-from .article import article_controller
+from .index import index_controller
 
 controllers = [
-    article_controller
+    index_controller
 ]

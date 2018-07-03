@@ -140,7 +140,8 @@
                 height: 60px;
                 width: 60px;
                 border-radius: 60px;
-                position: absolute;
+                position: relative;
+                float: left;
                 background: url("../../assets/Icon1.png") no-repeat center;
                 background-size: cover;
               }
@@ -173,10 +174,10 @@
               }
             }
             .other {
+              position: relative;
               .ot-avatar {
                 width: 60px;
                 position: relative;
-                float: left;
                 img {
                   width: 60px;
                   height: 60px;
@@ -211,7 +212,7 @@
               padding-top: 10px;
               .my-avatar {
                 position: relative;
-                float: right;
+                .flex(@h: flex-end);
                 img {
                   width: 60px;
                   height: 60px;
@@ -241,6 +242,8 @@
             }
             .my-reply, .other {
               .ot-context, .my-context {
+                min-height: 90px;
+                min-width: 180px;
                 margin-left: 85px;
                 margin-right: 85px;
                 margin-top: -60px;
@@ -384,15 +387,15 @@
   <div id="guestbook">
     <div class="container">
       <ul v-if="is_paved" class="paved">
-        <li class="msg-item">
+        <li v-for="item, index in guestbook_array" :key="index" class="msg-item">
           <div class="li-d1">
-            <a href="http://zcmol.cn" target="_blank">
+            <a :href="item.website" target="_blank">
               <div class="icon icon1"></div>
             </a>
             <div class="text">
-              <p>奈何</p>
+              <p>{{item.nickname}}</p>
               <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
+                {{item.content}}
               </p>
             </div>
           </div>
@@ -400,292 +403,7 @@
             <div class="icon icon2"></div>
             <div class="text">
               <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="msg-item">
-          <div class="li-d1">
-            <div class="icon icon1"></div>
-            <div class="text">
-              <p>奈何</p>
-              <p>
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
-              </p>
-            </div>
-          </div>
-          <div class="li-d2">
-            <div class="icon icon2"></div>
-            <div class="text">
-              <p class="reply">
-                我是爱着你的， 哈哈阿斯顿发生了的纠纷阿斯利康大姐夫 加收代理费加速度快放假哈克斯地方哈士大夫阿斯蒂芬
+                {{item.my_reply}}
               </p>
             </div>
           </div>
@@ -699,16 +417,16 @@
               <p>回复之前都是[...]</p>
             </div>
           </li>
-          <li class="li-item">
-            <div class="li-time"><span>1分钟前</span></div>
+          <li v-for="item, index in guestbook_array" :key="index" class="li-item">
+            <!--<div class="li-time"><span>1分钟前</span></div>-->
             <div class="other">
               <div class="ot-avatar">
-                <a href="http://zcmol.cn" target="_blank"><img
+                <a :href="item.website" target="_blank"><img
                   src="http://storeweb.cn/upload/site/image/2018-04/193-4-XEOXQC.jpg"></a>
               </div>
               <div class="ot-context">
-                <p class="ot-nickname">@我是你好</p>
-                <p class="ot-content">楼上的房间氨基酸老地方阿斯兰的积分阿斯兰的风景阿斯兰的咖啡机阿斯兰地方加收代理费加点水j</p>
+                <p class="ot-nickname">@{{item.nickname}}</p>
+                <p class="ot-content">{{item.content}}</p>
               </div>
             </div>
             <div class="my-reply">
@@ -717,7 +435,7 @@
               </div>
               <div class="my-context">
                 <p class="my-nickname">Reply:</p>
-                <p class="my-content">打发斯楼上的房间氨基酸老地方阿斯兰的积分阿斯兰的风景阿斯兰的咖啡机阿斯兰地方加收代理费加点水j蒂芬</p>
+                <p class="my-content">{{item.my_reply}}</p>
               </div>
             </div>
           </li>
@@ -756,11 +474,13 @@
 <script>
   export default {
     name: 'guestbook',
+    props: ['guestbooks'],
     data() {
       return {
         is_paved: true,
         show_other_input: false,
-        screen_width: window.innerWidth
+        screen_width: window.innerWidth,
+        guestbook_array: this.guestbooks
       }
     },
     methods: {

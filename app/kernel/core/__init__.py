@@ -1,5 +1,6 @@
 from flask import Flask
 from ..database import DB
+from flask_cors import CORS
 
 
 class Core:
@@ -11,3 +12,5 @@ class Core:
 
         # init database
         DB.init_app(self.app)
+        # 同源
+        CORS(self.app)

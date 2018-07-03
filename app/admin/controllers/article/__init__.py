@@ -5,7 +5,7 @@ from .blog_article import *
 from .blog_tag import *
 from .blog_category import *
 
-article_controller = AdminController(import_name=__name__, name="admin-article",
+article_controller = AdminController(import_name=__name__, name="admin-index",
                                      prefix="/admin")
 api = Api(article_controller.blueprint)
 

@@ -149,19 +149,12 @@
     </div>
     <div class="link-wrapper">
       <ul class="link-ul">
-        <li class="li-item">
+        <li v-for="item, index in link_array" :key='index' class="li-item">
           <div class="link-name">
             <p class="add">+</p>
-            <a href="http://zcmol.cn" target="_blank" class="text">你好啊</a>
+            <a :href="item.url" target="_blank" class="text">{{item.name}}</a>
           </div>
-          <div class="link-url"><span>http://zcmol.cn</span></div>
-        </li>
-        <li class="li-item">
-          <div class="link-name">
-            <p class="add">+</p>
-            <a href="http://zcmol.cn" target="_blank" class="text">你好啊</a>
-          </div>
-          <div class="link-url"><span>http://zcmol.cn</span></div>
+          <div class="link-url"><span>{{item.url}}</span></div>
         </li>
       </ul>
     </div>
@@ -171,5 +164,11 @@
 <script>
   export default {
     name: 'links',
+    props: ['links'],
+    data() {
+      return {
+        link_array: this.links
+      }
+    }
   }
 </script>

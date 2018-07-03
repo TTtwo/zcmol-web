@@ -125,9 +125,9 @@
       <div class="content-wrapper" :style="{top: mvMenuPos}">
         <daily-comp class="content-page"></daily-comp>
         <about-me-comp class="content-page"></about-me-comp>
-        <link-comp class="content-page"></link-comp>
+        <link-comp v-if="init_data" class="content-page" :links="init_data.links"></link-comp>
         <say-comp class="content-page"></say-comp>
-        <guestbook-comp class="content-page"></guestbook-comp>
+        <guestbook-comp v-if="init_data" class="content-page" :guestbooks="init_data.guestbooks"></guestbook-comp>
       </div>
     </div>
     <div class="menu" :class="{'menu-anim': show_menu}" v-on:mouseleave="show_menu = false">
@@ -145,6 +145,7 @@
   import LinkComp from './common/LinkComponent'
   import AboutMeComp from './common/AboutMeComponent'
   import SayComp from './common/SayComponent'
+  import api from '../api/api'
 
   export default {
     name: 'index',
@@ -162,6 +163,7 @@
         ],
         menu_pos: 0,
         show_menu: false,
+        init_data: null
       }
     },
     methods: {
@@ -174,11 +176,23 @@
           window.open(window.location.origin + item.link)
         }
       },
+      async getInitData() {
+        const result = await this.$$api(api.index, {})
+        if (result.status !== 200) {
+          this.$Message.error('访问失败~')
+          return
+        }
+        this.init_data = result.body.data
+        console.log(this.init_data.guestbooks)
+      }
     },
     computed: {
       mvMenuPos() {
         return this.menu_pos
       }
+    },
+    mounted() {
+      this.getInitData()
     }
   }
 </script>

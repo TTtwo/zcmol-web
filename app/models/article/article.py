@@ -15,7 +15,7 @@ class ArticleContentTypeEnum(Enum):
 
 
 class Article(DB.Model, ModelMixin, HiddenMixin):
-    __tablename__ = 'article'
+    __tablename__ = 'index'
 
     id = DB.Column(DB.Integer, primary_key=True, autoincrement=True)
     state = DB.Column(DB.Integer, nullable=False, default=ArticleStateEnum.PUBLIC.value)
