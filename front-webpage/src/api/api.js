@@ -16,6 +16,11 @@ export default {
   motto: {
     url: '/motto',
     method: GET
+  },
+  guestbook: {
+    url: '/guestbook',
+    method: GET
   }
+
 
 }

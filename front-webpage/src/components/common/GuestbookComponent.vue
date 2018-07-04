@@ -79,6 +79,27 @@
         .msg-item:first-child {
           width: 40%;
         }
+        .msg-page {
+          width: 20%;
+          height: 28%;
+          float: left;
+          .flex(@h: space-around);
+          .page-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 80px;
+            background-color: #7de87d;
+            color: #3a3a3a;
+            .flex;
+            font-size: 60px;
+            box-shadow: 0 0 5px #7de87d;
+            &:hover {
+              cursor: pointer;
+              background-color: #3a3a3a;
+              color: #7de87d;
+            }
+          }
+        }
         .icon {
           float: left;
           -webkit-box-sizing: border-box;
@@ -408,6 +429,14 @@
             </div>
           </div>
         </li>
+        <li class="msg-page">
+          <div v-show="paging.has_prev" class="page-btn"
+               @click="getData(paging.current_idx - 1)"><
+          </div>
+          <div v-show="paging.has_next" class="page-btn"
+               @click="getData(paging.current_idx + 1)">>
+          </div>
+        </li>
       </ul>
       <div v-else class="vertical">
         <ul class="v-ul">
@@ -472,6 +501,8 @@
   </div>
 </template>
 <script>
+  import api from '../../api/api'
+
   export default {
     name: 'guestbook',
     props: ['guestbooks'],
@@ -480,7 +511,16 @@
         is_paved: true,
         show_other_input: false,
         screen_width: window.innerWidth,
-        guestbook_array: this.guestbooks
+        guestbook_array: this.guestbooks,
+        paging: {
+          current_idx: 1,
+          has_next: true,
+          has_prev: false,
+          next_idx: null,
+          prev_idx: null,
+          total_pages: 2
+        },
+        per_page: 100,
       }
     },
     methods: {
@@ -489,24 +529,44 @@
       },
       onBlur() {
         this.show_other_input = false
+      },
+      reSize() {
+        window.innerWidth < 1024
+          ? this.is_paved = false
+          : this.is_paved = true
+
+        let func
+        const self = this
+        window.onresize = function () {
+          if (func)
+            clearTimeout(func)
+          func = setTimeout(() => {
+            window.innerWidth < 1024
+              ? self.is_paved = false
+              : self.is_paved = true
+          }, 200)
+        }
+      },
+      async getData(page) {
+        if (!page || page > this.paging.total_pages)
+          return
+        const result = await this.$$api(api.guestbook,
+          {
+            params: {
+              page: page,
+              per_page: this.per_page
+            }
+          })
+        if (result.status !== 200) {
+          this.$Message.error('访问失败~')
+          return
+        }
+        this.guestbook_array = result.body.data.guestbook
+        this.paging = result.body.data.paging
       }
     },
     mounted() {
-      window.innerWidth < 1024
-        ? this.is_paved = false
-        : this.is_paved = true
-
-      let func
-      const self = this
-      window.onresize = function () {
-        if (func)
-          clearTimeout(func)
-        func = setTimeout(() => {
-          window.innerWidth < 1024
-            ? self.is_paved = false
-            : self.is_paved = true
-        }, 200)
-      }
+      this.reSize()
     }
   }
 </script>

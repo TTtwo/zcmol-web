@@ -84,6 +84,7 @@
           line-height: 80px;
           width: 100%;
           font-size: 80px;
+          color: #222;
           overflow: hidden;
           position: relative;
           padding: 15px 0;

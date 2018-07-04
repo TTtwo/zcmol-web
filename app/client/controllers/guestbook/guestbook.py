@@ -1,32 +1,31 @@
 from app.kernel.database import DB
 from app.kernel.database import ModelHelper
 from app.models import Model
-from app.kernel.utils.response import resp_to_json
-from flask_restful import Resource
-from flask_sqlalchemy import BaseQuery
 from flask_sqlalchemy import Pagination
 from webargs import fields
 from webargs.flaskparser import use_kwargs
+from app.kernel.utils.response import resp_to_json
+from flask_restful import Resource
 
 
-class Motto(Resource):
+class Guestbook(Resource):
+
     @use_kwargs({
         'page': fields.Int(min=1, required=True),
         'per_page': fields.Int(min=1, required=True)
     })
     def get(self, page, per_page):
         pagination: Pagination = Model \
-            .Motto \
+            .GuestBook \
             .query \
-            .filter_by(_hidden=0) \
-            .order_by(Model.Motto.id.desc()) \
+            .order_by(Model.GuestBook.id.desc()) \
             .paginate(page=page, per_page=per_page)
-        motto_items = [
+        guestbook_items = [
             ModelHelper.serialize(item)
             for item in pagination.items
         ]
         data = {
-            'motto': motto_items,
+            'guestbook': guestbook_items,
             'paging': {
                 'has_next': pagination.has_next,
                 'has_prev': pagination.has_prev,

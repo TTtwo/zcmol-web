@@ -59,6 +59,9 @@
             }
             .hdiv1 {
               background-color: @green;
+              .day {
+                color: #222;
+              }
               .info {
                 color: #3d3d3d;
               }
@@ -89,6 +92,7 @@
           }
           .day {
             font-size: 80px;
+            color: #222;
           }
           .info {
             color: #3d3d3d;

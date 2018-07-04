@@ -104,6 +104,20 @@
       .content-header-anim {
         top: 0;
       }
+      .content-bg {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        .flex;
+        font-size: 400px;
+        font-family: motto;
+        opacity: .1;
+      }
+      @media (max-width: 880px) {
+        .content-bg {
+          font-size: 200px;
+        }
+      }
       .content {
         position: absolute;
         top: 600px;
@@ -175,7 +189,8 @@
       <div class="content-header" :class="{'content-header-anim': !show}">
         <span>心灵鸡汤</span>
       </div>
-      <div class="content" :class="{'content-anim': !show}">
+      <div class="content-bg">{{bg_text[Math.floor(Math.random() * bg_text.length)]}}</div>
+      <div ref="scrollView" class="content" :class="{'content-anim': !show}">
         <div v-for="item, index in motto" :key="index" class="motto">
           <span>{{transformTime(item.create_at)}}</span>
           <span class="words">{{item.content}}</span>
@@ -217,26 +232,63 @@
     data() {
       return {
         show: true,
-        motto: []
+        motto: [],
+        bg_text: ['空·缘', '静·心', '无·非', '故·知'],
+        paging: {
+          current_idx: 1,
+          has_next: false,
+          has_prev: false,
+          next_idx: null,
+          prev_idx: null,
+          total_pages: 1
+        },
+        per_page: 3,
       }
     },
     methods: {
-      async getInitData() {
-        this.$Spin.show()
-        const result = await this.$$api(api.motto, {})
-        this.$Spin.hide()
+      async getInitData(page) {
+        if (!page || page > this.paging.total_pages)
+          return
+        const result = await this.$$api(api.motto,
+          {
+            params: {
+              page: page,
+              per_page: this.per_page
+            }
+          })
+        console.log(result.body)
         if (result.status !== 200) {
           this.$Message.error('访问失败~')
           return
         }
-        this.motto = result.body.data.motto
+        this.motto = this.motto.concat(result.body.data.motto)
+        this.paging = result.body.data.paging
       },
       transformTime(time) {
         return new Date(time).toLocaleDateString().replace(new RegExp('/', 'g'), '.')
+      },
+      // 滑动刷新
+      scrollLoad() {
+        this.viewBox = this.$refs.scrollView
+        const self = this
+        let func
+        this.viewBox.addEventListener('scroll', function () {
+          if (func)
+            clearTimeout(func)
+          func = setTimeout(async () => {
+            let scrollTop = self.viewBox.scrollTop
+            let clientHeight = self.viewBox.clientHeight
+            let allHeight = self.viewBox.scrollHeight
+            if (scrollTop + clientHeight - allHeight <= 10) {
+              await self.getInitData(self.paging.current_idx + 1)
+            }
+          }, 200)
+        }, false)
       }
     },
-    mounted() {
-      this.getInitData()
+    async mounted() {
+      await this.getInitData(1)
+      this.scrollLoad()
     }
   }
 </script>

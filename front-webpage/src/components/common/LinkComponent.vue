@@ -67,6 +67,9 @@
           border-right: 2px solid #222;
           float: left;
           color: #333333;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
           .link-name {
             padding: 30px 40px;
             background-color: @green;
