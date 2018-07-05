@@ -7,6 +7,9 @@ from flask_sqlalchemy import BaseQuery
 from flask_sqlalchemy import Pagination
 from webargs import fields
 from webargs.flaskparser import use_kwargs
+from flask import current_app
+
+cache = current_app.core.cache
 
 
 class Motto(Resource):
@@ -15,6 +18,7 @@ class Motto(Resource):
         'per_page': fields.Int(min=1, required=True)
     })
     def get(self, page, per_page):
+        cache.set('first', 123)
         pagination: Pagination = Model \
             .Motto \
             .query \

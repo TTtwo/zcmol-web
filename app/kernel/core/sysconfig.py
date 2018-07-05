@@ -3,7 +3,6 @@ def __fileter_attribute__(attr: str):
 
 
 class SysConfig:
-
     # system
     DEBUG = False
     TESTING = False
@@ -17,7 +16,12 @@ class SysConfig:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = True
 
+    # redis
+    REDIS_HOST = ''
+    REDIS_PORT = 6379
+    REDIS_PASS = ''
+    REDIS_DB = 1
+    REDIS_DEFAULT_EX = 1
+
     def to_dict(self):
         return {k: getattr(self, k) for k in dir(self) if __fileter_attribute__(k)}
-
-
