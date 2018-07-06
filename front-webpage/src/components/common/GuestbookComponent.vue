@@ -473,26 +473,26 @@
       <div class="send-wrapper">
         <div class="enter-name">
           <div class="icon"></div>
-          <input type="text" placeholder="输入昵称"
+          <input v-model="nickname" type="text" placeholder="输入昵称"
                  @focus="onFocus"
                  @blur="onBlur">
         </div>
         <div class="enter-content">
           <div class="icon"></div>
-          <input type="text" placeholder="请输入内容  在回复之前都是[...]"
+          <input v-model="content" type="text" placeholder="请输入内容  在回复之前都是[...]"
                  @focus="onFocus"
                  @blur="onBlur">
         </div>
-        <div class="send-btn">SEND</div>
+        <div class="send-btn" @click="postData">SEND</div>
         <div class="enter-email" :class="{'enter-anim': show_other_input}">
           <div class="icon"></div>
-          <input type="text" placeholder="输入邮箱"
+          <input v-model="email" type="text" placeholder="输入邮箱"
                  @focus="onFocus"
                  @blur="onBlur">
         </div>
         <div class="enter-website" :class="{'enter-anim': show_other_input}">
           <div class="icon"></div>
-          <input type="text" placeholder="输入网址"
+          <input v-model="website" type="text" placeholder="输入网址"
                  @focus="onFocus"
                  @blur="onBlur">
         </div>
@@ -521,6 +521,11 @@
           total_pages: 2
         },
         per_page: 100,
+        // post
+        nickname: null,
+        content: null,
+        website: null,
+        email: null
       }
     },
     methods: {
@@ -550,7 +555,7 @@
       async getData(page) {
         if (!page || page > this.paging.total_pages)
           return
-        const result = await this.$$api(api.guestbook,
+        const result = await this.$$api(api.get_guestbook,
           {
             params: {
               page: page,
@@ -563,10 +568,36 @@
         }
         this.guestbook_array = result.body.data.guestbook
         this.paging = result.body.data.paging
+      },
+      async postData() {
+        if (!this.nickname || !this.content) {
+          console.log('不能为空')
+          return
+        }
+        await localStorage.setItem('nickname', this.nickname)
+        await localStorage.setItem('website', this.website)
+        await localStorage.setItem('email', this.email)
+        console.log(this.email ? this.email : '')
+        const result = await this.$$api(api.post_guestbook,
+          {
+            body: {
+              nickname: this.nickname,
+              content: this.content,
+              email: this.email ? this.email : '',
+              website: this.website ? this.website : ''
+            }
+          })
+        this.content = null
+        if (result.status === 200) {
+          await this.getData(1)
+        }
       }
     },
     mounted() {
       this.reSize()
+      this.nickname = localStorage.getItem('nickname')
+      this.website = localStorage.getItem('website')
+      this.email = localStorage.getItem('email')
     }
   }
 </script>

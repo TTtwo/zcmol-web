@@ -242,7 +242,7 @@
           prev_idx: null,
           total_pages: 1
         },
-        per_page: 3,
+        per_page: 5,
       }
     },
     methods: {
@@ -272,6 +272,7 @@
         this.viewBox = this.$refs.scrollView
         const self = this
         let func
+        let can_visit = true
         this.viewBox.addEventListener('scroll', function () {
           if (func)
             clearTimeout(func)
@@ -279,8 +280,12 @@
             let scrollTop = self.viewBox.scrollTop
             let clientHeight = self.viewBox.clientHeight
             let allHeight = self.viewBox.scrollHeight
-            if (scrollTop + clientHeight - allHeight <= 10) {
-              await self.getInitData(self.paging.current_idx + 1)
+            if (scrollTop + clientHeight - allHeight <= 100) {
+              if (can_visit) {
+                can_visit = false
+                await self.getInitData(self.paging.current_idx + 1)
+                can_visit = true
+              }
             }
           }, 200)
         }, false)

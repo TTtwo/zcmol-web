@@ -1,7 +1,12 @@
 from flask_sqlalchemy import Model
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 DB = SQLAlchemy()
+
+
+def _serialize(data):
+    return data.timestamp() if isinstance(data, datetime) else data
 
 
 class ModelHelper:
@@ -12,7 +17,7 @@ class ModelHelper:
             if isinstance(model, dict) or isinstance(model, list):
                 return model
             model_data = {
-                c.name: getattr(model, c.name)
+                c.name: _serialize(getattr(model, c.name))
                 for c in model.__table__.columns
             }
             for key, value in kwargs.items():

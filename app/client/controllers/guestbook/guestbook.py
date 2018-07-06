@@ -6,6 +6,14 @@ from webargs import fields
 from webargs.flaskparser import use_kwargs
 from app.kernel.utils.response import resp_to_json
 from flask_restful import Resource
+from flask_restful import request
+from flask import current_app
+
+
+class EmailValidate:
+    @staticmethod
+    def validate_email(email):
+        pass
 
 
 class Guestbook(Resource):
@@ -36,3 +44,23 @@ class Guestbook(Resource):
             }
         }
         return resp_to_json(data=data)
+
+    @use_kwargs({
+        'nickname': fields.Str(max=32, required=True),
+        'content': fields.Str(max=512, required=True),
+        'email': fields.Str(max=32),
+        'website': fields.Str(max=512)
+    })
+    def post(self, nickname, content, email, website):
+        cache = current_app.core.cache
+        ip = request.headers['X-Forwarded-For']
+        if cache.get(ip.strip()):
+            pass
+        cache.set(ip.strip(), 1, px=30)
+        gk = Model.GuestBook(nickname=nickname,
+                             content=content,
+                             email=email,
+                             website=website)
+        DB.session.add(gk)
+        DB.session.commit()
+        return resp_to_json(data='增加成功~')

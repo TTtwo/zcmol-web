@@ -17,9 +17,13 @@ export default {
     url: '/motto',
     method: GET
   },
-  guestbook: {
+  get_guestbook: {
     url: '/guestbook',
     method: GET
+  },
+  post_guestbook: {
+    url: '/guestbook',
+    method: POST
   }
 
 

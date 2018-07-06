@@ -1,24 +1,28 @@
-from app.kernel.database import DB
 from app.kernel.database import ModelHelper
 from app.models import Model
 from app.kernel.utils.response import resp_to_json
 from flask_restful import Resource
-from flask_sqlalchemy import BaseQuery
 from flask_sqlalchemy import Pagination
 from webargs import fields
 from webargs.flaskparser import use_kwargs
 from flask import current_app
-
-cache = current_app.core.cache
+import json
 
 
 class Motto(Resource):
+
     @use_kwargs({
         'page': fields.Int(min=1, required=True),
         'per_page': fields.Int(min=1, required=True)
     })
     def get(self, page, per_page):
-        cache.set('first', 123)
+        name = 'motto'
+        key = 'motto%i' % page
+        cache = current_app.core.cache
+        if cache.hget(name, key):
+            data = cache.hget(name, key)
+            data = json.loads(data)
+            return resp_to_json(data=data)
         pagination: Pagination = Model \
             .Motto \
             .query \
@@ -40,4 +44,6 @@ class Motto(Resource):
                 'total_pages': pagination.pages
             }
         }
+        cache.hset(name, key, json.dumps(data))
+        cache.expire(name, 3600)
         return resp_to_json(data=data)
