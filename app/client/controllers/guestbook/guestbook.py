@@ -5,6 +5,7 @@ from flask_sqlalchemy import Pagination
 from webargs import fields
 from webargs.flaskparser import use_kwargs
 from app.kernel.utils.response import resp_to_json
+from app.kernel.utils.response import RespError
 from flask_restful import Resource
 from flask_restful import request
 from flask import current_app
@@ -55,7 +56,7 @@ class Guestbook(Resource):
         cache = current_app.core.cache
         ip = request.headers['X-Forwarded-For']
         if cache.get(ip.strip()):
-            pass
+            return resp_to_json(error=RespError.FRE_COMMENT.value)
         cache.set(ip.strip(), 1, px=30)
         gk = Model.GuestBook(nickname=nickname,
                              content=content,

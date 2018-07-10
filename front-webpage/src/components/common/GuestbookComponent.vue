@@ -105,20 +105,23 @@
           -webkit-box-sizing: border-box;
           -moz-box-sizing: border-box;
           box-sizing: border-box;
-          width: 80px;
-          height: 80px;
-          margin: 4px 0 0 4px;
+          width: 60px;
+          height: 60px;
+          border-radius: 60px;
           background-size: cover;
-
         }
         .icon1 {
-          background: url("../../assets/me.png") no-repeat center;
+          /*background: url("../../assets/me.png") no-repeat center;*/
+          /*box-shadow: 0 0 5px #333333;*/
+          opacity: .9;
+          margin: 4px 0 0 12px;
           &:hover {
             cursor: pointer;
           }
         }
         .icon2 {
           background: url("../../assets/messagebook1.png") no-repeat center;
+          margin: 8px 0 0 12px;
         }
         .text {
           -webkit-box-sizing: border-box;
@@ -411,7 +414,7 @@
         <li v-for="item, index in guestbook_array" :key="index" class="msg-item">
           <div class="li-d1">
             <a :href="item.website" target="_blank">
-              <div class="icon icon1"></div>
+              <img class="icon icon1" :src="getAvatar(item.email)">
             </a>
             <div class="text">
               <p>{{item.nickname}}</p>
@@ -451,7 +454,7 @@
             <div class="other">
               <div class="ot-avatar">
                 <a :href="item.website" target="_blank"><img
-                  src="http://storeweb.cn/upload/site/image/2018-04/193-4-XEOXQC.jpg"></a>
+                  :src="getAvatar(item.email, false)"></a>
               </div>
               <div class="ot-context">
                 <p class="ot-nickname">@{{item.nickname}}</p>
@@ -502,6 +505,7 @@
 </template>
 <script>
   import api from '../../api/api'
+  import {getAvatar} from '../../util'
 
   export default {
     name: 'guestbook',
@@ -520,15 +524,16 @@
           prev_idx: null,
           total_pages: 2
         },
-        per_page: 100,
+        per_page: 50,
         // post
         nickname: null,
         content: null,
         website: null,
-        email: null
+        email: null,
       }
     },
     methods: {
+      getAvatar: getAvatar,
       onFocus() {
         this.show_other_input = true
       },
@@ -566,6 +571,7 @@
           this.$Message.error('访问失败~')
           return
         }
+        console.log(result.body)
         this.guestbook_array = result.body.data.guestbook
         this.paging = result.body.data.paging
       },

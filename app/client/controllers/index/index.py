@@ -14,13 +14,23 @@ class Index(Resource):
             .query \
             .filter_by(_hidden=False) \
             .all()
-        # 获取前100条Guestbook
+        # 获取前50条Guestbook
         guestbooks: BaseQuery = Model \
             .GuestBook \
             .query \
             .order_by(Model.GuestBook.id.desc()) \
-            .limit(100) \
+            .limit(50) \
             .all()
+        # 获取daily article
+        dailys: BaseQuery = DB \
+            .session \
+            .query(Model.DailyContent) \
+            .with_entities(Model.DailyContent.id,
+                           Model.DailyContent.title,
+                           Model.DailyContent.daily_type,
+                           Model.DailyContent.article) \
+            .order_by(Model.DailyContent.id.desc()) \
+            .limit(13)
         # 整合数据
         link_items = [
             ModelHelper.serialize(item)
@@ -30,5 +40,13 @@ class Index(Resource):
             ModelHelper.serialize(item)
             for item in guestbooks
         ]
-        data = {'links': link_items, 'guestbooks': guestbook_items}
+        daily_items = [
+            ModelHelper.serialize(item, article=item.article)
+            for item in dailys
+        ]
+        data = {
+            'links': link_items,
+            'guestbooks': guestbook_items,
+            'dailys': daily_items
+        }
         return resp_to_json(data=data)

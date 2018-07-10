@@ -184,7 +184,7 @@
           return
         }
         this.init_data = result.body.data
-        console.log(this.init_data.guestbooks)
+        console.log(this.init_data)
       }
     },
     computed: {
