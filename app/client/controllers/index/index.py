@@ -22,13 +22,9 @@ class Index(Resource):
             .limit(50) \
             .all()
         # 获取daily article
-        dailys: BaseQuery = DB \
-            .session \
-            .query(Model.DailyContent) \
-            .with_entities(Model.DailyContent.id,
-                           Model.DailyContent.title,
-                           Model.DailyContent.daily_type,
-                           Model.DailyContent.article) \
+        dailys: BaseQuery = Model \
+            .DailyContent \
+            .query \
             .order_by(Model.DailyContent.id.desc()) \
             .limit(13)
         # 整合数据
