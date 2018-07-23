@@ -30,3 +30,11 @@ class ModelHelper:
             return model_data
         else:
             return {}
+
+    @staticmethod
+    def filter(model: Model, filter_keys: list):
+        if model:
+            for key in filter_keys:
+                if key in model:
+                    del model[key]
+        return model

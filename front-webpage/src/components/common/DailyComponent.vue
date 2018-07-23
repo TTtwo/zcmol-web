@@ -52,8 +52,11 @@
                   font-size: 80px;
                 }
                 .info {
+                  font-size: 20px;
+                  font-family: motto;
+                }
+                .title {
                   font-size: 24px;
-                  font-family: beleren;
                 }
               }
             }
@@ -133,24 +136,24 @@
         </div>
       </li>
       <li></li>
-      <li>
+      <li v-for="item, index in daily_array">
         <div class="home-div">
           <a href="http://zcmol.cn">
             <div class="wp">
               <div class="hdiv1">
                 <div class="dp">
-                  <span class="day">17</span>
-                  <span class="info">2018.04</span>
-                  <span class="info">你好</span>
-                  <span class="info">Log+</span>
+                  <span class="day">{{getYM_D(item.article.create_at, 0)}}</span>
+                  <span class="info">{{getYM_D(item.article.create_at)}}</span>
+                  <span class="info title">{{item.title}}</span>
+                  <span class="info">{{item.daily_type}}</span>
                 </div>
               </div>
               <div class="hdiv2">
                 <div class="dp">
-                  <span class="day">17</span>
-                  <span class="info">2018.04</span>
-                  <span class="info">你好</span>
-                  <span class="info">Log+</span>
+                  <span class="day">{{getYM_D(item.article.create_at, 0)}}</span>
+                  <span class="info">{{getYM_D(item.article.create_at)}}</span>
+                  <span class="info title">{{item.title}}</span>
+                  <span class="info">{{item.daily_type}}</span>
                 </div>
               </div>
             </div>
@@ -160,10 +163,31 @@
     </ul>
   </div>
 </template>
-
 <script>
   export default {
-    name: 'daiyl',
+    name: 'daily',
+    props: ['daily'],
+    data() {
+      return {
+        daily_array: this.daily,
+      }
+    },
+    methods: {
+      getYM_D(time, YM = true) {
+        const date = new Date(time * 1000)
+        const timeAry = date.toLocaleDateString().split('/')
+        return YM
+          ? timeAry[0] + "." + timeAry[1]
+          : timeAry[2].length < 2
+            ? '0' + timeAry[2]
+            : timeAry[2]
+      }
+    },
+    watch: {
+      daily: function (daily) {
+        this.daily_array = daily
+      }
+    }
   }
 </script>
 

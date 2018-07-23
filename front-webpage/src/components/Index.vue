@@ -124,11 +124,11 @@
     </div>
     <div class="container" :class="{'container-anim': show_menu}">
       <div class="content-wrapper" :style="{top: mvMenuPos}">
-        <daily-comp class="content-page"></daily-comp>
+        <daily-comp class="content-page" :daily="init_data.daily"></daily-comp>
         <about-me-comp class="content-page"></about-me-comp>
-        <link-comp v-if="init_data" class="content-page" :links="init_data.links"></link-comp>
+        <link-comp class="content-page" @gu="mvMenuPosFunc" :links="init_data.links"></link-comp>
         <say-comp class="content-page"></say-comp>
-        <guestbook-comp v-if="init_data" class="content-page" :guestbooks="init_data.guestbooks"></guestbook-comp>
+        <guestbook-comp class="content-page" :guestbooks="init_data.guestbooks"></guestbook-comp>
       </div>
     </div>
     <div class="menu" :class="{'menu-anim': show_menu}" v-on:mouseleave="show_menu = false">
@@ -164,7 +164,11 @@
         ],
         menu_pos: 0,
         show_menu: false,
-        init_data: null
+        init_data: {
+          daily: [],
+          links: [],
+          guestbooks: []
+        }
       }
     },
     methods: {

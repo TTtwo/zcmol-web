@@ -4,10 +4,18 @@ from app.models import Model
 from app.kernel.utils.response import resp_to_json
 from flask_restful import Resource
 from flask_sqlalchemy import BaseQuery
+from flask import current_app
+import json
 
 
 class Index(Resource):
     def get(self):
+        key = name = 'index'
+        cache = current_app.core.cache
+        if cache.hget(name, key):
+            data = cache.hget(name, key)
+            data = json.loads(data)
+            return resp_to_json(data=data)
         # 获取所有links
         links: BaseQuery = Model \
             .Link \
@@ -22,7 +30,7 @@ class Index(Resource):
             .limit(50) \
             .all()
         # 获取daily article
-        dailys: BaseQuery = Model \
+        daily: BaseQuery = Model \
             .DailyContent \
             .query \
             .order_by(Model.DailyContent.id.desc()) \
@@ -37,12 +45,16 @@ class Index(Resource):
             for item in guestbooks
         ]
         daily_items = [
-            ModelHelper.serialize(item, article=item.article)
-            for item in dailys
+            ModelHelper.filter(
+                ModelHelper.serialize(item, article=item.article),
+                ['content'])
+            for item in daily
         ]
         data = {
             'links': link_items,
             'guestbooks': guestbook_items,
-            'dailys': daily_items
+            'daily': daily_items
         }
+        cache.hset(name, key, json.dumps(data))
+        cache.expire(name, 3600 * 24)
         return resp_to_json(data=data)

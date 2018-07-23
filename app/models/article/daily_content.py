@@ -6,9 +6,9 @@ from enum import Enum
 
 
 class DailyContentType(Enum):
-    MUSIC = 'music++'
-    SAD = 'sad++'
-    PICTURE = 'picture++'
+    MUSIC = 'music+'
+    SAD = 'sad+'
+    PICTURE = 'picture+'
 
 
 class DailyContent(DB.Model, ArticleMixin):

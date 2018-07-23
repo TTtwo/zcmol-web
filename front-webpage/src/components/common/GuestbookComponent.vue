@@ -599,6 +599,11 @@
         }
       }
     },
+    watch: {
+      guestbooks: function (gu) {
+        this.guestbook_array = gu
+      }
+    },
     mounted() {
       this.reSize()
       this.nickname = localStorage.getItem('nickname')

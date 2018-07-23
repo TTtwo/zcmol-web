@@ -145,7 +145,7 @@
         <p class="tex">做个简单的朋友，来？</p>
         <p class="tex">点击右边申请 ></p>
       </div>
-      <div class="link-btn">
+      <div class="link-btn" @click="clickAdd">
         <div class="ver"></div>
         <div class="hor"></div>
       </div>
@@ -171,6 +171,16 @@
     data() {
       return {
         link_array: this.links
+      }
+    },
+    methods: {
+      clickAdd () {
+        this.$emit('gu', 4)
+      }
+    },
+    watch: {
+      links: function (li) {
+        this.link_array = li
       }
     }
   }
