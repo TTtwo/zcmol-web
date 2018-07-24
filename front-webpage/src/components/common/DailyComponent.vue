@@ -138,7 +138,7 @@
       <li></li>
       <li v-for="item, index in daily_array">
         <div class="home-div">
-          <a href="http://zcmol.cn">
+          <a @click="toDaily(item.article.id)">
             <div class="wp">
               <div class="hdiv1">
                 <div class="dp">
@@ -181,6 +181,14 @@
           : timeAry[2].length < 2
             ? '0' + timeAry[2]
             : timeAry[2]
+      },
+      toDaily(id){
+        this.$router.push({
+          name: 'daily_article',
+          params: {
+            article_id: id
+          }
+        })
       }
     },
     watch: {

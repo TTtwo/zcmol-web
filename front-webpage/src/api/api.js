@@ -24,7 +24,9 @@ export default {
   post_guestbook: {
     url: '/guestbook',
     method: POST
+  },
+  get_daily: {
+    url: '/:id/daily',
+    method: GET
   }
-
-
 }

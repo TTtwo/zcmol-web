@@ -10,5 +10,5 @@ class RespError(Enum):
 def resp_to_json(*args, **kwargs):
     if 'error' not in kwargs:
         error = RespError.PASS.value
-        kwargs['error'] = error
+        kwargs['error'] = error[0]
     return jsonify(*args, **kwargs)

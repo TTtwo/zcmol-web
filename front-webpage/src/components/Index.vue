@@ -54,7 +54,7 @@
         height: 400%;
         top: 0;
         position: relative;
-        transition: top .3s ease-in-out;
+        transition: top .2s ease-in-out;
         .content-page {
           height: 25%;
           width: 100%;
