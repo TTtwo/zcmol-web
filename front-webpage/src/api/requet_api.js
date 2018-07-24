@@ -3,7 +3,7 @@ import api from './api'
 const apiConvert = function (url, args) {
   let res = url
   Object.keys(args).map(key => {
-    res.replace(new RegExp(`:${key}`, 'g'), encodeURIComponent(args[key]))
+    res = res.replace(new RegExp(`:${key}`, 'g'), encodeURIComponent(args[key]))
   })
   return res
 }
@@ -20,7 +20,7 @@ export default {
       let method = api.method
       let res
 
-      if (urlArgs !== null)
+      if (urlArgs != null)
         url = apiConvert(url, urlArgs)
 
       if (['get', 'delete', 'head'].includes(method)) {

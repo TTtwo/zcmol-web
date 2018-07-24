@@ -28,5 +28,9 @@ export default {
   get_daily: {
     url: '/:id/daily',
     method: GET
+  },
+  get_daily_comment: {
+    url: '/:id/comments',
+    method: GET
   }
 }

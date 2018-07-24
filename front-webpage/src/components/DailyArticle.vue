@@ -49,7 +49,7 @@
           .info {
             font-size: 18px;
             color: #999;
-            span:nth-child(2){
+            span:nth-child(2) {
               padding: 8px;
             }
           }
@@ -135,28 +135,14 @@
       </div>
       <div class="content-wrapper">
         <div class="content-wrap">
-          <div class="title"><span>你好</span></div>
+          <div class="title"><span>{{content.daily_content.title}}</span></div>
           <div class="info">
-            <span>Time: 2016.10.21 10:50:25</span>
+            <span>Time: {{timeTransform(content.create_at)}}</span>
             <span>丨</span>
             <span>Hits: 110</span>
           </div>
           <div class="content">
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86
-                    src="//music.163.com/outchain/player?type=2&id=361493&auto=0&height=66"></iframe>
-            <br>
-            我一直认为，你就是我的唯一<br>
-            我一直认为，你就是我的唯一<br>
-            我一直认为，你就是我的唯一<br>
-            我一直认为，你就是我的唯一<br>
-            我一直认为，你就是我的唯一<br>
-            我一直认为，你就是我的唯一<br>
-            我一直认为，你就是我的唯一<br>
-            我一直认为，你就是我的唯一<br>
-            我一直认为，你就是我的唯一<br>
-            我一直认为，你就是我的唯一<br>
-            我一直认为，你就是我的唯一<br>
-            我一直认为，你就是我的唯一<br>
+            {{content.daily_content.content}}
           </div>
         </div>
       </div>
@@ -171,6 +157,7 @@
 
 <script>
   import CommentComponent from './common/CommentComponent';
+  import api from '../api/api'
 
   export default {
     name: 'daily_article',
@@ -178,8 +165,68 @@
     data() {
       return {
         is_show_comment: false,
+        article_id: this.$route.params.id,
+        content: {
+          daily_content: {
+            title: '',
+            content: '',
+          }
+        },
+        comments: []
       }
     },
-    methods: {}
+    methods: {
+      async getArticle() {
+        const result = await this.$$api(api.get_daily, {
+          urlArgs: {
+            id: this.article_id
+          }
+        })
+        if (result.status !== 200) {
+          console.log('内容获取失败!')
+          return
+        }
+        if (!result.body.article) {
+          console.log('内容不存在!')
+          return
+        }
+        this.content = result.body.article
+      },
+      async getComment() {
+        const result = await this.$$api(api.get_daily_comment, {
+          urlArgs: {
+            id: this.article_id
+          }
+        })
+        if (result.status !== 200) {
+          console.log('数据获取失败！')
+          return
+        }
+        const data = result.body.comments
+        this.dataHandle(data)
+      },
+      dataHandle(data) {
+        if (!data) return
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].article_comment_id == null) {
+            let d = data[i]
+            d.subComments = []
+            this.comments.push(d)
+          } else {
+
+          }
+        }
+      },
+      timeTransform(time) {
+        const date = new Date(time * 1000)
+        const yms = date.toLocaleDateString().replace(new RegExp('/', 'g'), '.')
+        const hms = date.toLocaleTimeString()
+        return yms + hms
+      },
+    },
+    mounted() {
+      this.getArticle()
+      this.getComment()
+    }
   }
 </script>

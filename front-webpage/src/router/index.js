@@ -20,7 +20,7 @@ export default new Router({
       component: Index
     },
     {
-      path: '/daily_article',
+      path: '/:id/daily_article',
       name: 'daily_article',
       component: DailyArticle
     },
