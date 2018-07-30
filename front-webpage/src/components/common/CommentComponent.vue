@@ -101,7 +101,7 @@
             padding-left: 80px;
             font-size: 24px;
             line-height: 36px;
-            color: @comment_bg;
+            color: #ff9ca9;
           }
         }
       }
@@ -134,7 +134,7 @@
       .modal-wrapper {
         width: 680px;
         min-height: 200px;
-        background-color: white;
+        background-color: #373737;
         position: absolute;
         top: 40px;
         border-radius: 10px;
@@ -163,7 +163,7 @@
               font-size: 24px;
               font-weight: bolder;
               color: #222;
-              background-color: #cce8cf;
+              background-color: #7a7a7a;
               .flex(@h: flex-start);
               -webkit-box-sizing: border-box;
               -moz-box-sizing: border-box;
@@ -180,7 +180,7 @@
               box-sizing: border-box;
               padding-left: 10px;
               font-size: 24px;
-              background-color: #e6e7ee;
+              background-color: #7a7c7f;
             }
             .modal-input {
               height: 60px;
@@ -300,7 +300,24 @@
               {
                 nickname: '455',
                 content: '4545454',
-                subComments: []
+                subComments: [
+                  {
+                    nickname: '你知道吗',
+                    content: '哈哈哈哈哈哈',
+                    subComments: [
+                      {
+                        nickname: '你知道吗',
+                        content: '哈哈哈哈哈哈',
+                        subComments: []
+                      }
+                    ]
+                  },
+                  {
+                    nickname: '你知道吗',
+                    content: '哈哈哈哈哈哈',
+                    subComments: []
+                  }
+                ]
               }
             ]
           },

@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f1f25ac-3a26-4819-9ce6-3330263a0d3d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/client/controllers/index/index.py" afterPath="$PROJECT_DIR$/app/client/controllers/index/index.py" />
       <change beforePath="$PROJECT_DIR$/front-webpage/src/assets/my-style.less" afterPath="$PROJECT_DIR$/front-webpage/src/assets/my-style.less" />
-      <change beforePath="$PROJECT_DIR$/front-webpage/src/components/DailyArticle.vue" afterPath="$PROJECT_DIR$/front-webpage/src/components/DailyArticle.vue" />
       <change beforePath="$PROJECT_DIR$/front-webpage/src/components/common/CommentComponent.vue" afterPath="$PROJECT_DIR$/front-webpage/src/components/common/CommentComponent.vue" />
-      <change beforePath="$PROJECT_DIR$/front-webpage/src/router/index.js" afterPath="$PROJECT_DIR$/front-webpage/src/router/index.js" />
+      <change beforePath="$PROJECT_DIR$/front-webpage/src/components/common/subCommentComponent.vue" afterPath="$PROJECT_DIR$/front-webpage/src/components/common/subCommentComponent.vue" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />

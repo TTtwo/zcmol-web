@@ -104,7 +104,7 @@
         padding-left: 80px;
         font-size: 24px;
         line-height: 36px;
-        color: @comment_bg;
+        color: #ff9ca9;
       }
     }
   }
