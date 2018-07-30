@@ -225,6 +225,11 @@
       },
     },
     mounted() {
+      if (!this.article_id) {
+        console.log('123123123')
+        this.$router.push('index')
+        return
+      }
       this.getArticle()
       this.getComment()
     }

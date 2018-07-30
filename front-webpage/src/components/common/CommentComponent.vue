@@ -58,8 +58,8 @@
                 font-size: 24px;
                 display: block;
                 height: 50%;
-                color: white;
-                .flex(@h: flex-start;@v: flex-end);
+                color: #bababa;
+                .flex(@h: flex-start;@v: flex-start);
                 &:hover {
                   color: @green;
                 }
@@ -108,6 +108,7 @@
       .ul-lv2 {
         padding-left: 80px;
       }
+
     }
     .write-btn {
       .circle-btn;
@@ -115,7 +116,6 @@
       right: 12px;
       top: 90px;
     }
-
     .modal {
       width: 100%;
       height: 100%;
@@ -225,14 +225,14 @@
 <template>
   <div id="comment-component">
     <div class="content-wrapper">
-      <ul class="ul-lv1">
+      <ul v-for="item, index in array" class="ul-lv1">
         <li class="ul-lv1-li">
           <div class="avatar">
             <img src="../../assets/logo.png">
           </div>
           <div class="info-wrapper">
             <div class="info">
-              <a href="http://zcmol.cn" target="_blank">早茶月光</a>
+              <a href="http://zcmol.cn" target="_blank">{{item.nickname}}</a>
               <span>Time: 2016:03:06 23:54:46</span>
             </div>
             <aside class="aside">
@@ -242,9 +242,10 @@
             </aside>
           </div>
           <div class="content">
-            <p>-- 北极星的眼泪
+            <p>-- {{item.content}}
             </p>
           </div>
+          <sub-comment :comments="item.subComments"></sub-comment>
         </li>
       </ul>
     </div>
@@ -283,48 +284,39 @@
 
 <script>
   import api from '../../api/api'
+  import subComment from './subCommentComponent'
+
   export default {
     name: 'comment-component',
+    components: {subComment},
     data() {
       return {
         is_write: false,
+        array: [
+          {
+            nickname: '123',
+            content: '1231231231',
+            subComments: [
+              {
+                nickname: '455',
+                content: '4545454',
+                subComments: []
+              }
+            ]
+          },
+          {
+            nickname: '你好我',
+            content: '<div>哈哈</div>',
+            subComments: [
+              {
+                nickname: '打发了斯蒂芬',
+                content: '45454d阿瑟的发放4',
+                subComments: []
+              }
+            ]
+          }
+        ]
       }
     },
-    methods: {
-      createHtml(comment_arry) {
-        if (!comment_arry)
-          return ""
-        let str_html = ""
-        for (var i = 0; i < comment_arry.length; i++) {
-          str_html = "<ul class=\"ul-lv1 ul-lv2\">" +
-          "<li class=\"ul-lv1-li\">" +
-          "<div class=\"avatar\">" +
-          "<img src=\"https://avatars1.githubusercontent.com/u/24515205?s=460&v=4\">" +
-          "</div>" +
-          "<div class=\"info-wrapper\">" +
-          "<div class=\"info\">" +
-          "<a href=\"http://zcmol.cn\" target=\"_blank\">" + comment_arry[i].nickname + "</a>" +
-          "<span>Time: 2016:03:06 23:54:46</span>" +
-          "</div>" +
-          "<aside class=\"aside\">" +
-          "<div class=\"comment\">" +
-          "<img src=\"../../assets/comment.png\">" +
-          "</div>" +
-          "</aside>" +
-          "</div>" +
-          "<div class=\"content\">" +
-          "<p>-- " + comment_arry[i].content +
-          "</p>" +
-          "</div>" +
-          comment_arry[i].subComents
-            ? this.createHtml(comment_arry[i].subComments)
-            : ''
-          "</li>" +
-          "</ul>"
-        }
-        return str_html
-      },
-
-    }
   }
 </script>

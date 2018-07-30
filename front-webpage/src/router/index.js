@@ -15,6 +15,11 @@ Vue.use(iView)
 export default new Router({
   routes: [
     {
+      path: '*',
+      name: '404',
+      redirect: '/index'
+    },
+    {
       path: '/index',
       name: 'index',
       component: Index

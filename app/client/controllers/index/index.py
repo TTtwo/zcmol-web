@@ -22,12 +22,12 @@ class Index(Resource):
             .query \
             .filter_by(_hidden=False) \
             .all()
-        # 获取前50条Guestbook
+        # 获取前30条Guestbook
         guestbooks: BaseQuery = Model \
             .GuestBook \
             .query \
             .order_by(Model.GuestBook.id.desc()) \
-            .limit(50) \
+            .limit(30) \
             .all()
         # 获取daily article
         daily: BaseQuery = Model \
