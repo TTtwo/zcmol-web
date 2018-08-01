@@ -154,7 +154,6 @@
     }
   }
 </style>
-
 <template>
   <div id="about-me">
     <div class="info-wrapper">

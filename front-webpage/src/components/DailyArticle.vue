@@ -4,7 +4,6 @@
   #daily_article {
     width: 100%;
     height: 100%;
-
     .daily-container {
       z-index: 1;
       position: absolute;
@@ -63,7 +62,6 @@
         }
       }
     }
-
     .comment-btn {
       .circle-btn;
       position: absolute;
@@ -121,7 +119,6 @@
     }
   }
 </style>
-
 <template>
   <div id="daily_article">
     <div class="header">
@@ -131,7 +128,7 @@
     </div>
     <div class="daily-container">
       <div class="comment-wrapper" :class="{'comment-wrapper-animation': is_show_comment}">
-        <comment-component></comment-component>
+        <comment-component :comments="comments" :id="$route.params.id"></comment-component>
       </div>
       <div class="content-wrapper">
         <div class="content-wrap">
@@ -149,15 +146,15 @@
     </div>
     <div class="comment-btn" @click="is_show_comment = !is_show_comment">C</div>
     <div class="footer">
-      <div class="btn">Prev</div>
-      <div class="btn">Next</div>
+      <div class="btn" @click="otherPage(content.prev)">Prev</div>
+      <div class="btn" @click="otherPage(content.next)">Next</div>
     </div>
   </div>
 </template>
-
 <script>
   import CommentComponent from './common/CommentComponent';
   import api from '../api/api'
+  import {timeTransform} from '../util'
 
   export default {
     name: 'daily_article',
@@ -176,53 +173,43 @@
       }
     },
     methods: {
+      timeTransform: timeTransform,
       async getArticle() {
-        const result = await this.$$api(api.get_daily, {
-          urlArgs: {
-            id: this.article_id
-          }
-        })
+        const result = await
+          this.$$api(api.get_daily, {
+            urlArgs: {
+              id: this.article_id
+            }
+          })
         if (result.status !== 200) {
-          console.log('内容获取失败!')
-          return
+          alert('内容获取失败!')
+          return false
         }
         if (!result.body.article) {
-          console.log('内容不存在!')
-          return
+          alert('内容不存在!')
+          this.$router.push('index')
         }
         this.content = result.body.article
+        this.getComment()
       },
       async getComment() {
-        const result = await this.$$api(api.get_daily_comment, {
-          urlArgs: {
-            id: this.article_id
-          }
-        })
+        const result = await
+          this.$$api(api.get_daily_comment, {
+            urlArgs: {
+              id: this.article_id
+            }
+          })
         if (result.status !== 200) {
           console.log('数据获取失败！')
           return
         }
-        const data = result.body.comments
-        this.dataHandle(data)
+        this.comments = result.body.comments
       },
-      dataHandle(data) {
-        if (!data) return
-        for (var i = 0; i < data.length; i++) {
-          if (data[i].article_comment_id == null) {
-            let d = data[i]
-            d.subComments = []
-            this.comments.push(d)
-          } else {
-
-          }
-        }
-      },
-      timeTransform(time) {
-        const date = new Date(time * 1000)
-        const yms = date.toLocaleDateString().replace(new RegExp('/', 'g'), '.')
-        const hms = date.toLocaleTimeString()
-        return yms + hms
-      },
+      async otherPage(article_id) {
+        if (article_id == null)
+          return null
+        // this.$router.push('/' + article_id + '/daily_article')
+      }
     },
     mounted() {
       if (!this.article_id) {
@@ -231,7 +218,6 @@
         return
       }
       this.getArticle()
-      this.getComment()
     }
   }
 </script>

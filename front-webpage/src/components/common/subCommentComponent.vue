@@ -118,16 +118,16 @@
     <ul class="ul-lv1 ul-lv2" v-for="item, index in comments">
       <li class="ul-lv1-li">
         <div class="avatar">
-          <img src="https://avatars1.githubusercontent.com/u/24515205?s=460&v=4">
+          <img :src="getAvatar(item.email, false)">
         </div>
         <div class="info-wrapper">
           <div class="info">
             <a href="http://zcmol.cn" target="_blank">{{item.nickname}}</a>
-            <span>Time: 2016:03:06 23:54:46</span>
+            <span>Time: {{timeTransform(item.create_at)}}</span>
           </div>
           <aside class="aside">
             <div class="comment">
-              <img src="../../assets/comment.png">
+              <img @click="emitId(item.id)" src="../../assets/comment.png">
             </div>
           </aside>
         </div>
@@ -135,18 +135,30 @@
           <p>-- {{item.content}}
           </p>
         </div>
-        <sub-comment :comments="item.subComments"></sub-comment>
+        <sub-comment :comments="item.subComments" :id="id" @replyId="emitId"></sub-comment>
       </li>
     </ul>
   </div>
 </template>
-
 <script>
   import subComment from './subCommentComponent'
+  import {timeTransform, getAvatar} from "../../util";
 
   export default {
     name: 'subComment',
     components: {subComment},
-    props: ['comments'],
+    props: ['comments', 'id'],
+    methods: {
+      timeTransform: timeTransform,
+      getAvatar: getAvatar,
+      emitId(id) {
+        this.$emit('replyId', id)
+      }
+    },
+    watch: {
+      id: function (id) {
+        this.id = id
+      }
+    }
   }
 </script>

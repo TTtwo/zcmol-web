@@ -32,5 +32,9 @@ export default {
   get_daily_comment: {
     url: '/:id/comments',
     method: GET
+  },
+  post_daily_comment: {
+    url: '/:id/comments',
+    method: POST
   }
 }

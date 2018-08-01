@@ -7,6 +7,7 @@ from .article.blog_content import BlogTag
 from .article.blog_content import BlogContent
 from .article.daily_content import DailyContent
 from .article.article_comment import ArticleComment
+from .article.article import ArticleContentTypeEnum
 from .article.blog_content import BlogContentCategory
 
 
@@ -20,6 +21,7 @@ class Model:
     GuestBook = GuestBook
     Motto = Motto
     Link = Link
+    ArticleContentType = ArticleContentTypeEnum
 
     def create_all(self):
         DB.create_all()

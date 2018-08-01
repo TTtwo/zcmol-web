@@ -182,14 +182,6 @@
             ? '0' + timeAry[2]
             : timeAry[2]
       },
-      toDaily(id) {
-        this.$router.push({
-          name: 'daily_article',
-          params: {
-            article_id: id
-          }
-        })
-      },
     },
     watch: {
       daily: function (daily) {

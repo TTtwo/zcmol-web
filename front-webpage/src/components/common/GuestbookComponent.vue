@@ -568,22 +568,20 @@
             }
           })
         if (result.status !== 200) {
-          this.$Message.error('访问失败~')
+          alert('访问失败~')
           return
         }
-        console.log(result.body)
         this.guestbook_array = result.body.data.guestbook
         this.paging = result.body.data.paging
       },
       async postData() {
         if (!this.nickname || !this.content) {
-          console.log('不能为空')
+          alert('不能为空')
           return
         }
-        await localStorage.setItem('nickname', this.nickname)
-        await localStorage.setItem('website', this.website)
-        await localStorage.setItem('email', this.email)
-        console.log(this.email ? this.email : '')
+        localStorage.setItem('nickname', this.nickname)
+        localStorage.setItem('website', this.website)
+        localStorage.setItem('email', this.email)
         const result = await this.$$api(api.post_guestbook,
           {
             body: {
@@ -593,10 +591,16 @@
               website: this.website ? this.website : ''
             }
           })
-        this.content = null
-        if (result.status === 200) {
-          await this.getData(1)
+        if (result.status !== 200) {
+          alert('访问失败, 请重新尝试')
+          return false
         }
+        if (result.body.error === 2001) {
+          alert('每次留言的时间间隔为30秒！')
+          return false
+        }
+        this.content = null
+        await this.getData(1)
       }
     },
     watch: {

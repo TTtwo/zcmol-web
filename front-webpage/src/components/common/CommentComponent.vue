@@ -12,6 +12,8 @@
       .ul-lv1 {
         list-style: none;
         overflow-x: scroll;
+        margin-top: 40px;
+
         .ul-lv1-li {
           width: 100%;
           text-align: left;
@@ -134,7 +136,7 @@
       .modal-wrapper {
         width: 680px;
         min-height: 200px;
-        background-color: #373737;
+        background-color: #e4e4e4;
         position: absolute;
         top: 40px;
         border-radius: 10px;
@@ -163,7 +165,7 @@
               font-size: 24px;
               font-weight: bolder;
               color: #222;
-              background-color: #7a7a7a;
+              background-color: #999;
               .flex(@h: flex-start);
               -webkit-box-sizing: border-box;
               -moz-box-sizing: border-box;
@@ -180,7 +182,7 @@
               box-sizing: border-box;
               padding-left: 10px;
               font-size: 24px;
-              background-color: #7a7c7f;
+              background-color: #bbb;
             }
             .modal-input {
               height: 60px;
@@ -221,23 +223,22 @@
   }
 
 </style>
-
 <template>
   <div id="comment-component">
     <div class="content-wrapper">
-      <ul v-for="item, index in array" class="ul-lv1">
+      <ul v-for="item, index in comments_data" class="ul-lv1">
         <li class="ul-lv1-li">
           <div class="avatar">
-            <img src="../../assets/logo.png">
+            <img :src="getAvatar(item.email, false)">
           </div>
           <div class="info-wrapper">
             <div class="info">
               <a href="http://zcmol.cn" target="_blank">{{item.nickname}}</a>
-              <span>Time: 2016:03:06 23:54:46</span>
+              <span>Time: {{timeTransform(item.create_at)}}</span>
             </div>
             <aside class="aside">
               <div class="comment">
-                <img src="../../assets/comment.png">
+                <img @click="commentModal(item.id)" src="../../assets/comment.png">
               </div>
             </aside>
           </div>
@@ -245,7 +246,7 @@
             <p>-- {{item.content}}
             </p>
           </div>
-          <sub-comment :comments="item.subComments"></sub-comment>
+          <sub-comment :comments="item.subComments" :id="id" @replyId="commentModal"></sub-comment>
         </li>
       </ul>
     </div>
@@ -256,84 +257,136 @@
         <div class="modal-content">
           <div class="modal-item">
             <div class="modal-title">昵称</div>
-            <input type="text" class="modal-input" placeholder="...">
+            <input v-model="nickname" type="text" class="modal-input" placeholder="...">
           </div>
           <div class="modal-item">
             <div class="modal-title">邮箱</div>
-            <input type="text" class="modal-input" placeholder="...">
+            <input v-model="email" type="text" class="modal-input" placeholder="...">
           </div>
           <div class="modal-item">
             <div class="modal-title">网址</div>
-            <input type="text" class="modal-input" placeholder="...">
+            <input v-model="website" type="text" class="modal-input" placeholder="...">
           </div>
           <div class="modal-item">
             <div class="modal-title">内容</div>
-            <textarea class="modal-textarea" placeholder="..."></textarea>
+            <textarea v-model="content" class="modal-textarea" placeholder="..."></textarea>
           </div>
           <div class="modal-item">
             <div class="modal-send-btn">
-              <span>SEND</span>
+              <span @click="postComment">SEND</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="write-btn" @click="is_write = !is_write">W</div>
+    <div class="write-btn" @click="showModal">W</div>
   </div>
 </template>
-
 <script>
   import api from '../../api/api'
   import subComment from './subCommentComponent'
+  import {timeTransform, getAvatar} from "../../util";
 
   export default {
     name: 'comment-component',
     components: {subComment},
+    props: ["comments", "id"],
     data() {
       return {
         is_write: false,
-        array: [
-          {
-            nickname: '123',
-            content: '1231231231',
-            subComments: [
-              {
-                nickname: '455',
-                content: '4545454',
-                subComments: [
-                  {
-                    nickname: '你知道吗',
-                    content: '哈哈哈哈哈哈',
-                    subComments: [
-                      {
-                        nickname: '你知道吗',
-                        content: '哈哈哈哈哈哈',
-                        subComments: []
-                      }
-                    ]
-                  },
-                  {
-                    nickname: '你知道吗',
-                    content: '哈哈哈哈哈哈',
-                    subComments: []
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            nickname: '你好我',
-            content: '<div>哈哈</div>',
-            subComments: [
-              {
-                nickname: '打发了斯蒂芬',
-                content: '45454d阿瑟的发放4',
-                subComments: []
-              }
-            ]
-          }
-        ]
+        comments_data: [],
+        nickname: '',
+        content: '',
+        website: '',
+        email: '',
+        reply_id: ''
       }
     },
+    methods: {
+      timeTransform: timeTransform,
+      getAvatar: getAvatar,
+      showModal() {
+        this.is_write = !this.is_write
+        if (!this.is_write) this.reply_id = ''
+        return this.is_write
+      },
+      commentModal(reply_id) {
+        this.reply_id = reply_id
+        this.is_write = true
+      },
+      // 处理评论数据
+      dataProcessing(data) {
+        if (!data instanceof Array || data.length === 0)
+          return []
+        let new_data = []
+        for (var i = 0, len = data.length; i < len; i++) {
+          data[i].subComments = []
+          if (data[i].article_comment_id == null) {
+            new_data.push(data[i])
+          }
+          else {
+            this._findData(new_data, data[i])
+          }
+        }
+        this.comments_data = new_data
+      },
+      _findData(data, target) {
+        for (var i = 0, len = data.length; i < len; i++) {
+          if (data[i].id === target.article_comment_id) {
+            data[i].subComments.push(target)
+            return true
+          } else {
+            this._findData(data[i].subComments, target)
+          }
+        }
+      },
+
+      async postComment() {
+        if (!this.nickname || !this.content) {
+          alert('数据不能为空!!')
+          return false
+        }
+        localStorage.setItem('nickname', this.nickname)
+        localStorage.setItem('website', this.website)
+        localStorage.setItem('email', this.email)
+        const result = await this.$$api(api.post_daily_comment,
+          {
+            body: {
+              nickname: this.nickname,
+              content: this.content,
+              email: this.email ? this.email : '',
+              website: this.website ? this.website : '',
+              reply_id: this.reply_id ? this.reply_id : null
+            },
+            urlArgs: {
+              id: this.id
+            }
+          })
+        if (result.status !== 200) {
+          alert('留言失败，请刷新页面重新尝试')
+          return false
+        }
+        if (result.body.error === 2001) {
+          alert('每次留言的时间间隔为30秒！')
+          return false
+        }
+        this.$router.go(0)
+      }
+
+    },
+    watch: {
+      comments: function (co) {
+        this.comments = co
+        this.dataProcessing(this.comments)
+      },
+      id: function (id) {
+        this.id = id
+      }
+    },
+    mounted() {
+      this.nickname = localStorage.getItem('nickname')
+      this.website = localStorage.getItem('website')
+      this.email = localStorage.getItem('email')
+    }
   }
 </script>

@@ -12,3 +12,11 @@ export function getAvatar(email, style = true) {
     + '&r=PG'
   return src
 }
+
+export function timeTransform(time) {
+  const date = new Date(time * 1000)
+  const yms = date.toLocaleDateString().replace(new RegExp('/', 'g'), '.')
+  const hms = date.toLocaleTimeString()
+  return yms + hms
+}
+

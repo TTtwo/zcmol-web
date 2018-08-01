@@ -21,13 +21,26 @@ class Daily(Resource):
             data = cache.get(key)
             data = json.loads(data)
             return resp_to_json(article=data)
-        daily: BaseQuery = Model. \
-            Article. \
-            query. \
-            filter_by(id=daily_id). \
-            one()
-        if daily:
-            daily = ModelHelper.serialize(daily, daily_content=daily.daily_content)
+        daily: BaseQuery = Model \
+            .Article \
+            .query \
+            .filter_by(id=daily_id,
+                       content_type=Model.ArticleContentType.DAILY.value) \
+            .limit(1)
+        prev: BaseQuery = Model \
+            .Article \
+            .query \
+            .filter(Model.Article.id < daily_id) \
+            .limit(1)
+        next: BaseQuery = Model \
+            .Article \
+            .query \
+            .filter(Model.Article.id > daily_id) \
+            .limit(1)
+        if daily.first():
+            daily = ModelHelper.serialize(daily[0], daily_content=daily[0].daily_content)
+            daily['prev'] = prev[0].id if prev.first() else None
+            daily['next'] = next[0].id if next.first() else None
             cache.set(key, json.dumps(daily))
             cache.expire(key, 1800)
 
