@@ -187,7 +187,7 @@
         position: absolute;
         width: 80px;
         height: 80px;
-        background: url("../assets/logo.png") no-repeat center;
+        background: url("../../static/logo.png") no-repeat center;
         background-size: contain;
         &:hover {
           cursor: pointer;
@@ -204,11 +204,10 @@
       background-color: #222;
       > div {
         position: relative;
+        .flex;
         > img {
           width: 100px;
           position: absolute;
-          top: 25px;
-          right: 25px;
         }
       }
     }
@@ -274,7 +273,7 @@
     </div>
     <div class="i-loader" v-if="loading">
       <div>
-        <img src="../assets/logo.png">
+        <img src="../../static/logo.png">
         <pacman-loader :color="'#7de87d'" :size="'100px'"></pacman-loader>
       </div>
     </div>
@@ -354,6 +353,7 @@
       }
     },
     async mounted() {
+      document.title = '心灵鸡汤'
       await this.getInitData(1)
       this.scrollLoad()
     }

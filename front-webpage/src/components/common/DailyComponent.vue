@@ -138,7 +138,7 @@
       <li></li>
       <li v-for="item, index in daily_array">
         <div class="home-div">
-          <router-link :to="'/'+item.article.id+'/daily_article'">
+          <router-link target="_blank" :to="'/'+item.article.id+'/daily_article'">
             <div class="wp">
               <div class="hdiv1">
                 <div class="dp">

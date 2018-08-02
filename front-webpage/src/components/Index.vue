@@ -21,7 +21,7 @@
           height: 100%;
           max-height: 196px;
           max-width: 256px;
-          background: url("../assets/logo.png") no-repeat center;
+          background: url("../../static/logo.png") no-repeat center;
           background-size: contain;
         }
       }
@@ -121,12 +121,34 @@
       background-color: #222;
       > div {
         position: relative;
+        .flex;
         > img {
           width: 100px;
           position: absolute;
-          top: 25px;
-          right: 25px;
         }
+      }
+    }
+    .i-music {
+      position: absolute;
+      top: 25%;
+      left: 0;
+      transition: left .5s ease-in-out;
+      .flex;
+      .m-close {
+        width: 35px;
+        height: 50px;
+        background: #cce8cf url("../assets/lefts.png") no-repeat center;
+        transform: rotate(180deg);
+        transition: transform .5s ease-in-out;
+        background-size: 30%;
+        position: relative;
+        left: -7px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .m-close-anim {
+        transform: rotate(0);
       }
     }
   }
@@ -155,9 +177,18 @@
         </div>
       </div>
     </div>
+    <div ref="imusic" class="i-music">
+      <aplayer
+        autoplay
+        :theme="'#222222'"
+        :list="list3"
+        :music="list3[0]"
+      />
+      <div class="m-close" :class="{'m-close-anim': !music_show}" @click="musicHidden"></div>
+    </div>
     <div class="i-loader" v-if="loading">
       <div>
-        <img src="../assets/logo.png">
+        <img src="../../static/logo.png">
         <pacman-loader :color="'#7de87d'" :size="'100px'"></pacman-loader>
       </div>
     </div>
@@ -172,10 +203,11 @@
   import SayComp from './common/SayComponent'
   import api from '../api/api'
   import PacmanLoader from "vue-spinner/src/ClipLoader";
+  import Aplayer from 'vue-aplayer'
 
   export default {
     name: 'index',
-    components: {PacmanLoader, DailyComp, GuestbookComp, LinkComp, AboutMeComp, SayComp},
+    components: {Aplayer, PacmanLoader, DailyComp, GuestbookComp, LinkComp, AboutMeComp, SayComp},
     data() {
       return {
         menu: [
@@ -194,7 +226,30 @@
           links: [],
           guestbooks: []
         },
-        loading: true
+        loading: true,
+        list3: [
+          {
+            title: '视线所及只剩生活',
+            artist: '蔡维泽',
+            src: 'http://zcmol-1253645803.file.myqcloud.com/music/sxsjzssh.mp3',
+          },
+          {
+            title: '新年未老',
+            artist: '许含光',
+            src: 'http://zcmol-1253645803.file.myqcloud.com/music/xnwl.mp3',
+          },
+          {
+            title: '9420',
+            artist: '麦小兜',
+            src: 'http://zcmol-1253645803.file.myqcloud.com/music/9420.mp3',
+          },
+          {
+            title: '漆黑',
+            artist: '朴信惠',
+            src: 'http://zcmol-1253645803.file.myqcloud.com/music/%E6%9C%B4%E4%BF%A1%E6%83%A0%20-%20%E6%BC%86%E9%BB%91.mp3',
+          }
+        ],
+        music_show: false
       }
     },
     methods: {
@@ -216,6 +271,13 @@
         }
         this.init_data = result.body.data
         this.loading = false
+      },
+      musicHidden() {
+        this.music_show = !this.music_show
+        let left = 0
+        if (this.music_show)
+          left = -(this.$refs.imusic.offsetWidth - 28)
+        this.$refs.imusic.style.left = left + 'px'
       }
     },
     computed: {

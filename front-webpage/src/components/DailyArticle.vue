@@ -85,7 +85,7 @@
       .logo {
         height: 95px;
         width: 95px;
-        background: url("../assets/logo.png") no-repeat center;
+        background: url("../../static/logo.png") no-repeat center;
         background-size: contain;
         &:hover {
           cursor: pointer;
@@ -128,11 +128,10 @@
       background-color: #222;
       > div {
         position: relative;
+        .flex;
         > img {
           width: 100px;
           position: absolute;
-          top: 25px;
-          right: 25px;
         }
       }
     }
@@ -170,7 +169,7 @@
     </div>
     <div class="i-loader" v-if="loading">
       <div>
-        <img src="../assets/logo.png">
+        <img src="../../static/logo.png">
         <pacman-loader :color="'#7de87d'" :size="'100px'"></pacman-loader>
       </div>
     </div>
@@ -191,12 +190,10 @@
         is_show_comment: false,
         article_id: this.$route.params.id,
         content: {
-          daily_content: {
-            title: '',
-            content: '',
-          }
+          daily_content: {}
         },
-        comments: []
+        comments: [],
+        title: ''
       }
     },
     methods: {
@@ -218,7 +215,7 @@
           this.$router.push('index')
         }
         this.content = result.body.article
-        console.log(this.content)
+        document.title = this.content.daily_content.title
         await this.getComment()
         this.loading = false
       },
@@ -245,6 +242,11 @@
     },
     watch: {
       '$route': 'getArticle'
+    },
+    computed: {
+      getTitle() {
+        return this.title
+      }
     },
     mounted() {
       if (!this.article_id) {

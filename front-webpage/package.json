@@ -59,6 +59,7 @@
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "vue-aplayer": "^1.6.1",
     "vue-loader": "^13.3.0",
     "vue-particles": "^1.0.9",
     "vue-style-loader": "^3.0.1",
