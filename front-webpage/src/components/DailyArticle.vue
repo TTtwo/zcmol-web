@@ -117,6 +117,25 @@
       }
 
     }
+    .i-loader {
+      z-index: 10;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      .flex;
+      background-color: #222;
+      > div {
+        position: relative;
+        > img {
+          width: 100px;
+          position: absolute;
+          top: 25px;
+          right: 25px;
+        }
+      }
+    }
   }
 </style>
 <template>
@@ -149,18 +168,26 @@
       <div class="btn" @click="otherPage(content.prev)">Prev</div>
       <div class="btn" @click="otherPage(content.next)">Next</div>
     </div>
+    <div class="i-loader" v-if="loading">
+      <div>
+        <img src="../assets/logo.png">
+        <pacman-loader :color="'#7de87d'" :size="'100px'"></pacman-loader>
+      </div>
+    </div>
   </div>
 </template>
 <script>
   import CommentComponent from './common/CommentComponent';
+  import PacmanLoader from "vue-spinner/src/ClipLoader";
   import api from '../api/api'
   import {timeTransform} from '../util'
 
   export default {
     name: 'daily_article',
-    components: {CommentComponent},
+    components: {CommentComponent, PacmanLoader},
     data() {
       return {
+        loading: true,
         is_show_comment: false,
         article_id: this.$route.params.id,
         content: {
@@ -175,12 +202,13 @@
     methods: {
       timeTransform: timeTransform,
       async getArticle() {
-        const result = await
-          this.$$api(api.get_daily, {
-            urlArgs: {
-              id: this.article_id
-            }
-          })
+        this.loading = true
+        this.article_id = this.$route.params.id
+        const result = await this.$$api(api.get_daily, {
+          urlArgs: {
+            id: this.article_id
+          }
+        })
         if (result.status !== 200) {
           alert('内容获取失败!')
           return false
@@ -190,7 +218,9 @@
           this.$router.push('index')
         }
         this.content = result.body.article
-        this.getComment()
+        console.log(this.content)
+        await this.getComment()
+        this.loading = false
       },
       async getComment() {
         const result = await
@@ -200,22 +230,26 @@
             }
           })
         if (result.status !== 200) {
-          console.log('数据获取失败！')
+          alert('数据获取失败！')
           return
         }
         this.comments = result.body.comments
+        console.log(this.comments)
       },
-      async otherPage(article_id) {
+      otherPage(article_id) {
         if (article_id == null)
           return null
-        // this.$router.push('/' + article_id + '/daily_article')
+        console.log(article_id)
+        this.$router.push('/' + article_id + '/daily_article')
       }
+    },
+    watch: {
+      '$route': 'getArticle'
     },
     mounted() {
       if (!this.article_id) {
-        console.log('123123123')
         this.$router.push('index')
-        return
+        return false
       }
       this.getArticle()
     }

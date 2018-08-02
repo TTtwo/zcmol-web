@@ -1,12 +1,7 @@
-from app.kernel.database import DB
 from app.kernel.database import ModelHelper
 from app.models import Model
-from webargs import fields
-from webargs.flaskparser import use_kwargs
 from app.kernel.utils.response import resp_to_json
-from app.kernel.utils.response import RespError
 from flask_restful import Resource
-from flask_restful import request
 from flask_sqlalchemy import BaseQuery
 from flask import current_app
 import json
@@ -37,11 +32,12 @@ class Daily(Resource):
             .query \
             .filter(Model.Article.id > daily_id) \
             .limit(1)
-        if daily.first():
+        if daily.first() is not None:
             daily = ModelHelper.serialize(daily[0], daily_content=daily[0].daily_content)
             daily['prev'] = prev[0].id if prev.first() else None
             daily['next'] = next[0].id if next.first() else None
             cache.set(key, json.dumps(daily))
             cache.expire(key, 1800)
-
+        else:
+            daily = None
         return resp_to_json(article=daily)

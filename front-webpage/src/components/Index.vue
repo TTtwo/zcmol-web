@@ -111,6 +111,24 @@
         height: 80%;
       }
     }
+    .i-loader {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      .flex;
+      background-color: #222;
+      > div {
+        position: relative;
+        > img {
+          width: 100px;
+          position: absolute;
+          top: 25px;
+          right: 25px;
+        }
+      }
+    }
   }
 </style>
 
@@ -137,6 +155,12 @@
         </div>
       </div>
     </div>
+    <div class="i-loader" v-if="loading">
+      <div>
+        <img src="../assets/logo.png">
+        <pacman-loader :color="'#7de87d'" :size="'100px'"></pacman-loader>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -147,10 +171,11 @@
   import AboutMeComp from './common/AboutMeComponent'
   import SayComp from './common/SayComponent'
   import api from '../api/api'
+  import PacmanLoader from "vue-spinner/src/ClipLoader";
 
   export default {
     name: 'index',
-    components: {DailyComp, GuestbookComp, LinkComp, AboutMeComp, SayComp},
+    components: {PacmanLoader, DailyComp, GuestbookComp, LinkComp, AboutMeComp, SayComp},
     data() {
       return {
         menu: [
@@ -168,7 +193,8 @@
           daily: [],
           links: [],
           guestbooks: []
-        }
+        },
+        loading: true
       }
     },
     methods: {
@@ -182,13 +208,14 @@
         }
       },
       async getInitData() {
+        this.loading = true
         const result = await this.$$api(api.index, {})
         if (result.status !== 200) {
-          this.$Message.error('访问失败~')
+          alert('访问失败~')
           return
         }
         this.init_data = result.body.data
-        console.log(this.init_data)
+        this.loading = false
       }
     },
     computed: {

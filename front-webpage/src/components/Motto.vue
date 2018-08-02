@@ -113,9 +113,22 @@
         font-family: motto;
         opacity: .1;
       }
+      .lizi {
+        position: absolute;
+        top: 145px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: .6;
+      }
       @media (max-width: 880px) {
         .content-bg {
           font-size: 200px;
+        }
+      }
+      @media (max-width: 1024px) {
+        .lizi {
+          display: none;
         }
       }
       .content {
@@ -126,6 +139,7 @@
         left: 0;
         overflow-y: scroll;
         transition: top 1.2s ease-in-out;
+
         .motto {
           width: 600px;
           padding: 20px;
@@ -180,6 +194,24 @@
         }
       }
     }
+    .i-loader {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      .flex;
+      background-color: #222;
+      > div {
+        position: relative;
+        > img {
+          width: 100px;
+          position: absolute;
+          top: 25px;
+          right: 25px;
+        }
+      }
+    }
   }
 </style>
 
@@ -190,6 +222,25 @@
         <span>心灵鸡汤</span>
       </div>
       <div class="content-bg">{{bg_text[Math.floor(Math.random() * bg_text.length)]}}</div>
+      <vue-particles
+        color="#777"
+        :particleOpacity="0.7"
+        :particlesNumber="60"
+        shapeType="circle"
+        :particleSize="4"
+        linesColor="#777"
+        :linesWidth="1"
+        :lineLinked="true"
+        :lineOpacity="0.4"
+        :linesDistance="150"
+        :moveSpeed="2"
+        :hoverEffect="true"
+        hoverMode="grab"
+        :clickEffect="true"
+        clickMode="push"
+        class="lizi"
+      >
+      </vue-particles>
       <div ref="scrollView" class="content" :class="{'content-anim': !show}">
         <div v-for="item, index in motto" :key="index" class="motto">
           <span>{{transformTime(item.create_at)}}</span>
@@ -221,14 +272,22 @@
         <div class="logo"></div>
       </a>
     </div>
+    <div class="i-loader" v-if="loading">
+      <div>
+        <img src="../assets/logo.png">
+        <pacman-loader :color="'#7de87d'" :size="'100px'"></pacman-loader>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
   import api from '../api/api'
+  import PacmanLoader from "vue-spinner/src/ClipLoader";
 
   export default {
     name: 'motto',
+    components: {PacmanLoader},
     data() {
       return {
         show: true,
@@ -243,12 +302,15 @@
           total_pages: 1
         },
         per_page: 5,
+        loading: true
       }
     },
     methods: {
-      async getInitData(page) {
+      async getInitData(page, showLoading = true) {
         if (!page || page > this.paging.total_pages)
-          return
+          return false
+        if (showLoading)
+          this.loading = true
         const result = await this.$$api(api.motto,
           {
             params: {
@@ -256,11 +318,11 @@
               per_page: this.per_page
             }
           })
-        console.log(result.body)
         if (result.status !== 200) {
-          this.$Message.error('访问失败~')
-          return
+          alert('访问失败~')
+          return false
         }
+        this.loading = false
         this.motto = this.motto.concat(result.body.data.motto)
         this.paging = result.body.data.paging
       },
@@ -283,7 +345,7 @@
             if (scrollTop + clientHeight - allHeight <= 100) {
               if (can_visit) {
                 can_visit = false
-                await self.getInitData(self.paging.current_idx + 1)
+                await self.getInitData(self.paging.current_idx + 1, false)
                 can_visit = true
               }
             }

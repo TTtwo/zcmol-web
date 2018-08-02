@@ -299,7 +299,7 @@
         content: '',
         website: '',
         email: '',
-        reply_id: ''
+        reply_id: '',
       }
     },
     methods: {
@@ -316,8 +316,10 @@
       },
       // 处理评论数据
       dataProcessing(data) {
-        if (!data instanceof Array || data.length === 0)
-          return []
+        if (!data instanceof Array || data.length === 0) {
+          this.comments_data = []
+          return false
+        }
         let new_data = []
         for (var i = 0, len = data.length; i < len; i++) {
           data[i].subComments = []
@@ -346,6 +348,8 @@
           alert('数据不能为空!!')
           return false
         }
+        const content = this.content
+        this.content = ''
         localStorage.setItem('nickname', this.nickname)
         localStorage.setItem('website', this.website)
         localStorage.setItem('email', this.email)
@@ -353,7 +357,7 @@
           {
             body: {
               nickname: this.nickname,
-              content: this.content,
+              content: content,
               email: this.email ? this.email : '',
               website: this.website ? this.website : '',
               reply_id: this.reply_id ? this.reply_id : null
