@@ -122,7 +122,7 @@
         </div>
         <div class="info-wrapper">
           <div class="info">
-            <a href="http://zcmol.cn" target="_blank">{{item.nickname}}</a>
+            <a :href="item.website" target="_blank">{{item.nickname}}</a>
             <span>Time: {{timeTransform(item.create_at)}}</span>
           </div>
           <aside class="aside">

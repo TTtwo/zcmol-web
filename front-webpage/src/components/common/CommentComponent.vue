@@ -233,7 +233,7 @@
           </div>
           <div class="info-wrapper">
             <div class="info">
-              <a href="http://zcmol.cn" target="_blank">{{item.nickname}}</a>
+              <a :href="item.website" target="_blank">{{item.nickname}}</a>
               <span>Time: {{timeTransform(item.create_at)}}</span>
             </div>
             <aside class="aside">
@@ -321,6 +321,16 @@
           return false
         }
         let new_data = []
+        let temp = null
+        for (var i = 0, len = data.length; i < len; i++) {
+          for (var j = 0, lenj = data.length; j < lenj - 1 - i; j++) {
+            if (data[j].id > data[j + 1].id) {
+              temp = data[j]
+              data[j] = data[j + 1]
+              data[j + 1] = temp
+            }
+          }
+        }
         for (var i = 0, len = data.length; i < len; i++) {
           data[i].subComments = []
           if (data[i].article_comment_id == null) {

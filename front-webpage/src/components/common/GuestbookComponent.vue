@@ -411,6 +411,7 @@
   <div id="guestbook">
     <div class="container">
       <ul v-if="is_paved" class="paved">
+
         <li v-for="item, index in guestbook_array" :key="index" class="msg-item">
           <div class="li-d1">
             <a :href="item.website" target="_blank">
@@ -432,6 +433,7 @@
             </div>
           </div>
         </li>
+
         <li class="msg-page">
           <div v-show="paging.has_prev" class="page-btn"
                @click="getData(paging.current_idx - 1)"><
@@ -518,7 +520,7 @@
         guestbook_array: this.guestbooks,
         paging: {
           current_idx: 1,
-          has_next: true,
+          has_next: false,
           has_prev: false,
           next_idx: null,
           prev_idx: null,

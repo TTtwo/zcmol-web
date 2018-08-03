@@ -40,6 +40,8 @@
         overflow-y: scroll;
         font-family: 'microsoft yahei', arial;
         .content-wrap {
+          margin: auto;
+          width: 70%;
           .title {
             padding: 60px 0 10px 0;
             font-size: 40px;
@@ -58,6 +60,11 @@
             color: #bbb;
             font-size: 20px;
             line-height: 48px;
+          }
+        }
+        @media (max-width: 1024px) {
+          .content-wrap {
+            width: 90%;
           }
         }
       }
@@ -156,7 +163,7 @@
             <span>丨</span>
             <span>Hits: 110</span>
           </div>
-          <div class="content">
+          <div class="content" v-html="content.daily_content.content">
             {{content.daily_content.content}}
           </div>
         </div>
@@ -215,6 +222,7 @@
           this.$router.push('index')
         }
         this.content = result.body.article
+        console.log(this.content)
         document.title = this.content.daily_content.title
         await this.getComment()
         this.loading = false
@@ -236,7 +244,6 @@
       otherPage(article_id) {
         if (article_id == null)
           return null
-        console.log(article_id)
         this.$router.push('/' + article_id + '/daily_article')
       }
     },

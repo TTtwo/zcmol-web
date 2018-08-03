@@ -55,9 +55,10 @@ class Guestbook(Resource):
     def post(self, nickname, content, email, website):
         cache = current_app.core.cache
         ip = request.headers['X-Forwarded-For']
-        if cache.get(ip.strip()):
-            return resp_to_json(error=RespError.FRE_COMMENT.value)
-        cache.set(ip.strip(), 1, px=30)
+        ip = "".join(ip.strip().split('.'))
+        if cache.get(ip):
+            return resp_to_json(error=RespError.FRE_COMMENT.value[0])
+        cache.set(ip, '1', ex=30)
         gk = Model.GuestBook(nickname=nickname,
                              content=content,
                              email=email,

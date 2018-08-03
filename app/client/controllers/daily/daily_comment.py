@@ -15,7 +15,10 @@ import json
 class DailyComment(Resource):
 
     def get(self, daily_id):
-        article: BaseQuery = Model.Article.query.get(daily_id)
+        article: BaseQuery = Model \
+            .Article \
+            .query \
+            .get(daily_id)
         comments = article.article_comment if article else []
         comments = [
             ModelHelper.serialize(item)
@@ -33,9 +36,10 @@ class DailyComment(Resource):
     def post(self, daily_id, nickname, content, email, website, reply_id):
         cache = current_app.core.cache
         ip = request.headers['X-Forwarded-For']
-        if cache.get(ip.strip()):
-            return resp_to_json(error=RespError.FRE_COMMENT.value)
-        cache.set(ip.strip(), 1, px=30)
+        ip = "".join(ip.strip().split('.'))
+        if cache.get(ip):
+            return resp_to_json(error=RespError.FRE_COMMENT.value[0])
+        cache.set(ip, 1, ex=30)
         article: Model.Article = Model.Article.query.get(daily_id)
         comment = Model.ArticleComment(nickname=nickname,
                                        content=content,

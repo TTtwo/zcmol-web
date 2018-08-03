@@ -25,6 +25,7 @@ class Daily(Resource):
         prev: BaseQuery = Model \
             .Article \
             .query \
+            .order_by(Model.Article.id.desc()) \
             .filter(Model.Article.id < daily_id) \
             .limit(1)
         next: BaseQuery = Model \
@@ -34,8 +35,8 @@ class Daily(Resource):
             .limit(1)
         if daily.first() is not None:
             daily = ModelHelper.serialize(daily[0], daily_content=daily[0].daily_content)
-            daily['prev'] = prev[0].id if prev.first() else None
-            daily['next'] = next[0].id if next.first() else None
+            daily['prev'] = prev[0].id if prev.first() is not None else None
+            daily['next'] = next[0].id if next.first() is not None else None
             cache.set(key, json.dumps(daily))
             cache.expire(key, 1800)
         else:

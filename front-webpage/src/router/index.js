@@ -15,6 +15,8 @@ Vue.use(iView)
 Vue.use(VueParticles)
 
 export default new Router({
+  mode: 'history',
+  base: '/',
   routes: [
     {
       path: '*',
