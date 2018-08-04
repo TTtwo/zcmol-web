@@ -161,7 +161,7 @@
           <div class="info">
             <span>Time: {{timeTransform(content.create_at)}}</span>
             <span>丨</span>
-            <span>Hits: 110</span>
+            <span>Hits: 1996</span>
           </div>
           <div class="content" v-html="content.daily_content.content">
             {{content.daily_content.content}}

@@ -217,7 +217,7 @@
           {name: 'S', dis: "-300%", des: '说说'},
           {name: 'G', dis: "-400%", des: '留言'},
           {name: 'B', dis: null, link: '', des: '博客文章, building...'},
-          {name: 'M', dis: null, link: '#/motto', des: '心灵鸡汤'},
+          {name: 'M', dis: null, link: '/motto', des: '心灵鸡汤'},
         ],
         menu_pos: 0,
         show_menu: false,

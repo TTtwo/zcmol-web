@@ -326,7 +326,7 @@
         this.paging = result.body.data.paging
       },
       transformTime(time) {
-        return new Date(time).toLocaleDateString().replace(new RegExp('/', 'g'), '.')
+        return new Date(time * 1000).toLocaleDateString().replace(new RegExp('/', 'g'), '.')
       },
       // 滑动刷新
       scrollLoad() {

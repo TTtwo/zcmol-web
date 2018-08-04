@@ -520,7 +520,7 @@
         guestbook_array: this.guestbooks,
         paging: {
           current_idx: 1,
-          has_next: false,
+          has_next: true,
           has_prev: false,
           next_idx: null,
           prev_idx: null,
