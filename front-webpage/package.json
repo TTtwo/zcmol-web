@@ -12,7 +12,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+<<<<<<< HEAD
     "ajv": "^6.0.0",
+=======
+    "hls.js": "^0.11.0",
+>>>>>>> 696385031ba8681a111bf5ae34bb1cfee418a39d
     "iview": "^2.14.3",
     "js-md5": "^0.7.3",
     "less": "^3.0.4",
