@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from '../components/Index'
 import DailyArticle from '../components/DailyArticle'
 import Motto from '../components/Motto'
+import LoveGame from '../components/LoveGame'
 import Http from 'vue-resource'
 import request_api from '../api/requet_api'
 import VueParticles from 'vue-particles'
@@ -37,6 +38,11 @@ export default new Router({
       path: '/motto',
       name: '/motto',
       component: Motto
+    },
+    {
+      path: '/love_game',
+      name: 'love_game',
+      component: LoveGame
     }
   ]
 })
