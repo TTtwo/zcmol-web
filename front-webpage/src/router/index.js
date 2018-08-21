@@ -40,13 +40,8 @@ export default new Router({
       component: Motto
     },
     {
-<<<<<<< HEAD
       path: '/love_game',
       name: 'love_game',
-=======
-      path: '/love-game',
-      name: '/love-game',
->>>>>>> 696385031ba8681a111bf5ae34bb1cfee418a39d
       component: LoveGame
     }
   ]
