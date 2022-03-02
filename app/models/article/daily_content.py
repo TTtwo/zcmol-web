@@ -1,6 +1,7 @@
 from ...kernel.database import DB
 from ..article.article import Article
 from ..utils.mixin import ArticleMixin
+from ..utils.mixin import HiddenMixin
 from sqlalchemy.orm import relationship
 from enum import Enum
 
@@ -11,7 +12,7 @@ class DailyContentType(Enum):
     PICTURE = 'picture+'
 
 
-class DailyContent(DB.Model, ArticleMixin):
+class DailyContent(DB.Model, ArticleMixin, HiddenMixin):
     __tablename__ = 'daily_content'
 
     daily_type = DB.Column(DB.String(20), default=DailyContentType.MUSIC.value)

@@ -491,13 +491,13 @@
         <div class="send-btn" @click="postData">SEND</div>
         <div class="enter-email" :class="{'enter-anim': show_other_input}">
           <div class="icon"></div>
-          <input v-model="email" type="text" placeholder="输入邮箱"
+          <input v-model="email" type="text" placeholder="输入邮箱 [*选填]"
                  @focus="onFocus"
                  @blur="onBlur">
         </div>
         <div class="enter-website" :class="{'enter-anim': show_other_input}">
           <div class="icon"></div>
-          <input v-model="website" type="text" placeholder="输入网址"
+          <input v-model="website" type="text" placeholder="输入网址 [*选填]"
                  @focus="onFocus"
                  @blur="onBlur">
         </div>
@@ -598,7 +598,11 @@
           return false
         }
         if (result.body.error === 2001) {
-          alert('每次留言的时间间隔为30秒！')
+          alert('30秒内有人留言过了，每次留言的时间间隔为30秒！')
+          return false
+        }
+        if (result.body.error === 2002) {
+          alert('该名字或邮箱属博主所有！')
           return false
         }
         this.content = null

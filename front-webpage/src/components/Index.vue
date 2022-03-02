@@ -229,24 +229,9 @@
         loading: true,
         list3: [
           {
-            title: '视线所及只剩生活',
-            artist: '蔡维泽',
-            src: 'http://zcmol-1253645803.file.myqcloud.com/music/sxsjzssh.mp3',
-          },
-          {
-            title: '新年未老',
-            artist: '许含光',
-            src: 'http://zcmol-1253645803.file.myqcloud.com/music/xnwl.mp3',
-          },
-          {
-            title: '9420',
-            artist: '麦小兜',
-            src: 'http://zcmol-1253645803.file.myqcloud.com/music/9420.mp3',
-          },
-          {
-            title: '漆黑',
-            artist: '朴信惠',
-            src: 'http://zcmol-1253645803.file.myqcloud.com/music/%E6%9C%B4%E4%BF%A1%E6%83%A0%20-%20%E6%BC%86%E9%BB%91.mp3',
+            title: '够爱',
+            artist: '未知',
+            src: 'https://zcmol-1253645803.cos.ap-guangzhou.myqcloud.com/music/toLove.mp3',
           }
         ],
         music_show: false
@@ -287,6 +272,7 @@
     },
     mounted() {
       this.getInitData()
+      this.musicHidden()
     }
   }
 </script>

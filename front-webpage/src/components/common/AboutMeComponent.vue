@@ -164,18 +164,15 @@
       <dl class="des">
         <dt class="avatar"><img src="../../assets/Icon1.png"></dt>
         <dd class="about">
-          <p>昵称：早茶月光</p>
-          <p>年龄：？？</p>
-          <p>性别：男</p>
-          <p>职业：游戏开发(打酱油)</p>
-          <p>爱好：编程，音乐，篮球，阅读</p>
-          <p>Detail</p>
+          <p>昵称：早茶月光<p>
           <p class="smh">-关于此博客</p>
           <p>
-            网站风格是模仿大神的&nbsp;(&nbsp;虽然模仿别人的感觉不好，但是偶尔充满罪恶感还是让生活增加趣味的~~&nbsp;)
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网站是在2016年开始搭建的，前前后后代码已经改过好多遍了。做这个网站的初衷只为了可以排解自己的烦恼，不开心。毕竟，
+负面情绪不想影响身边的人，陌生人的鼓励与批判，不会为自己带来任何一点心理压力。不喜欢的我可以不听，甚至是删掉。"I am the king here."。
+有想过在这里发发技术博客什么的，发现自己太懒了，估计会无限期的延期。不想追求那么多，只求开心，快乐，与活着。
           </p>
           <p class="smh">-待人</p>
-          <p>缘深多聚聚，缘浅随它去</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;缘深多聚聚，缘浅随它去</p>
         </dd>
       </dl>
     </div>
@@ -192,12 +189,10 @@
       <div class="contact"></div>
       <div class="contact"></div>
       <div class="contact source-code">
-        <a href="https://github.com/TTtwo/zcmol-web" target="_blank">
           <p>
             code<br>
             source
           </p>
-        </a>
       </div>
     </div>
   </div>

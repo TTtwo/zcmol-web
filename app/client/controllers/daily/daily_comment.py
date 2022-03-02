@@ -35,8 +35,14 @@ class DailyComment(Resource):
     })
     def post(self, daily_id, nickname, content, email, website, reply_id):
         cache = current_app.core.cache
-        ip = request.headers['X-Forwarded-For']
-        ip = "".join(ip.strip().split('.'))
+        # ip = request.headers['X-Forwarded-For']
+        # ip = "".join(ip.strip().split('.'))
+        if nickname == "早茶月光" or email == "1297075993@qq.com":
+            return resp_to_json(error=RespError.COMMENT_INVAILD.value[0])
+        if nickname == "早茶月光admin" and email == "1297075993@qq.comadmin":
+            nickname = "早茶月光"
+            email = "1297075993@qq.com"
+        ip = "12345"
         if cache.get(ip):
             return resp_to_json(error=RespError.FRE_COMMENT.value[0])
         cache.set(ip, 1, ex=30)

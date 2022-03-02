@@ -7,12 +7,12 @@ Flask-Script==2.0.6
 Flask-SQLAlchemy==2.3.2
 itsdangerous==0.24
 Jinja2==2.10
-MarkupSafe==1.0
+MarkupSafe==1.1.1
 marshmallow==2.15.2
-mysql-connector==2.1.6
+mysql-connector==2.1.7
 pytz==2018.4
 redis==2.10.6
 six==1.11.0
-SQLAlchemy==1.2.7
+SQLAlchemy==1.3.24
 webargs==3.0.0
 Werkzeug==0.14.1

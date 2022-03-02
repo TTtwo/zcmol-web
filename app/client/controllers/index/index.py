@@ -10,18 +10,6 @@ import json
 
 class Index(Resource):
     def get(self):
-        key = name = 'index'
-        cache = current_app.core.cache
-        if cache.hget(name, key):
-            data = cache.hget(name, key)
-            data = json.loads(data)
-            return resp_to_json(data=data)
-        # 获取所有links
-        links: BaseQuery = Model \
-            .Link \
-            .query \
-            .filter_by(_hidden=False) \
-            .all()
         # 获取前30条Guestbook
         guestbooks: BaseQuery = Model \
             .GuestBook \
@@ -29,20 +17,34 @@ class Index(Resource):
             .order_by(Model.GuestBook.id.desc()) \
             .limit(30) \
             .all()
+        guestbook_items = [
+            ModelHelper.serialize(item)
+            for item in guestbooks
+        ]
+        key = name = 'index'
+        cache = current_app.core.cache
+        if cache.hget(name, key):
+            data = cache.hget(name, key)
+            data = json.loads(data)
+            data['guestbooks'] = guestbook_items
+            return resp_to_json(data=data)
+        # 获取所有links
+        links: BaseQuery = Model \
+            .Link \
+            .query \
+            .filter_by(_hidden=False) \
+            .all() 
         # 获取daily article
         daily: BaseQuery = Model \
             .DailyContent \
             .query \
+            .filter_by(_hidden=False) \
             .order_by(Model.DailyContent.id.desc()) \
             .limit(13)
         # 整合数据
         link_items = [
             ModelHelper.serialize(item)
             for item in links
-        ]
-        guestbook_items = [
-            ModelHelper.serialize(item)
-            for item in guestbooks
         ]
         daily_items = [
             ModelHelper.filter(
@@ -56,5 +58,5 @@ class Index(Resource):
             'daily': daily_items
         }
         cache.hset(name, key, json.dumps(data))
-        cache.expire(name, 3600 * 24)
+        cache.expire(name, 20)
         return resp_to_json(data=data)

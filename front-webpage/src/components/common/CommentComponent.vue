@@ -261,11 +261,11 @@
           </div>
           <div class="modal-item">
             <div class="modal-title">邮箱</div>
-            <input v-model="email" type="text" class="modal-input" placeholder="...">
+            <input v-model="email" type="text" class="modal-input" placeholder="*选填">
           </div>
           <div class="modal-item">
             <div class="modal-title">网址</div>
-            <input v-model="website" type="text" class="modal-input" placeholder="...">
+            <input v-model="website" type="text" class="modal-input" placeholder="*选填">
           </div>
           <div class="modal-item">
             <div class="modal-title">内容</div>
@@ -382,6 +382,10 @@
         }
         if (result.body.error === 2001) {
           alert('每次留言的时间间隔为30秒！')
+          return false
+        }
+        if (result.body.error === 2002) {
+          alert('该名字或邮箱属博主所有！')
           return false
         }
         this.$router.go(0)

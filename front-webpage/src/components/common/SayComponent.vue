@@ -18,7 +18,8 @@
   }
 </style>
 <template>
-  <div id="say"></div>
+  <div id="say">
+  </div>
 </template>
 <script>
   export default {

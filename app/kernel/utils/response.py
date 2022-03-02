@@ -5,6 +5,7 @@ from enum import Enum
 class RespError(Enum):
     PASS = 0,
     FRE_COMMENT = 2001,
+    COMMENT_INVAILD = 2002,
 
 
 def resp_to_json(*args, **kwargs):

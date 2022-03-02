@@ -129,8 +129,8 @@
     <ul>
       <li>
         <div class="daily-div">
-          <span class="day">11</span>
-          <span class="info">2016.09</span>
+          <span class="day">09</span>
+          <span class="info">2022.02</span>
           <span class="info">The truth that you leave</span>
           <span class="info">Log+</span>
         </div>

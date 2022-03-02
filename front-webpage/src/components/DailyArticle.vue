@@ -218,7 +218,7 @@
           return false
         }
         if (!result.body.article) {
-          alert('内容不存在!')
+          alert('内容不存在或被隐藏了呢~ O(∩_∩)O~')
           this.$router.push('index')
         }
         this.content = result.body.article

@@ -54,8 +54,11 @@ class Guestbook(Resource):
     })
     def post(self, nickname, content, email, website):
         cache = current_app.core.cache
-        ip = request.headers['X-Forwarded-For']
-        ip = "".join(ip.strip().split('.'))
+        # ip = request.headers['X-Forwarded-For']
+        # ip = "".join(ip.strip().split('.'))
+        if nickname == "早茶月光" or email == "1297075993@qq.com":
+            return resp_to_json(error=RespError.COMMENT_INVAILD.value[0])
+        ip = "123"
         if cache.get(ip):
             return resp_to_json(error=RespError.FRE_COMMENT.value[0])
         cache.set(ip, '1', ex=30)

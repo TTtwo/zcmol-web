@@ -7,7 +7,7 @@ const
   PATCH = 'patch'
 
 export default {
-  BASEURL: 'http://www.zcmol.cn:8889/api',
+  BASEURL: 'http://127.0.0.1:8889/api',
 
   index: {
     url: '/index',
