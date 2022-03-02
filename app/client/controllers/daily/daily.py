@@ -12,10 +12,10 @@ class Daily(Resource):
     def get(self, daily_id: int):
         key = 'daily{}'.format(daily_id)
         cache = current_app.core.cache
-        # if cache.get(key):
-        #     data = cache.get(key)
-        #     data = json.loads(data)
-        #     return resp_to_json(article=data)
+        if cache.get(key):
+            data = cache.get(key)
+            data = json.loads(data)
+            return resp_to_json(article=data)
         daily: BaseQuery = Model \
             .Article \
             .query \
